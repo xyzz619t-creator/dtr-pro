@@ -11,7 +11,7 @@ import KioskActivityPanels from './components/KioskActivityPanels'
 
 import AdminLogin from './pages/AdminLogin'
 import AdminDashboard from './pages/AdminDashboard'
-
+import EmployeeLeaveRequest from './pages/EmployeeLeaveRequest'
 
 import './App.css'
 
@@ -22,7 +22,7 @@ import './App.css'
 // CURRENT MODE:
 // BREAK START + BREAK END ONLY
 //
-// Later:
+// LATER:
 // change false → true
 // to enable TIME IN / TIME OUT again.
 // ===========================================================
@@ -34,7 +34,11 @@ const ENABLE_BREAK_START = true
 const ENABLE_BREAK_END = true
 
 
-function App() {
+// ===========================================================
+// DTR APPLICATION
+// ===========================================================
+
+function DtrApp() {
   // =========================================================
   // CLOCK
   // =========================================================
@@ -97,9 +101,6 @@ function App() {
 
   // =========================================================
   // ACTIVITY PANELS
-  //
-  // Increment this after Break Start / Break End so
-  // ON BREAKS and LOG HISTORY refresh immediately.
   // =========================================================
 
   const [
@@ -214,7 +215,6 @@ function App() {
   // CLEAN LOOKUP TIMER
   // =========================================================
 
-
   useEffect(() => {
     return () => {
       if (
@@ -282,11 +282,6 @@ function App() {
 
   // =========================================================
   // RESET KIOSK
-  //
-  // After an action:
-  // employee clears
-  // employee code clears
-  // scanner becomes active again
   // =========================================================
 
   function resetKiosk() {
@@ -332,21 +327,10 @@ function App() {
       successMessage
     )
 
-    // =======================================================
-    // IMMEDIATELY REFRESH:
-    //
-    // LEFT  = ON BREAKS
-    // RIGHT = LOG HISTORY
-    // =======================================================
-
     setActivityRefreshKey(
       (previous) =>
         previous + 1
     )
-
-    // -------------------------------------------------------
-    // Give employee time to see confirmation.
-    // -------------------------------------------------------
 
     window.setTimeout(
       () => {
@@ -354,10 +338,6 @@ function App() {
       },
       700
     )
-
-    // -------------------------------------------------------
-    // Remove notice.
-    // -------------------------------------------------------
 
     window.setTimeout(
       () => {
@@ -408,10 +388,6 @@ function App() {
         throw error
       }
 
-      // =====================================================
-      // NO RESPONSE
-      // =====================================================
-
       if (!data) {
         resetEmployeeData()
 
@@ -421,10 +397,6 @@ function App() {
 
         return
       }
-
-      // =====================================================
-      // EMPLOYEE / SCHEDULE ERROR
-      // =====================================================
 
       if (
         data.success !==
@@ -439,10 +411,6 @@ function App() {
 
         return
       }
-
-      // =====================================================
-      // SUCCESS
-      // =====================================================
 
       setEmployee(
         data.employee ||
@@ -505,10 +473,6 @@ function App() {
       return
     }
 
-    // =======================================================
-    // CANCEL MANUAL LOOKUP
-    // =======================================================
-
     if (
       lookupTimer.current
     ) {
@@ -525,10 +489,6 @@ function App() {
     setMessage('')
 
     setActionError('')
-
-    // =======================================================
-    // PUT RECOGNIZED CODE INTO MANUAL INPUT
-    // =======================================================
 
     setEmployeeCode(
       code
@@ -560,10 +520,6 @@ function App() {
         1800
       )
     }
-
-    // =======================================================
-    // SAME FLOW AS MANUAL CODE
-    // =======================================================
 
     await loadEmployeeDashboard(
       code
@@ -612,10 +568,6 @@ function App() {
     if (!code) {
       return
     }
-
-    // =======================================================
-    // AUTOMATIC LOOKUP
-    // =======================================================
 
     lookupTimer.current =
       window.setTimeout(
@@ -670,10 +622,6 @@ function App() {
         throw error
       }
 
-      // =====================================================
-      // BACKEND REJECTED ACTION
-      // =====================================================
-
       if (
         !data?.success
       ) {
@@ -689,10 +637,6 @@ function App() {
 
         return
       }
-
-      // =====================================================
-      // SUCCESS
-      // =====================================================
 
       completeActionAndReset(
         data.message ||
@@ -715,8 +659,6 @@ function App() {
 
   // =========================================================
   // TIME IN
-  //
-  // Kept for future use.
   // =========================================================
 
   function handleTimeIn() {
@@ -750,8 +692,6 @@ function App() {
 
   // =========================================================
   // TIME OUT
-  //
-  // Kept for future use.
   // =========================================================
 
   function handleTimeOut() {
@@ -812,8 +752,6 @@ function App() {
 
   // =========================================================
   // DUTY END DATE
-  //
-  // Kept for future TIME OUT mode.
   // =========================================================
 
   function getDutyEndDate() {
@@ -843,8 +781,6 @@ function App() {
 
   // =========================================================
   // TIME OUT AVAILABLE
-  //
-  // Kept for future use.
   // =========================================================
 
   function canTimeOutNow() {
@@ -854,10 +790,6 @@ function App() {
     ) {
       return false
     }
-
-    // -------------------------------------------------------
-    // Backend explicitly allows Time Out.
-    // -------------------------------------------------------
 
     if (
       schedule
@@ -869,10 +801,6 @@ function App() {
     ) {
       return true
     }
-
-    // -------------------------------------------------------
-    // Backend exact availability timestamp.
-    // -------------------------------------------------------
 
     if (
       schedule
@@ -897,10 +825,6 @@ function App() {
       }
     }
 
-    // -------------------------------------------------------
-    // Frontend fallback.
-    // -------------------------------------------------------
-
     const dutyEnd =
       getDutyEndDate()
 
@@ -924,8 +848,6 @@ function App() {
 
   // =========================================================
   // FINAL 5 MINUTES
-  //
-  // Kept for future TIME OUT mode.
   // =========================================================
 
   function isLastFiveMinutesOrLater() {
@@ -1094,7 +1016,7 @@ function App() {
 
       {/* =====================================================
           THREE-COLUMN KIOSK
-          
+
           LEFT   = ON BREAKS
           CENTER = DTR
           RIGHT  = LOG HISTORY
@@ -1350,7 +1272,6 @@ function App() {
 
                   {/* =========================================
                       TIME IN
-                      HIDDEN FOR NOW
                   ========================================= */}
 
                   {ENABLE_TIME_IN && (
@@ -1420,13 +1341,6 @@ function App() {
 
                 <div className="dtr-actions">
 
-                  {/* =========================================
-                      FINAL 5 MINUTES
-
-                      Only active when
-                      ENABLE_TIME_OUT = true.
-                  ========================================= */}
-
                   {ENABLE_TIME_OUT &&
                   finalFiveMinutes ? (
 
@@ -1485,7 +1399,6 @@ function App() {
 
                       {/* ======================================
                           TIME OUT
-                          HIDDEN FOR NOW
                       ====================================== */}
 
                       {ENABLE_TIME_OUT &&
@@ -1583,6 +1496,46 @@ function App() {
 
     </div>
   )
+}
+
+
+// ===========================================================
+// APPLICATION ROUTER
+//
+// /
+// → Employee DTR
+//
+// /leave-request
+// → Employee Leave / Sick Leave / Com-off Request
+// ===========================================================
+
+function App() {
+  const pathname =
+    window.location.pathname
+      .replace(
+        /\/+$/,
+        ''
+      ) || '/'
+
+  // =========================================================
+  // EMPLOYEE LEAVE REQUEST
+  // =========================================================
+
+  if (
+    pathname ===
+    '/leave-request'
+  ) {
+    return (
+      <EmployeeLeaveRequest />
+    )
+  }
+
+  // =========================================================
+  // DEFAULT
+  // EMPLOYEE DTR + ADMIN
+  // =========================================================
+
+  return <DtrApp />
 }
 
 export default App
