@@ -25,7 +25,6 @@ const MAX_PDF_SIZE =
 function createEmptyForm() {
   return {
     employeeCode: '',
-
     requestType: 'annual',
 
     startDate: '',
@@ -37,7 +36,6 @@ function createEmptyForm() {
     endTime: '',
 
     reason: '',
-
     attachment: null,
   }
 }
@@ -50,8 +48,7 @@ function createEmptyForm() {
 function createRandomFileName() {
   if (
     typeof crypto !== 'undefined' &&
-    typeof crypto.randomUUID ===
-      'function'
+    typeof crypto.randomUUID === 'function'
   ) {
     return crypto.randomUUID()
   }
@@ -69,18 +66,12 @@ function createRandomFileName() {
 // FORMAT BALANCE
 // ===========================================================
 
-function formatBalance(
-  value
-) {
+function formatBalance(value) {
   const number =
-    Number(
-      value || 0
-    )
+    Number(value || 0)
 
   if (
-    Number.isInteger(
-      number
-    )
+    Number.isInteger(number)
   ) {
     return String(number)
   }
@@ -90,12 +81,7 @@ function formatBalance(
 
 
 // ===========================================================
-// CALCULATE CONSECUTIVE DAYS
-//
-// Inclusive:
-// Sep 10 -> Sep 10 = 1
-// Sep 10 -> Sep 11 = 2
-// Sep 10 -> Sep 12 = 3
+// CALCULATE INCLUSIVE DAYS
 // ===========================================================
 
 function calculateInclusiveDays(
@@ -131,13 +117,12 @@ function calculateInclusiveDays(
     return 0
   }
 
-  const difference =
-    end.getTime() -
-    start.getTime()
-
   return (
     Math.floor(
-      difference /
+      (
+        end.getTime() -
+        start.getTime()
+      ) /
         86400000
     ) + 1
   )
@@ -145,7 +130,7 @@ function calculateInclusiveDays(
 
 
 // ===========================================================
-// EMPLOYEE LEAVE REQUEST
+// COMPONENT
 // ===========================================================
 
 function EmployeeLeaveRequest({
@@ -162,7 +147,6 @@ function EmployeeLeaveRequest({
     createEmptyForm()
   )
 
-
   // =========================================================
   // EMPLOYEE
   // =========================================================
@@ -176,7 +160,6 @@ function EmployeeLeaveRequest({
     comOffBalance,
     setComOffBalance,
   ] = useState(null)
-
 
   // =========================================================
   // UI
@@ -201,7 +184,6 @@ function EmployeeLeaveRequest({
     successMessage,
     setSuccessMessage,
   ] = useState('')
-
 
   // =========================================================
   // COM-OFF CALCULATIONS
@@ -229,30 +211,24 @@ function EmployeeLeaveRequest({
       ]
     )
 
-
   const availableComOff =
     Number(
-      comOffBalance
-        ?.available ||
+      comOffBalance?.available ||
       0
     )
-
 
   const pendingComOff =
     Number(
-      comOffBalance
-        ?.pending ||
+      comOffBalance?.pending ||
       0
     )
-
 
   const remainingIfApproved =
     Math.max(
       availableComOff -
-        requestedComOffDays,
+      requestedComOffDays,
       0
     )
-
 
   // =========================================================
   // UPDATE FORM
@@ -269,59 +245,46 @@ function EmployeeLeaveRequest({
           [field]: value,
         }
 
-
-        // ===================================================
+        // ---------------------------------------------------
         // START DATE
-        // Keep End Date valid.
-        // ===================================================
+        // ---------------------------------------------------
 
         if (
-          field ===
-          'startDate'
+          field === 'startDate'
         ) {
           if (
             !next.endDate ||
-            next.endDate <
-              value
+            next.endDate < value
           ) {
             next.endDate =
               value
           }
         }
 
-
-        // ===================================================
+        // ---------------------------------------------------
         // FULL DAY
-        // Remove partial-day times.
-        // ===================================================
+        // ---------------------------------------------------
 
         if (
-          field ===
-            'durationType' &&
-          value ===
-            'full_day'
+          field === 'durationType' &&
+          value === 'full_day'
         ) {
           next.startTime = ''
           next.endTime = ''
         }
 
-
-        // ===================================================
+        // ---------------------------------------------------
         // PARTIAL DAY
-        // Force same date if Start Date exists.
-        // ===================================================
+        // ---------------------------------------------------
 
         if (
-          field ===
-            'durationType' &&
-          value ===
-            'partial_day' &&
+          field === 'durationType' &&
+          value === 'partial_day' &&
           next.startDate
         ) {
           next.endDate =
             next.startDate
         }
-
 
         return next
       }
@@ -331,11 +294,8 @@ function EmployeeLeaveRequest({
     setSuccessMessage('')
   }
 
-
   // =========================================================
-  // EMPLOYEE CODE CHANGE
-  //
-  // Changing code requires verification again.
+  // EMPLOYEE CODE
   // =========================================================
 
   function handleEmployeeCodeChange(
@@ -349,14 +309,11 @@ function EmployeeLeaveRequest({
     )
 
     setEmployee(null)
-
     setComOffBalance(null)
 
     setErrorMessage('')
-
     setSuccessMessage('')
   }
-
 
   // =========================================================
   // REQUEST TYPE
@@ -373,16 +330,10 @@ function EmployeeLeaveRequest({
           requestType,
 
           attachment:
-            requestType ===
-            'sick'
+            requestType === 'sick'
               ? previous.attachment
               : null,
         }
-
-
-        // ===================================================
-        // COM-OFF
-        // ===================================================
 
         if (
           requestType ===
@@ -403,7 +354,6 @@ function EmployeeLeaveRequest({
           }
         }
 
-
         return next
       }
     )
@@ -412,11 +362,8 @@ function EmployeeLeaveRequest({
     setSuccessMessage('')
   }
 
-
   // =========================================================
   // LOAD EMPLOYEE PROFILE
-  //
-  // Protected RPC
   // =========================================================
 
   async function loadEmployeeProfile(
@@ -424,17 +371,14 @@ function EmployeeLeaveRequest({
   ) {
     const code =
       String(
-        employeeCode ||
-        ''
+        employeeCode || ''
       ).trim()
-
 
     if (!code) {
       throw new Error(
         'Enter your employee code.'
       )
     }
-
 
     const {
       data,
@@ -448,11 +392,9 @@ function EmployeeLeaveRequest({
         }
       )
 
-
     if (error) {
       throw error
     }
-
 
     if (
       !data ||
@@ -464,18 +406,15 @@ function EmployeeLeaveRequest({
       )
     }
 
-
     if (!data.employee) {
       throw new Error(
         'Employee information was not returned.'
       )
     }
 
-
     setEmployee(
       data.employee
     )
-
 
     setComOffBalance(
       data.com_off || {
@@ -486,10 +425,8 @@ function EmployeeLeaveRequest({
       }
     )
 
-
     return data
   }
-
 
   // =========================================================
   // FIND EMPLOYEE
@@ -497,9 +434,7 @@ function EmployeeLeaveRequest({
 
   async function findEmployee() {
     const code =
-      form.employeeCode
-        .trim()
-
+      form.employeeCode.trim()
 
     if (!code) {
       setErrorMessage(
@@ -509,17 +444,13 @@ function EmployeeLeaveRequest({
       return
     }
 
-
     setCheckingEmployee(true)
 
     setEmployee(null)
-
     setComOffBalance(null)
 
     setErrorMessage('')
-
     setSuccessMessage('')
-
 
     try {
       await loadEmployeeProfile(
@@ -540,7 +471,6 @@ function EmployeeLeaveRequest({
     }
   }
 
-
   // =========================================================
   // PDF ATTACHMENT
   // =========================================================
@@ -550,7 +480,6 @@ function EmployeeLeaveRequest({
   ) {
     const file =
       event.target.files?.[0]
-
 
     if (!file) {
       setForm(
@@ -562,11 +491,6 @@ function EmployeeLeaveRequest({
 
       return
     }
-
-
-    // =======================================================
-    // PDF ONLY
-    // =======================================================
 
     if (
       file.type !==
@@ -588,11 +512,6 @@ function EmployeeLeaveRequest({
       return
     }
 
-
-    // =======================================================
-    // MAXIMUM 10 MB
-    // =======================================================
-
     if (
       file.size >
       MAX_PDF_SIZE
@@ -613,7 +532,6 @@ function EmployeeLeaveRequest({
       return
     }
 
-
     setForm(
       (previous) => ({
         ...previous,
@@ -622,10 +540,8 @@ function EmployeeLeaveRequest({
     )
 
     setErrorMessage('')
-
     setSuccessMessage('')
   }
-
 
   // =========================================================
   // VALIDATION
@@ -636,7 +552,6 @@ function EmployeeLeaveRequest({
       return 'Please verify your employee code first.'
     }
 
-
     if (
       employee.employee_code !==
       form.employeeCode.trim()
@@ -644,18 +559,18 @@ function EmployeeLeaveRequest({
       return 'Employee code has changed. Please verify it again.'
     }
 
-
     if (!form.startDate) {
-      return form.requestType ===
+      return (
+        form.requestType ===
         'comoff'
-        ? 'Com-off From Date is required.'
-        : 'Start date is required.'
+          ? 'Com-off From Date is required.'
+          : 'Start date is required.'
+      )
     }
 
-
-    // =======================================================
-    // ANNUAL / SICK LEAVE
-    // =======================================================
+    // -------------------------------------------------------
+    // ANNUAL / SICK
+    // -------------------------------------------------------
 
     if (
       form.requestType !==
@@ -665,18 +580,12 @@ function EmployeeLeaveRequest({
         return 'End date is required.'
       }
 
-
       if (
         form.endDate <
         form.startDate
       ) {
         return 'End date cannot be before start date.'
       }
-
-
-      // =====================================================
-      // PARTIAL DAY
-      // =====================================================
 
       if (
         form.durationType ===
@@ -689,14 +598,12 @@ function EmployeeLeaveRequest({
           return 'Partial-day leave must use the same start and end date.'
         }
 
-
         if (
           !form.startTime ||
           !form.endTime
         ) {
           return 'Start and end time are required for partial-day leave.'
         }
-
 
         if (
           form.endTime <=
@@ -707,10 +614,9 @@ function EmployeeLeaveRequest({
       }
     }
 
-
-    // =======================================================
+    // -------------------------------------------------------
     // COM-OFF
-    // =======================================================
+    // -------------------------------------------------------
 
     if (
       form.requestType ===
@@ -720,14 +626,12 @@ function EmployeeLeaveRequest({
         return 'Com-off To Date is required.'
       }
 
-
       if (
         form.endDate <
         form.startDate
       ) {
         return 'Com-off To Date cannot be before From Date.'
       }
-
 
       if (
         requestedComOffDays <
@@ -736,7 +640,6 @@ function EmployeeLeaveRequest({
         return 'Select a valid Com-off date range.'
       }
 
-
       if (
         availableComOff <
         1
@@ -744,29 +647,23 @@ function EmployeeLeaveRequest({
         return 'You do not have an available Com-off balance.'
       }
 
-
       if (
         requestedComOffDays >
         availableComOff
       ) {
-        return `You only have ${formatBalance(
-          availableComOff
-        )} available Com-off day(s), but selected ${requestedComOffDays} day(s).`
+        return (
+          `You only have ${formatBalance(
+            availableComOff
+          )} available Com-off day(s), but selected ${requestedComOffDays} day(s).`
+        )
       }
     }
-
 
     return ''
   }
 
-
   // =========================================================
   // UPLOAD SICK LEAVE PDF
-  //
-  // leave-documents/
-  //   employee_uuid/
-  //     2026/
-  //       random.pdf
   // =========================================================
 
   async function uploadSickAttachment() {
@@ -778,31 +675,24 @@ function EmployeeLeaveRequest({
       return null
     }
 
-
     if (!employee?.id) {
       throw new Error(
         'Employee information is missing.'
       )
     }
 
-
     const fileName =
       `${createRandomFileName()}.pdf`
-
 
     const year =
       form.startDate
         ? String(
             form.startDate
-          ).slice(
-            0,
-            4
-          )
+          ).slice(0, 4)
         : String(
             new Date()
               .getFullYear()
           )
-
 
     const filePath =
       [
@@ -810,7 +700,6 @@ function EmployeeLeaveRequest({
         year,
         fileName,
       ].join('/')
-
 
     const {
       error,
@@ -834,32 +723,22 @@ function EmployeeLeaveRequest({
           }
         )
 
-
     if (error) {
       throw new Error(
         `Unable to upload PDF: ${error.message}`
       )
     }
 
-
     return filePath
   }
 
-
   // =========================================================
-  // SUBMIT ANNUAL / SICK LEAVE
-  //
-  // Protected RPC
+  // SUBMIT ANNUAL / SICK
   // =========================================================
 
   async function submitLeaveRequest() {
     let attachmentPath =
       null
-
-
-    // =======================================================
-    // UPLOAD PDF
-    // =======================================================
 
     if (
       form.requestType ===
@@ -869,11 +748,6 @@ function EmployeeLeaveRequest({
       attachmentPath =
         await uploadSickAttachment()
     }
-
-
-    // =======================================================
-    // SUBMIT THROUGH BACKEND
-    // =======================================================
 
     const {
       data,
@@ -919,11 +793,9 @@ function EmployeeLeaveRequest({
         }
       )
 
-
     if (error) {
       throw error
     }
-
 
     if (
       !data ||
@@ -935,18 +807,11 @@ function EmployeeLeaveRequest({
       )
     }
 
-
     return data
   }
 
-
   // =========================================================
   // SUBMIT COM-OFF
-  //
-  // NEW CONSECUTIVE-DAY RPC
-  //
-  // Backend calculates requested_days itself.
-  // Frontend DOES NOT send requested_days.
   // =========================================================
 
   async function submitComOffRequest() {
@@ -972,11 +837,9 @@ function EmployeeLeaveRequest({
         }
       )
 
-
     if (error) {
       throw error
     }
-
 
     if (
       !data ||
@@ -988,15 +851,11 @@ function EmployeeLeaveRequest({
       )
     }
 
-
     return data
   }
 
-
   // =========================================================
-  // RESET REQUEST FIELDS
-  //
-  // Keep employee verification and selected request type.
+  // RESET REQUEST
   // =========================================================
 
   function resetRequestForm() {
@@ -1013,9 +872,8 @@ function EmployeeLeaveRequest({
     )
   }
 
-
   // =========================================================
-  // REFRESH EMPLOYEE BALANCE
+  // REFRESH BALANCE
   // =========================================================
 
   async function refreshEmployeeBalance() {
@@ -1031,7 +889,6 @@ function EmployeeLeaveRequest({
     }
   }
 
-
   // =========================================================
   // SUBMIT
   // =========================================================
@@ -1041,15 +898,12 @@ function EmployeeLeaveRequest({
   ) {
     event.preventDefault()
 
-
     if (submitting) {
       return
     }
 
-
     const validationError =
       validateForm()
-
 
     if (validationError) {
       setErrorMessage(
@@ -1059,26 +913,18 @@ function EmployeeLeaveRequest({
       return
     }
 
-
     setSubmitting(true)
 
     setErrorMessage('')
-
     setSuccessMessage('')
 
-
     try {
-      // =====================================================
-      // COM-OFF
-      // =====================================================
-
       if (
         form.requestType ===
         'comoff'
       ) {
         const result =
           await submitComOffRequest()
-
 
         setSuccessMessage(
           result.message ||
@@ -1090,24 +936,10 @@ function EmployeeLeaveRequest({
           )
         )
 
-
-        // ===================================================
-        // Pending does not reduce available balance.
-        // But Pending counter will refresh.
-        // ===================================================
-
         await refreshEmployeeBalance()
-      }
-
-
-      // =====================================================
-      // ANNUAL / SICK
-      // =====================================================
-
-      else {
+      } else {
         const result =
           await submitLeaveRequest()
-
 
         setSuccessMessage(
           result.message ||
@@ -1120,14 +952,12 @@ function EmployeeLeaveRequest({
         )
       }
 
-
       resetRequestForm()
     } catch (error) {
       console.error(
         'Request submission error:',
         error
       )
-
 
       setErrorMessage(
         error.message
@@ -1139,6 +969,18 @@ function EmployeeLeaveRequest({
     }
   }
 
+  // =========================================================
+  // BACK TO DTR
+  // =========================================================
+
+  function handleBack() {
+    if (onBack) {
+      onBack()
+      return
+    }
+
+    window.location.href = '/'
+  }
 
   // =========================================================
   // REQUEST TITLE
@@ -1165,7 +1007,6 @@ function EmployeeLeaveRequest({
       ]
     )
 
-
   // =========================================================
   // UI
   // =========================================================
@@ -1174,35 +1015,26 @@ function EmployeeLeaveRequest({
     <div className="employee-leave-page">
 
       {/* =====================================================
-          HEADER
+          FIXED HEADER
       ===================================================== */}
 
       <header className="employee-leave-header">
 
         <img
           src="/dtr-pro-logo.png"
-
           alt="DTR Pro"
-
           className="employee-leave-logo"
         />
 
-
-        {onBack && (
-
-          <button
-            type="button"
-
-            className="employee-leave-back"
-
-            onClick={
-              onBack
-            }
-          >
-            Employee DTR
-          </button>
-
-        )}
+        <button
+          type="button"
+          className="employee-leave-back"
+          onClick={
+            handleBack
+          }
+        >
+          Employee DTR
+        </button>
 
       </header>
 
@@ -1214,7 +1046,7 @@ function EmployeeLeaveRequest({
       <main className="employee-leave-content">
 
         {/* ===================================================
-            TITLE
+            PAGE TITLE
         =================================================== */}
 
         <section className="employee-leave-intro">
@@ -1231,14 +1063,14 @@ function EmployeeLeaveRequest({
 
 
         {/* ===================================================
-            EMPLOYEE LOOKUP
+            EMPLOYEE CARD
         =================================================== */}
 
         <section className="leave-employee-card">
 
           <div className="leave-employee-search">
 
-            <div>
+            <div className="leave-employee-copy">
 
               <label>
                 Employee Code
@@ -1255,9 +1087,7 @@ function EmployeeLeaveRequest({
 
               <input
                 type="text"
-
                 inputMode="numeric"
-
                 autoComplete="off"
 
                 value={
@@ -1280,7 +1110,6 @@ function EmployeeLeaveRequest({
                     'Enter'
                   ) {
                     event.preventDefault()
-
                     findEmployee()
                   }
                 }}
@@ -1320,7 +1149,7 @@ function EmployeeLeaveRequest({
 
 
           {/* =================================================
-              VERIFIED EMPLOYEE
+              EMPLOYEE PROFILE
           ================================================= */}
 
           {employee && (
@@ -1340,7 +1169,7 @@ function EmployeeLeaveRequest({
               </div>
 
 
-              <div>
+              <div className="leave-employee-details">
 
                 <strong>
 
@@ -1396,21 +1225,16 @@ function EmployeeLeaveRequest({
 
           <form
             className="leave-request-card"
-
             onSubmit={
               handleSubmit
             }
           >
 
             {/* =================================================
-                TYPE TABS
+                REQUEST TYPE
             ================================================= */}
 
             <div className="leave-type-tabs">
-
-              {/* ===============================================
-                  ANNUAL
-              =============================================== */}
 
               <button
                 type="button"
@@ -1444,10 +1268,6 @@ function EmployeeLeaveRequest({
               </button>
 
 
-              {/* ===============================================
-                  SICK
-              =============================================== */}
-
               <button
                 type="button"
 
@@ -1479,10 +1299,6 @@ function EmployeeLeaveRequest({
 
               </button>
 
-
-              {/* ===============================================
-                  COM-OFF
-              =============================================== */}
 
               <button
                 type="button"
@@ -1519,7 +1335,7 @@ function EmployeeLeaveRequest({
 
 
             {/* =================================================
-                FORM HEADER
+                FORM TITLE
             ================================================= */}
 
             <div className="leave-form-heading">
@@ -1546,10 +1362,6 @@ function EmployeeLeaveRequest({
               </div>
 
 
-              {/* ===============================================
-                  COM-OFF AVAILABLE BALANCE
-              =============================================== */}
-
               {form.requestType ===
                 'comoff' && (
 
@@ -1559,15 +1371,11 @@ function EmployeeLeaveRequest({
                     Available
                   </span>
 
-
                   <strong>
-
                     {formatBalance(
                       availableComOff
                     )}
-
                   </strong>
-
 
                   <small>
                     day(s)
@@ -1587,7 +1395,7 @@ function EmployeeLeaveRequest({
             <div className="leave-form-grid">
 
               {/* ===============================================
-                  START / FROM DATE
+                  START DATE
               =============================================== */}
 
               <div className="leave-form-group">
@@ -1602,7 +1410,6 @@ function EmployeeLeaveRequest({
                   <span>*</span>
 
                 </label>
-
 
                 <input
                   type="date"
@@ -1629,7 +1436,7 @@ function EmployeeLeaveRequest({
 
 
               {/* ===============================================
-                  END / TO DATE
+                  END DATE
               =============================================== */}
 
               <div className="leave-form-group">
@@ -1644,7 +1451,6 @@ function EmployeeLeaveRequest({
                   <span>*</span>
 
                 </label>
-
 
                 <input
                   type="date"
@@ -1676,7 +1482,7 @@ function EmployeeLeaveRequest({
 
 
               {/* ===============================================
-                  COM-OFF REQUESTED DAYS
+                  COM-OFF REQUESTED
               =============================================== */}
 
               {form.requestType ===
@@ -1688,10 +1494,8 @@ function EmployeeLeaveRequest({
                     Requested Com-off
                   </label>
 
-
                   <input
                     type="text"
-
                     readOnly
 
                     value={
@@ -1724,10 +1528,8 @@ function EmployeeLeaveRequest({
                     Remaining if Approved
                   </label>
 
-
                   <input
                     type="text"
-
                     readOnly
 
                     value={
@@ -1747,16 +1549,17 @@ function EmployeeLeaveRequest({
 
 
               {/* ===============================================
-                  COM-OFF PENDING INFORMATION
+                  COM-OFF PENDING
               =============================================== */}
 
               {form.requestType ===
                 'comoff' &&
-                pendingComOff > 0 && (
+                pendingComOff >
+                0 && (
 
-                <div className="leave-form-group leave-form-full">
+                <div className="leave-form-full">
 
-                  <div className="leave-request-message success">
+                  <div className="leave-request-message success leave-inline-message">
 
                     You currently have{' '}
 
@@ -1778,7 +1581,7 @@ function EmployeeLeaveRequest({
 
 
               {/* ===============================================
-                  LEAVE DURATION
+                  DURATION
               =============================================== */}
 
               {form.requestType !==
@@ -1789,7 +1592,6 @@ function EmployeeLeaveRequest({
                   <label>
                     Duration
                   </label>
-
 
                   <select
                     value={
@@ -1826,7 +1628,7 @@ function EmployeeLeaveRequest({
 
 
               {/* ===============================================
-                  PARTIAL START
+                  PARTIAL START TIME
               =============================================== */}
 
               {form.requestType !==
@@ -1840,7 +1642,6 @@ function EmployeeLeaveRequest({
                     Start Time
                     <span>*</span>
                   </label>
-
 
                   <input
                     type="time"
@@ -1869,7 +1670,7 @@ function EmployeeLeaveRequest({
 
 
               {/* ===============================================
-                  PARTIAL END
+                  PARTIAL END TIME
               =============================================== */}
 
               {form.requestType !==
@@ -1883,7 +1684,6 @@ function EmployeeLeaveRequest({
                     End Time
                     <span>*</span>
                   </label>
-
 
                   <input
                     type="time"
@@ -1924,7 +1724,6 @@ function EmployeeLeaveRequest({
                     Medical Certificate
                   </label>
 
-
                   <label className="leave-file-upload">
 
                     <input
@@ -1941,32 +1740,25 @@ function EmployeeLeaveRequest({
                       }
                     />
 
-
                     <div className="leave-upload-icon">
                       PDF
                     </div>
 
-
-                    <div>
+                    <div className="leave-file-copy">
 
                       <strong>
 
                         {form.attachment
-                          ? form
-                              .attachment
-                              .name
+                          ? form.attachment.name
                           : 'Attach medical certificate'}
 
                       </strong>
-
 
                       <span>
 
                         {form.attachment
                           ? `${(
-                              form
-                                .attachment
-                                .size /
+                              form.attachment.size /
                               1024 /
                               1024
                             ).toFixed(
@@ -1977,7 +1769,6 @@ function EmployeeLeaveRequest({
                       </span>
 
                     </div>
-
 
                     <span className="leave-upload-button">
 
@@ -2008,7 +1799,6 @@ function EmployeeLeaveRequest({
                     : 'Reason'}
 
                 </label>
-
 
                 <textarea
                   rows="4"
@@ -2047,15 +1837,15 @@ function EmployeeLeaveRequest({
 
 
             {/* =================================================
-                CLIENT-SIDE COM-OFF WARNING
+                COM-OFF WARNING
             ================================================= */}
 
             {form.requestType ===
               'comoff' &&
               requestedComOffDays >
-                availableComOff &&
+              availableComOff &&
               requestedComOffDays >
-                0 && (
+              0 && (
 
               <div className="leave-request-message error">
 
@@ -2121,12 +1911,12 @@ function EmployeeLeaveRequest({
                   submitting ||
                   (
                     form.requestType ===
-                      'comoff' &&
+                    'comoff' &&
                     (
                       requestedComOffDays <
-                        1 ||
+                      1 ||
                       requestedComOffDays >
-                        availableComOff
+                      availableComOff
                     )
                   )
                 }

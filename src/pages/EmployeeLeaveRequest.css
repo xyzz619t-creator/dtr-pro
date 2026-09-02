@@ -1,27 +1,53 @@
 /* =========================================================
-   PAGE
+   EMPLOYEE LEAVE REQUEST
 ========================================================= */
 
 .employee-leave-page {
+  --leave-bg: #f4f6f9;
+  --leave-card: #ffffff;
+  --leave-input: #ffffff;
+  --leave-soft: #f8fafc;
+
+  --leave-border: #dce2e9;
+
+  --leave-text: #111827;
+  --leave-muted: #64748b;
+
+  --leave-pink: #ec4899;
+  --leave-pink-dark: #db2777;
+
+  --leave-dark: #111827;
+
   width: 100%;
   min-height: 100vh;
 
-  /* Fixed header height */
   padding-top: 78px;
 
   box-sizing: border-box;
 
-  background:
-    var(
-      --employee-leave-bg,
-      #f4f6f9
-    );
+  background: var(--leave-bg);
+  color: var(--leave-text);
 
-  color:
-    var(
-      --employee-leave-text,
-      #111827
-    );
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+
+/* =========================================================
+   PROTECT PAGE TEXT FROM GLOBAL STYLES
+========================================================= */
+
+.employee-leave-page h1,
+.employee-leave-page h2,
+.employee-leave-page h3,
+.employee-leave-page h4,
+.employee-leave-page strong,
+.employee-leave-page label {
+  color: var(--leave-text);
 }
 
 
@@ -46,32 +72,20 @@
   align-items: center;
   justify-content: space-between;
 
-  padding:
-    0 28px;
-
-  border-bottom:
-    1px solid
-    var(
-      --employee-leave-border,
-      #dde2e8
-    );
-
-  background:
-    var(
-      --employee-leave-card,
-      #ffffff
-    );
+  padding: 0 28px;
 
   box-sizing: border-box;
 
+  border-bottom:
+    1px solid
+    var(--leave-border);
+
+  background:
+    var(--leave-card);
+
   box-shadow:
     0 1px 8px
-    rgba(
-      15,
-      23,
-      42,
-      0.04
-    );
+    rgba(15, 23, 42, 0.04);
 }
 
 
@@ -80,44 +94,37 @@
 ========================================================= */
 
 .employee-leave-logo {
-  width: 110px;
-  height: auto;
-
   display: block;
+
+  width: 112px;
+  height: auto;
 
   object-fit: contain;
 }
 
 
 /* =========================================================
-   BACK TO DTR
+   EMPLOYEE DTR BUTTON
 ========================================================= */
 
 .employee-leave-back {
   min-height: 46px;
 
-  padding:
-    0 20px;
+  padding: 0 20px;
 
   border:
     1px solid
-    var(
-      --employee-leave-border,
-      #d1d5db
-    );
+    var(--leave-border);
 
   border-radius: 10px;
 
   background:
-    var(
-      --employee-leave-card,
-      #ffffff
-    );
+    var(--leave-card);
 
-  color: inherit;
+  color:
+    var(--leave-text);
 
-  font-family: inherit;
-
+  font: inherit;
   font-weight: 800;
 
   cursor: pointer;
@@ -127,9 +134,11 @@
     background 0.15s ease;
 }
 
-
 .employee-leave-back:hover {
-  border-color: #ec4899;
+  border-color:
+    var(--leave-pink);
+
+  background: #fff7fb;
 }
 
 
@@ -140,17 +149,14 @@
 .employee-leave-content {
   width:
     min(
-      980px,
-      calc(
-        100% - 40px
-      )
+      1220px,
+      calc(100% - 40px)
     );
 
-  margin:
-    0 auto;
+  margin: 0 auto;
 
   padding:
-    38px 0
+    42px 0
     60px;
 
   box-sizing: border-box;
@@ -158,34 +164,44 @@
 
 
 /* =========================================================
-   INTRO
+   PAGE INTRO
 ========================================================= */
 
 .employee-leave-intro {
-  margin-bottom: 24px;
-}
+  width: 100%;
 
+  margin-bottom: 28px;
+
+  text-align: center;
+}
 
 .employee-leave-intro h1 {
+  display: block;
+
   margin: 0;
 
-  font-size: 32px;
+  color:
+    var(--leave-text) !important;
 
-  font-weight: 800;
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  font-size: 36px;
+  line-height: 1.15;
+
+  font-weight: 900;
+
+  letter-spacing: -0.03em;
 }
 
-
 .employee-leave-intro p {
-  margin:
-    6px 0 0;
+  margin: 8px 0 0;
 
   color:
-    var(
-      --employee-leave-muted,
-      #6b7280
-    );
+    var(--leave-muted) !important;
 
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 
@@ -194,24 +210,22 @@
 ========================================================= */
 
 .leave-employee-card {
-  margin-bottom: 18px;
+  width: 100%;
 
-  padding: 22px;
+  margin-bottom: 22px;
+
+  padding: 24px 28px;
+
+  box-sizing: border-box;
 
   border:
     1px solid
-    var(
-      --employee-leave-border,
-      #e1e5ea
-    );
+    var(--leave-border);
 
-  border-radius: 14px;
+  border-radius: 16px;
 
   background:
-    var(
-      --employee-leave-card,
-      #ffffff
-    );
+    var(--leave-card);
 }
 
 
@@ -225,106 +239,100 @@
   align-items: center;
   justify-content: space-between;
 
-  gap: 25px;
+  gap: 30px;
 }
 
+.leave-employee-copy {
+  min-width: 0;
+}
 
 .leave-employee-search label {
-  font-size: 14px;
-
-  font-weight: 800;
-}
-
-
-.leave-employee-search p {
-  margin:
-    4px 0 0;
+  display: block;
 
   color:
-    var(
-      --employee-leave-muted,
-      #6b7280
-    );
+    var(--leave-text) !important;
 
-  font-size: 11px;
+  font-size: 17px;
+
+  font-weight: 900;
+}
+
+.leave-employee-search p {
+  margin: 6px 0 0;
+
+  color:
+    var(--leave-muted);
+
+  font-size: 13px;
 }
 
 
 /* =========================================================
-   EMPLOYEE CODE CONTROL
+   CODE INPUT
 ========================================================= */
 
 .leave-code-control {
   display: flex;
 
-  gap: 8px;
+  align-items: stretch;
+
+  gap: 10px;
 }
 
-
 .leave-code-control input {
-  width: 210px;
-  height: 46px;
+  width: 260px;
+  height: 48px;
 
-  padding:
-    0 13px;
+  padding: 0 15px;
+
+  box-sizing: border-box;
 
   border:
     1px solid
-    var(
-      --employee-leave-border,
-      #d1d5db
-    );
+    var(--leave-border);
 
-  border-radius: 9px;
+  border-radius: 10px;
 
   outline: none;
 
   background:
-    var(
-      --employee-leave-input,
-      #ffffff
-    );
+    var(--leave-input);
 
-  color: inherit;
+  color:
+    var(--leave-text);
 
-  font-family: inherit;
-
-  box-sizing: border-box;
+  font: inherit;
+  font-size: 14px;
 }
 
-
 .leave-code-control input:focus {
-  border-color: #ec4899;
+  border-color:
+    var(--leave-pink);
 
   box-shadow:
     0 0 0 3px
-    rgba(
-      236,
-      72,
-      153,
-      0.10
-    );
+    rgba(236, 72, 153, 0.10);
 }
 
-
 .leave-code-control button {
-  min-width: 110px;
+  min-width: 138px;
 
-  border: none;
+  padding: 0 18px;
 
-  border-radius: 9px;
+  border: 0;
 
-  background: #111827;
+  border-radius: 10px;
+
+  background:
+    var(--leave-dark);
 
   color: #ffffff;
 
-  font-family: inherit;
-
-  font-weight: 800;
+  font: inherit;
+  font-weight: 900;
 
   cursor: pointer;
 }
-
 
 .leave-code-control button:disabled {
   opacity: 0.55;
@@ -342,24 +350,20 @@
 
   align-items: center;
 
-  gap: 12px;
+  gap: 16px;
 
-  margin-top: 18px;
+  margin-top: 22px;
 
-  padding-top: 18px;
+  padding-top: 22px;
 
   border-top:
     1px solid
-    var(
-      --employee-leave-border,
-      #e5e7eb
-    );
+    var(--leave-border);
 }
 
-
 .leave-employee-avatar {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
 
   display: flex;
 
@@ -379,38 +383,35 @@
 
   color: #ffffff;
 
-  font-size: 12px;
+  font-size: 13px;
 
   font-weight: 900;
 }
 
-
-.leave-employee-profile > div:last-child {
+.leave-employee-details {
   min-width: 0;
 
   display: flex;
 
   flex-direction: column;
 
-  gap: 3px;
+  gap: 5px;
 }
-
 
 .leave-employee-profile strong {
-  font-size: 14px;
-}
+  color:
+    var(--leave-text) !important;
 
+  font-size: 15px;
+}
 
 .leave-employee-profile span {
   overflow: hidden;
 
   color:
-    var(
-      --employee-leave-muted,
-      #6b7280
-    );
+    var(--leave-muted);
 
-  font-size: 10px;
+  font-size: 12px;
 
   white-space: nowrap;
 
@@ -427,27 +428,21 @@
 
   overflow: hidden;
 
+  box-sizing: border-box;
+
   border:
     1px solid
-    var(
-      --employee-leave-border,
-      #e1e5ea
-    );
+    var(--leave-border);
 
-  border-radius: 14px;
+  border-radius: 16px;
 
   background:
-    var(
-      --employee-leave-card,
-      #ffffff
-    );
-
-  box-sizing: border-box;
+    var(--leave-card);
 }
 
 
 /* =========================================================
-   TYPE TABS
+   REQUEST TYPE TABS
 ========================================================= */
 
 .leave-type-tabs {
@@ -456,50 +451,41 @@
   grid-template-columns:
     repeat(
       3,
-      1fr
+      minmax(0, 1fr)
     );
 
-  gap: 10px;
+  gap: 12px;
 
-  padding: 18px;
+  padding: 20px;
 
   border-bottom:
     1px solid
-    var(
-      --employee-leave-border,
-      #e5e7eb
-    );
+    var(--leave-border);
 }
 
-
 .leave-type-tabs button {
-  min-height: 70px;
+  min-height: 76px;
 
   display: flex;
 
   align-items: center;
   justify-content: center;
 
-  gap: 9px;
+  gap: 10px;
 
   border:
     1px solid
-    var(
-      --employee-leave-border,
-      #d1d5db
-    );
+    var(--leave-border);
 
-  border-radius: 10px;
+  border-radius: 11px;
 
   background:
-    var(
-      --employee-leave-input,
-      #ffffff
-    );
+    var(--leave-input);
 
-  color: inherit;
+  color:
+    var(--leave-text);
 
-  font-family: inherit;
+  font: inherit;
 
   cursor: pointer;
 
@@ -509,26 +495,27 @@
     color 0.15s ease;
 }
 
-
 .leave-type-tabs button:hover {
-  border-color: #ec4899;
+  border-color:
+    var(--leave-pink);
 }
-
 
 .leave-type-tabs button.active {
-  border-color: #ec4899;
+  border-color:
+    var(--leave-pink);
 
   background:
-    rgba(
-      236,
-      72,
-      153,
-      0.08
-    );
+    rgba(236, 72, 153, 0.08);
 
-  color: #db2777;
+  color:
+    var(--leave-pink-dark);
 }
 
+.leave-type-tabs button.active strong,
+.leave-type-tabs button.active .leave-type-icon {
+  color:
+    var(--leave-pink-dark) !important;
+}
 
 .leave-type-tabs button:disabled {
   opacity: 0.55;
@@ -536,19 +523,20 @@
   cursor: not-allowed;
 }
 
-
 .leave-type-icon {
-  font-size: 18px;
+  font-size: 20px;
 }
 
-
 .leave-type-tabs strong {
-  font-size: 12px;
+  color:
+    var(--leave-text);
+
+  font-size: 13px;
 }
 
 
 /* =========================================================
-   FORM HEADING
+   FORM HEADER
 ========================================================= */
 
 .leave-form-heading {
@@ -560,34 +548,36 @@
   gap: 20px;
 
   padding:
-    22px 24px
+    28px 28px
     0;
 }
-
 
 .leave-form-heading > div:first-child {
   min-width: 0;
 }
 
-
 .leave-form-heading h2 {
   margin: 0;
 
-  font-size: 20px;
+  color:
+    var(--leave-text) !important;
+
+  opacity: 1 !important;
+
+  font-size: 24px;
+
+  font-weight: 900;
+
+  letter-spacing: -0.02em;
 }
 
-
 .leave-form-heading p {
-  margin:
-    4px 0 0;
+  margin: 6px 0 0;
 
   color:
-    var(
-      --employee-leave-muted,
-      #6b7280
-    );
+    var(--leave-muted) !important;
 
-  font-size: 11px;
+  font-size: 13px;
 }
 
 
@@ -596,20 +586,18 @@
 ========================================================= */
 
 .leave-comoff-balance {
-  min-width: 100px;
+  min-width: 105px;
 
   flex-shrink: 0;
 
-  padding:
-    9px 15px;
+  padding: 10px 16px;
 
-  border-radius: 10px;
+  border-radius: 11px;
 
   background: #f3e8ff;
 
   text-align: center;
 }
-
 
 .leave-comoff-balance span,
 .leave-comoff-balance small {
@@ -617,18 +605,22 @@
 
   color: #7e22ce;
 
-  font-size: 8px;
+  font-size: 9px;
 
-  font-weight: 700;
+  font-weight: 800;
 }
-
 
 .leave-comoff-balance strong {
   display: block;
 
-  color: #7e22ce;
+  margin: 2px 0;
 
-  font-size: 22px;
+  color:
+    #7e22ce !important;
+
+  font-size: 24px;
+
+  font-weight: 900;
 }
 
 
@@ -642,18 +634,14 @@
   grid-template-columns:
     repeat(
       2,
-      minmax(
-        0,
-        1fr
-      )
+      minmax(0, 1fr)
     );
 
   gap:
-    18px 20px;
+    20px 22px;
 
-  padding: 24px;
+  padding: 28px;
 }
-
 
 .leave-form-group {
   min-width: 0;
@@ -662,22 +650,22 @@
 
   flex-direction: column;
 
-  gap: 7px;
+  gap: 8px;
 }
-
 
 .leave-form-full {
   grid-column:
     1 / -1;
 }
 
-
 .leave-form-group label {
-  font-size: 11px;
+  color:
+    var(--leave-text) !important;
 
-  font-weight: 800;
+  font-size: 12px;
+
+  font-weight: 900;
 }
-
 
 .leave-form-group label span {
   margin-left: 3px;
@@ -686,216 +674,249 @@
 }
 
 
+/* =========================================================
+   FORM CONTROLS
+========================================================= */
+
 .leave-form-group input,
 .leave-form-group select,
 .leave-form-group textarea {
   width: 100%;
 
+  box-sizing: border-box;
+
   border:
     1px solid
-    var(
-      --employee-leave-border,
-      #d1d5db
-    );
+    var(--leave-border);
 
-  border-radius: 9px;
+  border-radius: 10px;
 
   outline: none;
 
   background:
-    var(
-      --employee-leave-input,
-      #ffffff
-    );
+    var(--leave-input);
 
-  color: inherit;
+  color:
+    var(--leave-text);
 
-  font-family: inherit;
-
-  box-sizing: border-box;
+  font: inherit;
 }
-
 
 .leave-form-group input,
 .leave-form-group select {
-  height: 46px;
+  height: 48px;
 
-  padding:
-    0 12px;
+  padding: 0 14px;
 }
 
-
 .leave-form-group textarea {
-  padding: 12px;
+  min-height: 108px;
+
+  padding: 13px 14px;
 
   resize: vertical;
 }
 
-
 .leave-form-group input:focus,
 .leave-form-group select:focus,
 .leave-form-group textarea:focus {
-  border-color: #ec4899;
+  border-color:
+    var(--leave-pink);
 
   box-shadow:
     0 0 0 3px
-    rgba(
-      236,
-      72,
-      153,
-      0.10
-    );
+    rgba(236, 72, 153, 0.10);
 }
-
-
-/* =========================================================
-   READ ONLY
-========================================================= */
 
 .leave-form-group input[readonly] {
   background:
-    var(
-      --employee-leave-soft,
-      #f9fafb
-    );
+    var(--leave-soft);
 
   cursor: default;
 }
 
 
 /* =========================================================
-   FILE UPLOAD
+   DATE / TIME PICKER
+========================================================= */
+
+.leave-form-group input[type="date"],
+.leave-form-group input[type="time"] {
+  color-scheme: light;
+}
+
+.leave-form-group input[type="date"]::-webkit-calendar-picker-indicator,
+.leave-form-group input[type="time"]::-webkit-calendar-picker-indicator {
+  display: block;
+
+  opacity: 1;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MEDICAL CERTIFICATE / PDF UPLOAD
 ========================================================= */
 
 .leave-file-upload {
-  min-height: 88px;
+  width: 100%;
+
+  min-height: 116px;
 
   display: flex;
 
   align-items: center;
 
-  gap: 14px;
+  /*
+    IMPORTANT:
+    Centers the complete:
+    PDF + text + button
+    group inside the box.
+  */
+  justify-content: center;
 
-  padding:
-    14px 16px;
+  gap: 18px;
+
+  padding: 20px 24px;
+
+  box-sizing: border-box;
 
   border:
     1px dashed
-    var(
-      --employee-leave-border,
-      #cbd5e1
-    );
+    var(--leave-border);
 
-  border-radius: 10px;
+  border-radius: 12px;
 
   background:
-    var(
-      --employee-leave-soft,
-      #f9fafb
-    );
+    var(--leave-soft);
 
   cursor: pointer;
-
-  box-sizing: border-box;
 }
-
 
 .leave-file-upload:hover {
-  border-color: #ec4899;
+  border-color:
+    var(--leave-pink);
 }
 
+
+/* Hide native input */
 
 .leave-file-upload input {
   display: none;
 }
 
 
+/* PDF ICON */
+
 .leave-upload-icon {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
 
   display: flex;
 
   align-items: center;
   justify-content: center;
 
-  flex-shrink: 0;
+  flex: 0 0 56px;
 
-  border-radius: 9px;
+  border-radius: 11px;
 
   background: #fee2e2;
 
   color: #dc2626;
 
-  font-size: 10px;
+  font-size: 12px;
 
   font-weight: 900;
 }
 
 
-.leave-file-upload > div:nth-child(3) {
+/* TEXT */
+
+.leave-file-copy {
   min-width: 0;
 
-  flex: 1;
+  /*
+    Do not stretch to the full remaining width.
+    This keeps the complete group centered.
+  */
+  flex:
+    0 1 auto;
 
   display: flex;
 
   flex-direction: column;
 
-  gap: 4px;
+  justify-content: center;
+
+  gap: 5px;
+
+  text-align: left;
 }
 
-
 .leave-file-upload strong {
+  display: block;
+
+  max-width: 460px;
+
   overflow: hidden;
 
-  font-size: 11px;
+  color:
+    var(--leave-text) !important;
+
+  font-size: 13px;
+
+  font-weight: 900;
 
   white-space: nowrap;
 
   text-overflow: ellipsis;
 }
 
+.leave-file-copy span {
+  display: block;
 
-.leave-file-upload span {
   color:
-    var(
-      --employee-leave-muted,
-      #6b7280
-    );
+    var(--leave-muted);
 
-  font-size: 9px;
+  font-size: 11px;
+
+  line-height: 1.4;
 }
 
 
-.leave-upload-button {
-  flex-shrink: 0;
+/* CHOOSE PDF */
 
-  padding:
-    8px 11px;
+.leave-upload-button {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  min-height: 46px;
+
+  padding: 0 18px;
 
   border:
     1px solid
-    var(
-      --employee-leave-border,
-      #d1d5db
-    );
+    var(--leave-border);
 
-  border-radius: 7px;
+  border-radius: 9px;
 
   background:
-    var(
-      --employee-leave-card,
-      #ffffff
-    );
+    var(--leave-card);
 
   color:
-    var(
-      --employee-leave-text,
-      #111827
-    ) !important;
+    var(--leave-text) !important;
 
-  font-weight: 800;
+  font-size: 12px;
+
+  font-weight: 900;
+
+  white-space: nowrap;
 }
 
 
@@ -905,39 +926,57 @@
 
 .leave-request-message {
   margin:
-    0 24px
+    0 28px
     18px;
 
   padding:
-    12px 14px;
+    13px 15px;
 
-  border-radius: 9px;
+  border-radius: 10px;
 
-  font-size: 11px;
+  font-size: 12px;
+
+  line-height: 1.5;
 
   font-weight: 700;
 }
 
+.leave-inline-message {
+  margin: 0;
+}
 
 .leave-request-message.error {
   border:
     1px solid
     #fecaca;
 
-  background: #fef2f2;
+  background:
+    #fef2f2;
 
-  color: #b91c1c;
+  color:
+    #b91c1c;
 }
 
+.leave-request-message.error strong {
+  color:
+    #b91c1c !important;
+}
 
 .leave-request-message.success {
   border:
     1px solid
     #a7f3d0;
 
-  background: #ecfdf5;
+  background:
+    #ecfdf5;
 
-  color: #047857;
+  color:
+    #047857;
+}
+
+.leave-request-message.success strong {
+  color:
+    #047857 !important;
 }
 
 
@@ -951,40 +990,36 @@
   justify-content: flex-end;
 
   padding:
-    18px 24px;
+    20px 28px;
 
   border-top:
     1px solid
-    var(
-      --employee-leave-border,
-      #e5e7eb
-    );
+    var(--leave-border);
 }
 
-
 .leave-submit-button {
-  min-height: 46px;
+  min-width: 155px;
+  min-height: 48px;
 
-  padding:
-    0 24px;
+  padding: 0 25px;
 
-  border: none;
+  border: 0;
 
-  border-radius: 9px;
+  border-radius: 10px;
 
-  background: #111827;
+  background:
+    var(--leave-dark);
 
   color: #ffffff;
 
-  font-family: inherit;
+  font: inherit;
 
-  font-size: 12px;
+  font-size: 13px;
 
-  font-weight: 800;
+  font-weight: 900;
 
   cursor: pointer;
 }
-
 
 .leave-submit-button:disabled {
   opacity: 0.55;
@@ -997,38 +1032,37 @@
    DARK MODE
 ========================================================= */
 
-html[data-theme='dark'],
-.theme-dark {
-  --employee-leave-bg:
-    #15171c;
+html[data-theme="dark"] .employee-leave-page,
+html[data-theme="classic-dark"] .employee-leave-page,
+.theme-dark .employee-leave-page {
+  --leave-bg: #15171c;
+  --leave-card: #20242c;
+  --leave-input: #292e37;
+  --leave-soft: #252a32;
 
-  --employee-leave-card:
-    #20242c;
+  --leave-border: #3b414c;
 
-  --employee-leave-input:
-    #292e37;
+  --leave-text: #f9fafb;
+  --leave-muted: #9ca3af;
 
-  --employee-leave-soft:
-    #252a32;
+  --leave-dark: #111827;
+}
 
-  --employee-leave-border:
-    #3b414c;
-
-  --employee-leave-text:
-    #f9fafb;
-
-  --employee-leave-muted:
-    #9ca3af;
+html[data-theme="dark"] .leave-form-group input[type="date"],
+html[data-theme="dark"] .leave-form-group input[type="time"],
+html[data-theme="classic-dark"] .leave-form-group input[type="date"],
+html[data-theme="classic-dark"] .leave-form-group input[type="time"],
+.theme-dark .leave-form-group input[type="date"],
+.theme-dark .leave-form-group input[type="time"] {
+  color-scheme: dark;
 }
 
 
 /* =========================================================
-   RESPONSIVE - TABLET / MOBILE
+   TABLET / MOBILE
 ========================================================= */
 
-@media (
-  max-width: 700px
-) {
+@media (max-width: 700px) {
 
   .employee-leave-page {
     padding-top: 70px;
@@ -1044,7 +1078,7 @@ html[data-theme='dark'],
 
 
   .employee-leave-logo {
-    width: 95px;
+    width: 96px;
   }
 
 
@@ -1060,23 +1094,31 @@ html[data-theme='dark'],
 
   .employee-leave-content {
     width:
-      calc(
-        100% - 24px
-      );
+      calc(100% - 24px);
 
     padding:
-      22px 0
+      26px 0
       40px;
   }
 
 
+  .employee-leave-intro {
+    margin-bottom: 20px;
+  }
+
+
   .employee-leave-intro h1 {
-    font-size: 25px;
+    font-size: 28px;
+  }
+
+
+  .employee-leave-intro p {
+    font-size: 13px;
   }
 
 
   .leave-employee-card {
-    padding: 17px;
+    padding: 18px;
   }
 
 
@@ -1085,7 +1127,7 @@ html[data-theme='dark'],
 
     align-items: stretch;
 
-    gap: 15px;
+    gap: 16px;
   }
 
 
@@ -1102,7 +1144,7 @@ html[data-theme='dark'],
 
 
   .leave-code-control button {
-    min-width: 100px;
+    min-width: 105px;
   }
 
 
@@ -1123,8 +1165,13 @@ html[data-theme='dark'],
     align-items: flex-start;
 
     padding:
-      18px 18px
+      20px 18px
       0;
+  }
+
+
+  .leave-form-heading h2 {
+    font-size: 20px;
   }
 
 
@@ -1132,9 +1179,10 @@ html[data-theme='dark'],
     grid-template-columns:
       1fr;
 
-    padding: 18px;
+    padding:
+      20px 18px;
 
-    gap: 16px;
+    gap: 17px;
   }
 
 
@@ -1143,15 +1191,48 @@ html[data-theme='dark'],
   }
 
 
-  .leave-file-upload {
-    align-items: flex-start;
+  /* =======================================================
+     PDF MOBILE
+  ======================================================= */
 
-    flex-wrap: wrap;
+  .leave-file-upload {
+    min-height: 150px;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+      20px 16px;
+
+    text-align: center;
+  }
+
+
+  .leave-file-copy {
+    align-items: center;
+
+    text-align: center;
+  }
+
+
+  .leave-file-upload strong {
+    max-width: 260px;
+
+    text-align: center;
+  }
+
+
+  .leave-file-copy span {
+    text-align: center;
   }
 
 
   .leave-upload-button {
-    margin-left: 62px;
+    margin: 2px 0 0;
   }
 
 
@@ -1162,9 +1243,14 @@ html[data-theme='dark'],
   }
 
 
+  .leave-inline-message {
+    margin: 0;
+  }
+
+
   .leave-request-footer {
     padding:
-      16px 18px;
+      17px 18px;
   }
 
 
