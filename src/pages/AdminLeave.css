@@ -1,0 +1,1850 @@
+/* =========================================================
+   ADMIN LEAVE
+========================================================= */
+
+.admin-leave-page {
+  width: 100%;
+  min-width: 0;
+
+  height:
+    calc(
+      100dvh - 80px
+    );
+
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding:
+    28px 30px
+    18px;
+
+  box-sizing: border-box;
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.leave-stat-grid {
+  flex-shrink: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap: 14px;
+
+  margin-bottom: 20px;
+}
+
+
+.leave-stat-card {
+  min-height: 100px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 8px;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+
+  border-radius: 13px;
+
+  background:
+    var(
+      --admin-card,
+      #ffffff
+    );
+}
+
+
+.leave-stat-card span {
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+.leave-stat-card strong {
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 27px;
+  font-weight: 800;
+}
+
+
+.leave-stat-approved strong {
+  color: #059669;
+}
+
+
+.leave-stat-pending strong {
+  color: #d97706;
+}
+
+
+.leave-stat-on-leave strong {
+  color: #7c3aed;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.leave-message {
+  flex-shrink: 0;
+
+  margin-bottom: 12px;
+
+  padding:
+    12px 14px;
+
+  border-radius: 9px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+.leave-success {
+  border:
+    1px solid
+    #a7f3d0;
+
+  background:
+    #ecfdf5;
+
+  color:
+    #047857;
+}
+
+
+.leave-error {
+  border:
+    1px solid
+    #fecaca;
+
+  background:
+    #fef2f2;
+
+  color:
+    #b91c1c;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.leave-filter-bar {
+  flex-shrink: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(
+      340px,
+      1fr
+    )
+    175px
+    190px
+    78px
+    135px;
+
+  gap: 10px;
+
+  align-items: center;
+
+  margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.leave-search-box {
+  position: relative;
+
+  min-width: 0;
+}
+
+
+.leave-search-box span {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  z-index: 2;
+
+  transform:
+    translateY(-50%);
+
+  pointer-events: none;
+}
+
+
+.leave-search-box input {
+  padding-left:
+    42px !important;
+}
+
+
+/* =========================================================
+   FILTER INPUTS
+========================================================= */
+
+.leave-filter-bar input,
+.leave-filter-bar select {
+  width: 100%;
+
+  height: 44px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(
+      --admin-input,
+      #ffffff
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  -webkit-text-fill-color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  box-sizing: border-box;
+}
+
+
+.leave-filter-bar input:focus,
+.leave-filter-bar select:focus {
+  border-color: #ec4899;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      236,
+      72,
+      153,
+      0.10
+    );
+}
+
+
+/* =========================================================
+   MONTH PICKER
+========================================================= */
+
+.leave-month-picker {
+  position: relative;
+
+  min-width: 0;
+
+  width: 100%;
+}
+
+
+.leave-month-picker input {
+  width: 100%;
+
+  padding-right:
+    45px !important;
+}
+
+
+/* Hide native browser icon */
+
+.leave-month-picker
+input::-webkit-calendar-picker-indicator {
+  opacity: 0 !important;
+
+  width: 0;
+
+  margin: 0;
+
+  padding: 0;
+}
+
+
+/* =========================================================
+   VISIBLE CALENDAR BUTTON
+========================================================= */
+
+.leave-month-picker-button {
+  position: absolute;
+
+  top: 50%;
+  right: 5px;
+
+  z-index: 5;
+
+  width: 35px;
+  height: 35px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  transform:
+    translateY(-50%);
+
+  border: none;
+
+  border-radius: 7px;
+
+  background:
+    transparent;
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+
+.leave-month-picker-button:hover {
+  background:
+    var(
+      --admin-table-header,
+      #f3f4f6
+    );
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+.leave-clear-filter {
+  width: 100%;
+
+  height: 44px;
+
+  padding:
+    0 14px;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  background:
+    var(
+      --admin-card,
+      #ffffff
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-family: inherit;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+.leave-clear-filter:hover:not(:disabled) {
+  background:
+    var(
+      --admin-table-header,
+      #f9fafb
+    );
+}
+
+
+.leave-clear-filter:disabled {
+  opacity: 0.45;
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   ADD LEAVE
+========================================================= */
+
+.leave-add-button {
+  width: 100%;
+
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0 16px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background:
+    #111827;
+
+  color:
+    #ffffff !important;
+
+  -webkit-text-fill-color:
+    #ffffff !important;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+
+.leave-add-button:hover {
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.leave-table-card {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+
+  border-radius: 13px;
+
+  background:
+    var(
+      --admin-card,
+      #ffffff
+    );
+}
+
+
+/* =========================================================
+   TABLE SCROLL
+========================================================= */
+
+.leave-table-scroll {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
+}
+
+
+.leave-table-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.leave-table {
+  width: 100%;
+
+  table-layout: fixed;
+
+  border-collapse:
+    separate;
+
+  border-spacing: 0;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.leave-table thead {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+}
+
+
+.leave-table th {
+  height: 52px;
+
+  padding:
+    0 8px;
+
+  border-bottom:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+
+  background:
+    var(
+      --admin-table-header,
+      #f9fafb
+    );
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 9px;
+
+  font-weight: 800;
+
+  text-align: center;
+
+  vertical-align: middle;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   TABLE CELLS
+========================================================= */
+
+.leave-table td {
+  height: 68px;
+
+  padding:
+    10px 8px;
+
+  border-bottom:
+    1px solid
+    var(
+      --admin-border,
+      #edf0f3
+    );
+
+  background:
+    var(
+      --admin-card,
+      #ffffff
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 10px;
+
+  vertical-align: middle;
+
+  text-align: center;
+
+  overflow: hidden;
+}
+
+
+.leave-table tbody
+tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   TABLE WIDTHS
+========================================================= */
+
+.leave-table th:nth-child(1),
+.leave-table td:nth-child(1) {
+  width: 16%;
+}
+
+
+.leave-table th:nth-child(2),
+.leave-table td:nth-child(2) {
+  width: 10%;
+}
+
+
+.leave-table th:nth-child(3),
+.leave-table td:nth-child(3) {
+  width: 13%;
+}
+
+
+.leave-table th:nth-child(4),
+.leave-table td:nth-child(4) {
+  width: 5%;
+}
+
+
+.leave-table th:nth-child(5),
+.leave-table td:nth-child(5) {
+  width: 13%;
+}
+
+
+.leave-table th:nth-child(6),
+.leave-table td:nth-child(6) {
+  width: 8%;
+}
+
+
+.leave-table th:nth-child(7),
+.leave-table td:nth-child(7) {
+  width: 8%;
+}
+
+
+.leave-table th:nth-child(8),
+.leave-table td:nth-child(8) {
+  width: 9%;
+}
+
+
+.leave-table th:nth-child(9),
+.leave-table td:nth-child(9) {
+  width: 18%;
+}
+
+
+/* =========================================================
+   EMPLOYEE
+========================================================= */
+
+.leave-employee-cell {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  text-align: left;
+}
+
+
+.leave-avatar {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ec4899,
+      #8b5cf6
+    );
+
+  color: #ffffff;
+
+  font-size: 8px;
+
+  font-weight: 900;
+}
+
+
+.leave-employee-info {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+
+.leave-employee-info strong {
+  overflow: hidden;
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 10px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+.leave-employee-info small {
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   LEAVE TYPE
+========================================================= */
+
+.leave-type-label {
+  display: inline-flex;
+
+  min-height: 27px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0 8px;
+
+  border-radius: 999px;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+
+.leave-type-annual {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+
+.leave-type-sick {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+
+.leave-type-emergency {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+
+.leave-type-unpaid {
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+
+.leave-type-other {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.leave-date-range {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 2px;
+}
+
+
+.leave-date-range strong {
+  overflow: hidden;
+
+  font-size: 9px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+.leave-date-range small {
+  overflow: hidden;
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 8px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   DAYS
+========================================================= */
+
+.leave-day-count {
+  color: #7c3aed;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   REASON
+========================================================= */
+
+.leave-reason {
+  width: 100%;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   PDF
+========================================================= */
+
+.leave-pdf-button {
+  min-height: 29px;
+
+  padding:
+    0 9px;
+
+  border:
+    1px solid
+    #fecaca;
+
+  border-radius: 6px;
+
+  background:
+    #fef2f2;
+
+  color: #dc2626;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+.leave-pdf-button:hover {
+  background:
+    #fee2e2;
+}
+
+
+.leave-pdf-button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+
+.leave-no-pdf {
+  color:
+    var(
+      --admin-muted,
+      #9ca3af
+    );
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.leave-status {
+  display: inline-flex;
+
+  min-width: 62px;
+
+  height: 27px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0 8px;
+
+  border-radius: 999px;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  text-transform: capitalize;
+}
+
+
+.leave-status-pending {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+
+.leave-status-approved {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+
+.leave-status-rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+
+.leave-status-cancelled {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+
+/* =========================================================
+   SUBMITTED
+========================================================= */
+
+.leave-submitted {
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 8px;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.leave-actions-heading {
+  text-align:
+    center !important;
+}
+
+
+.leave-actions {
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 4px;
+}
+
+
+.leave-actions button {
+  min-height: 29px;
+
+  padding:
+    0 6px;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  font-family: inherit;
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+
+.leave-actions button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+
+.leave-approve-button {
+  border:
+    1px solid
+    #86efac;
+
+  color: #15803d;
+}
+
+
+.leave-reject-button,
+.leave-delete-button {
+  border:
+    1px solid
+    #fecaca;
+
+  color: #dc2626;
+}
+
+
+.leave-edit-button,
+.leave-cancel-request-button {
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.leave-empty-state {
+  flex: 1;
+
+  min-height: 240px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 24px;
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  text-align: center;
+}
+
+
+.leave-empty-state strong {
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 15px;
+}
+
+
+.leave-empty-state span {
+  font-size: 10px;
+}
+
+
+.leave-empty-icon {
+  margin-bottom: 4px;
+
+  font-size: 27px;
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.leave-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 999999;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      0.62
+    );
+
+  backdrop-filter:
+    blur(5px);
+
+  -webkit-backdrop-filter:
+    blur(5px);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.leave-modal {
+  width:
+    min(
+      820px,
+      100%
+    );
+
+  max-height:
+    calc(
+      100dvh - 48px
+    );
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  border-radius: 16px;
+
+  background:
+    var(
+      --admin-card,
+      #ffffff
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  box-shadow:
+    0 24px 70px
+    rgba(
+      0,
+      0,
+      0,
+      0.3
+    );
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.leave-modal-header {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    flex-start;
+
+  gap: 20px;
+
+  padding:
+    20px 24px;
+
+  border-bottom:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+}
+
+
+.leave-modal-header h2 {
+  margin: 0;
+
+  font-size: 21px;
+}
+
+
+.leave-modal-header p {
+  margin:
+    5px 0 0;
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 11px;
+}
+
+
+.leave-modal-close {
+  width: 34px;
+  height: 34px;
+
+  border: none;
+
+  background: transparent;
+
+  color: inherit;
+
+  font-size: 25px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MODAL BODY
+========================================================= */
+
+.leave-modal-body {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    17px 20px;
+
+  padding:
+    22px 24px;
+
+  overflow-y: auto;
+
+  scrollbar-width: none;
+}
+
+
+.leave-modal-body::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.leave-form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+
+.leave-form-full {
+  grid-column:
+    1 / -1;
+}
+
+
+.leave-form-group label {
+  font-size: 11px;
+
+  font-weight: 800;
+}
+
+
+.leave-form-group label span {
+  margin-left: 3px;
+
+  color: #ef4444;
+}
+
+
+.leave-form-group input,
+.leave-form-group select,
+.leave-form-group textarea {
+  width: 100%;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(
+      --admin-input,
+      #ffffff
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  -webkit-text-fill-color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  box-sizing: border-box;
+}
+
+
+.leave-form-group input,
+.leave-form-group select {
+  height: 44px;
+
+  padding:
+    0 11px;
+}
+
+
+.leave-form-group textarea {
+  padding: 11px;
+
+  resize: vertical;
+}
+
+
+.leave-form-group input:focus,
+.leave-form-group select:focus,
+.leave-form-group textarea:focus {
+  border-color: #ec4899;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      236,
+      72,
+      153,
+      0.10
+    );
+}
+
+
+/* =========================================================
+   CALCULATED DAYS
+========================================================= */
+
+.leave-calculated-days {
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  background:
+    var(
+      --admin-table-header,
+      #f9fafb
+    );
+
+  font-weight: 700;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MODAL PDF
+========================================================= */
+
+.leave-modal-pdf {
+  width: fit-content;
+
+  min-height: 40px;
+
+  padding:
+    0 14px;
+
+  border:
+    1px solid
+    #fecaca;
+
+  border-radius: 8px;
+
+  background:
+    #fef2f2;
+
+  color: #dc2626;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MODAL ERROR
+========================================================= */
+
+.leave-modal-error {
+  margin:
+    0 24px
+    16px;
+
+  padding:
+    11px 13px;
+
+  border:
+    1px solid
+    #fecaca;
+
+  border-radius: 8px;
+
+  background:
+    #fef2f2;
+
+  color: #b91c1c;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.leave-modal-footer {
+  display: flex;
+
+  justify-content:
+    flex-end;
+
+  gap: 9px;
+
+  padding:
+    16px 24px;
+
+  border-top:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+}
+
+
+.leave-modal-footer button {
+  min-height: 42px;
+
+  padding:
+    0 18px;
+
+  border-radius: 8px;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+.leave-cancel-button {
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  background: transparent;
+
+  color: inherit;
+}
+
+
+.leave-save-button {
+  border: none;
+
+  background: #111827;
+
+  color: #ffffff;
+
+  -webkit-text-fill-color:
+    #ffffff;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html[data-theme='dark'],
+html[data-theme='classic-dark'],
+.theme-dark,
+.theme-classic-dark {
+  --admin-text: #f9fafb;
+  --admin-muted: #9ca3af;
+  --admin-card: #20242c;
+  --admin-input: #292e37;
+  --admin-border: #3b414c;
+  --admin-table-header: #252a32;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (
+  max-width: 1200px
+) {
+
+  .admin-leave-page {
+    padding:
+      22px 18px
+      16px;
+  }
+
+
+  .leave-filter-bar {
+    grid-template-columns:
+      minmax(
+        280px,
+        1fr
+      )
+      145px
+      165px
+      72px
+      125px;
+  }
+
+
+  .leave-table th,
+  .leave-table td {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+
+  .leave-table th:nth-child(5),
+  .leave-table td:nth-child(5) {
+    display: none;
+  }
+
+}
+
+
+@media (
+  max-width: 1000px
+) {
+
+  .leave-stat-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+
+
+  .leave-filter-bar {
+    grid-template-columns:
+      1fr
+      1fr
+      1fr;
+
+    align-items: stretch;
+  }
+
+
+  .leave-search-box {
+    grid-column:
+      1 / -1;
+  }
+
+
+  .leave-clear-filter,
+  .leave-add-button {
+    width: 100%;
+  }
+
+
+  .leave-table th:nth-child(8),
+  .leave-table td:nth-child(8) {
+    display: none;
+  }
+
+}
+
+
+@media (
+  max-width: 760px
+) {
+
+  .admin-leave-page {
+    height:
+      calc(
+        100dvh - 70px
+      );
+
+    padding:
+      16px 12px
+      10px;
+  }
+
+
+  .leave-stat-grid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+  }
+
+
+  .leave-stat-card {
+    min-height: 80px;
+  }
+
+
+  .leave-stat-card strong {
+    font-size: 22px;
+  }
+
+
+  .leave-filter-bar {
+    grid-template-columns:
+      1fr;
+
+    gap: 8px;
+  }
+
+
+  .leave-search-box {
+    grid-column: auto;
+  }
+
+
+  .leave-filter-bar input,
+  .leave-filter-bar select,
+  .leave-clear-filter,
+  .leave-add-button {
+    height: 42px;
+  }
+
+
+  .leave-table th:nth-child(4),
+  .leave-table td:nth-child(4),
+  .leave-table th:nth-child(6),
+  .leave-table td:nth-child(6) {
+    display: none;
+  }
+
+
+  .leave-modal-overlay {
+    padding: 10px;
+  }
+
+
+  .leave-modal {
+    max-height:
+      calc(
+        100dvh - 20px
+      );
+  }
+
+
+  .leave-modal-body {
+    grid-template-columns:
+      1fr;
+
+    padding: 18px;
+  }
+
+
+  .leave-form-full {
+    grid-column: auto;
+  }
+
+
+  .leave-modal-header,
+  .leave-modal-footer {
+    padding:
+      17px 18px;
+  }
+
+}

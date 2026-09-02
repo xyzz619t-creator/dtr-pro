@@ -1,0 +1,1175 @@
+/* =========================================================
+   PAGE
+========================================================= */
+
+.employee-leave-page {
+  width: 100%;
+  min-height: 100vh;
+
+  /* Fixed header height */
+  padding-top: 78px;
+
+  box-sizing: border-box;
+
+  background:
+    var(
+      --employee-leave-bg,
+      #f4f6f9
+    );
+
+  color:
+    var(
+      --employee-leave-text,
+      #111827
+    );
+}
+
+
+/* =========================================================
+   FIXED HEADER
+========================================================= */
+
+.employee-leave-header {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 10000;
+
+  width: 100%;
+  height: 78px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding:
+    0 28px;
+
+  border-bottom:
+    1px solid
+    var(
+      --employee-leave-border,
+      #dde2e8
+    );
+
+  background:
+    var(
+      --employee-leave-card,
+      #ffffff
+    );
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 1px 8px
+    rgba(
+      15,
+      23,
+      42,
+      0.04
+    );
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.employee-leave-logo {
+  width: 110px;
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   BACK TO DTR
+========================================================= */
+
+.employee-leave-back {
+  min-height: 46px;
+
+  padding:
+    0 20px;
+
+  border:
+    1px solid
+    var(
+      --employee-leave-border,
+      #d1d5db
+    );
+
+  border-radius: 10px;
+
+  background:
+    var(
+      --employee-leave-card,
+      #ffffff
+    );
+
+  color: inherit;
+
+  font-family: inherit;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+
+.employee-leave-back:hover {
+  border-color: #ec4899;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.employee-leave-content {
+  width:
+    min(
+      980px,
+      calc(
+        100% - 40px
+      )
+    );
+
+  margin:
+    0 auto;
+
+  padding:
+    38px 0
+    60px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.employee-leave-intro {
+  margin-bottom: 24px;
+}
+
+
+.employee-leave-intro h1 {
+  margin: 0;
+
+  font-size: 32px;
+
+  font-weight: 800;
+}
+
+
+.employee-leave-intro p {
+  margin:
+    6px 0 0;
+
+  color:
+    var(
+      --employee-leave-muted,
+      #6b7280
+    );
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   EMPLOYEE CARD
+========================================================= */
+
+.leave-employee-card {
+  margin-bottom: 18px;
+
+  padding: 22px;
+
+  border:
+    1px solid
+    var(
+      --employee-leave-border,
+      #e1e5ea
+    );
+
+  border-radius: 14px;
+
+  background:
+    var(
+      --employee-leave-card,
+      #ffffff
+    );
+}
+
+
+/* =========================================================
+   EMPLOYEE SEARCH
+========================================================= */
+
+.leave-employee-search {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+}
+
+
+.leave-employee-search label {
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+
+.leave-employee-search p {
+  margin:
+    4px 0 0;
+
+  color:
+    var(
+      --employee-leave-muted,
+      #6b7280
+    );
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   EMPLOYEE CODE CONTROL
+========================================================= */
+
+.leave-code-control {
+  display: flex;
+
+  gap: 8px;
+}
+
+
+.leave-code-control input {
+  width: 210px;
+  height: 46px;
+
+  padding:
+    0 13px;
+
+  border:
+    1px solid
+    var(
+      --employee-leave-border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(
+      --employee-leave-input,
+      #ffffff
+    );
+
+  color: inherit;
+
+  font-family: inherit;
+
+  box-sizing: border-box;
+}
+
+
+.leave-code-control input:focus {
+  border-color: #ec4899;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      236,
+      72,
+      153,
+      0.10
+    );
+}
+
+
+.leave-code-control button {
+  min-width: 110px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #111827;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+.leave-code-control button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   EMPLOYEE PROFILE
+========================================================= */
+
+.leave-employee-profile {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-top: 18px;
+
+  padding-top: 18px;
+
+  border-top:
+    1px solid
+    var(
+      --employee-leave-border,
+      #e5e7eb
+    );
+}
+
+
+.leave-employee-avatar {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ec4899,
+      #8b5cf6
+    );
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 900;
+}
+
+
+.leave-employee-profile > div:last-child {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.leave-employee-profile strong {
+  font-size: 14px;
+}
+
+
+.leave-employee-profile span {
+  overflow: hidden;
+
+  color:
+    var(
+      --employee-leave-muted,
+      #6b7280
+    );
+
+  font-size: 10px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   REQUEST CARD
+========================================================= */
+
+.leave-request-card {
+  width: 100%;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(
+      --employee-leave-border,
+      #e1e5ea
+    );
+
+  border-radius: 14px;
+
+  background:
+    var(
+      --employee-leave-card,
+      #ffffff
+    );
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TYPE TABS
+========================================================= */
+
+.leave-type-tabs {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      1fr
+    );
+
+  gap: 10px;
+
+  padding: 18px;
+
+  border-bottom:
+    1px solid
+    var(
+      --employee-leave-border,
+      #e5e7eb
+    );
+}
+
+
+.leave-type-tabs button {
+  min-height: 70px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  border:
+    1px solid
+    var(
+      --employee-leave-border,
+      #d1d5db
+    );
+
+  border-radius: 10px;
+
+  background:
+    var(
+      --employee-leave-input,
+      #ffffff
+    );
+
+  color: inherit;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+
+.leave-type-tabs button:hover {
+  border-color: #ec4899;
+}
+
+
+.leave-type-tabs button.active {
+  border-color: #ec4899;
+
+  background:
+    rgba(
+      236,
+      72,
+      153,
+      0.08
+    );
+
+  color: #db2777;
+}
+
+
+.leave-type-tabs button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+
+.leave-type-icon {
+  font-size: 18px;
+}
+
+
+.leave-type-tabs strong {
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   FORM HEADING
+========================================================= */
+
+.leave-form-heading {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding:
+    22px 24px
+    0;
+}
+
+
+.leave-form-heading > div:first-child {
+  min-width: 0;
+}
+
+
+.leave-form-heading h2 {
+  margin: 0;
+
+  font-size: 20px;
+}
+
+
+.leave-form-heading p {
+  margin:
+    4px 0 0;
+
+  color:
+    var(
+      --employee-leave-muted,
+      #6b7280
+    );
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   COM-OFF BALANCE
+========================================================= */
+
+.leave-comoff-balance {
+  min-width: 100px;
+
+  flex-shrink: 0;
+
+  padding:
+    9px 15px;
+
+  border-radius: 10px;
+
+  background: #f3e8ff;
+
+  text-align: center;
+}
+
+
+.leave-comoff-balance span,
+.leave-comoff-balance small {
+  display: block;
+
+  color: #7e22ce;
+
+  font-size: 8px;
+
+  font-weight: 700;
+}
+
+
+.leave-comoff-balance strong {
+  display: block;
+
+  color: #7e22ce;
+
+  font-size: 22px;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.leave-form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    18px 20px;
+
+  padding: 24px;
+}
+
+
+.leave-form-group {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+
+.leave-form-full {
+  grid-column:
+    1 / -1;
+}
+
+
+.leave-form-group label {
+  font-size: 11px;
+
+  font-weight: 800;
+}
+
+
+.leave-form-group label span {
+  margin-left: 3px;
+
+  color: #ef4444;
+}
+
+
+.leave-form-group input,
+.leave-form-group select,
+.leave-form-group textarea {
+  width: 100%;
+
+  border:
+    1px solid
+    var(
+      --employee-leave-border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(
+      --employee-leave-input,
+      #ffffff
+    );
+
+  color: inherit;
+
+  font-family: inherit;
+
+  box-sizing: border-box;
+}
+
+
+.leave-form-group input,
+.leave-form-group select {
+  height: 46px;
+
+  padding:
+    0 12px;
+}
+
+
+.leave-form-group textarea {
+  padding: 12px;
+
+  resize: vertical;
+}
+
+
+.leave-form-group input:focus,
+.leave-form-group select:focus,
+.leave-form-group textarea:focus {
+  border-color: #ec4899;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      236,
+      72,
+      153,
+      0.10
+    );
+}
+
+
+/* =========================================================
+   READ ONLY
+========================================================= */
+
+.leave-form-group input[readonly] {
+  background:
+    var(
+      --employee-leave-soft,
+      #f9fafb
+    );
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   FILE UPLOAD
+========================================================= */
+
+.leave-file-upload {
+  min-height: 88px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding:
+    14px 16px;
+
+  border:
+    1px dashed
+    var(
+      --employee-leave-border,
+      #cbd5e1
+    );
+
+  border-radius: 10px;
+
+  background:
+    var(
+      --employee-leave-soft,
+      #f9fafb
+    );
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+
+.leave-file-upload:hover {
+  border-color: #ec4899;
+}
+
+
+.leave-file-upload input {
+  display: none;
+}
+
+
+.leave-upload-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 9px;
+
+  background: #fee2e2;
+
+  color: #dc2626;
+
+  font-size: 10px;
+
+  font-weight: 900;
+}
+
+
+.leave-file-upload > div:nth-child(3) {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.leave-file-upload strong {
+  overflow: hidden;
+
+  font-size: 11px;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+.leave-file-upload span {
+  color:
+    var(
+      --employee-leave-muted,
+      #6b7280
+    );
+
+  font-size: 9px;
+}
+
+
+.leave-upload-button {
+  flex-shrink: 0;
+
+  padding:
+    8px 11px;
+
+  border:
+    1px solid
+    var(
+      --employee-leave-border,
+      #d1d5db
+    );
+
+  border-radius: 7px;
+
+  background:
+    var(
+      --employee-leave-card,
+      #ffffff
+    );
+
+  color:
+    var(
+      --employee-leave-text,
+      #111827
+    ) !important;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.leave-request-message {
+  margin:
+    0 24px
+    18px;
+
+  padding:
+    12px 14px;
+
+  border-radius: 9px;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+.leave-request-message.error {
+  border:
+    1px solid
+    #fecaca;
+
+  background: #fef2f2;
+
+  color: #b91c1c;
+}
+
+
+.leave-request-message.success {
+  border:
+    1px solid
+    #a7f3d0;
+
+  background: #ecfdf5;
+
+  color: #047857;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.leave-request-footer {
+  display: flex;
+
+  justify-content: flex-end;
+
+  padding:
+    18px 24px;
+
+  border-top:
+    1px solid
+    var(
+      --employee-leave-border,
+      #e5e7eb
+    );
+}
+
+
+.leave-submit-button {
+  min-height: 46px;
+
+  padding:
+    0 24px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #111827;
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+.leave-submit-button:disabled {
+  opacity: 0.55;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+html[data-theme='dark'],
+.theme-dark {
+  --employee-leave-bg:
+    #15171c;
+
+  --employee-leave-card:
+    #20242c;
+
+  --employee-leave-input:
+    #292e37;
+
+  --employee-leave-soft:
+    #252a32;
+
+  --employee-leave-border:
+    #3b414c;
+
+  --employee-leave-text:
+    #f9fafb;
+
+  --employee-leave-muted:
+    #9ca3af;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET / MOBILE
+========================================================= */
+
+@media (
+  max-width: 700px
+) {
+
+  .employee-leave-page {
+    padding-top: 70px;
+  }
+
+
+  .employee-leave-header {
+    height: 70px;
+
+    padding:
+      0 14px;
+  }
+
+
+  .employee-leave-logo {
+    width: 95px;
+  }
+
+
+  .employee-leave-back {
+    min-height: 40px;
+
+    padding:
+      0 13px;
+
+    font-size: 11px;
+  }
+
+
+  .employee-leave-content {
+    width:
+      calc(
+        100% - 24px
+      );
+
+    padding:
+      22px 0
+      40px;
+  }
+
+
+  .employee-leave-intro h1 {
+    font-size: 25px;
+  }
+
+
+  .leave-employee-card {
+    padding: 17px;
+  }
+
+
+  .leave-employee-search {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 15px;
+  }
+
+
+  .leave-code-control {
+    width: 100%;
+  }
+
+
+  .leave-code-control input {
+    width: 100%;
+
+    flex: 1;
+  }
+
+
+  .leave-code-control button {
+    min-width: 100px;
+  }
+
+
+  .leave-type-tabs {
+    grid-template-columns:
+      1fr;
+
+    padding: 14px;
+  }
+
+
+  .leave-type-tabs button {
+    min-height: 58px;
+  }
+
+
+  .leave-form-heading {
+    align-items: flex-start;
+
+    padding:
+      18px 18px
+      0;
+  }
+
+
+  .leave-form-grid {
+    grid-template-columns:
+      1fr;
+
+    padding: 18px;
+
+    gap: 16px;
+  }
+
+
+  .leave-form-full {
+    grid-column: auto;
+  }
+
+
+  .leave-file-upload {
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+  }
+
+
+  .leave-upload-button {
+    margin-left: 62px;
+  }
+
+
+  .leave-request-message {
+    margin:
+      0 18px
+      16px;
+  }
+
+
+  .leave-request-footer {
+    padding:
+      16px 18px;
+  }
+
+
+  .leave-submit-button {
+    width: 100%;
+  }
+
+}

@@ -1,0 +1,1771 @@
+/* =========================================================
+   ADMIN HOLIDAYS
+========================================================= */
+
+.admin-holidays-page {
+  width: 100%;
+  min-width: 0;
+
+  height:
+    calc(
+      100dvh - 80px
+    );
+
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding:
+    28px 36px
+    18px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+.holiday-stat-grid {
+  flex-shrink: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap: 14px;
+
+  margin-bottom: 24px;
+}
+
+
+.holiday-stat-card {
+  min-height: 108px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+
+  border-radius: 14px;
+
+  background:
+    var(
+      --admin-card,
+      #ffffff
+    );
+}
+
+
+.holiday-stat-card span {
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+.holiday-stat-card strong {
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 27px;
+
+  font-weight: 800;
+}
+
+
+.holiday-stat-active strong {
+  color: #059669;
+}
+
+
+.holiday-stat-upcoming strong {
+  color: #2563eb;
+}
+
+
+.holiday-stat-credit strong {
+  color: #7c3aed;
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.holiday-message {
+  flex-shrink: 0;
+
+  margin-bottom: 14px;
+
+  padding:
+    13px 15px;
+
+  border-radius: 9px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+.holiday-success {
+  border:
+    1px solid
+    #a7f3d0;
+
+  background:
+    #ecfdf5;
+
+  color:
+    #047857;
+}
+
+
+.holiday-error {
+  border:
+    1px solid
+    #fecaca;
+
+  background:
+    #fef2f2;
+
+  color:
+    #b91c1c;
+}
+
+
+/* =========================================================
+   FILTER BAR
+========================================================= */
+
+.holiday-filter-bar {
+  flex-shrink: 0;
+
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(
+      320px,
+      1fr
+    )
+    180px
+    190px
+    170px;
+
+  gap: 12px;
+
+  align-items: center;
+
+  margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.holiday-search-box {
+  position: relative;
+
+  min-width: 0;
+}
+
+
+.holiday-search-box span {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  z-index: 2;
+
+  transform:
+    translateY(-50%);
+
+  pointer-events: none;
+}
+
+
+.holiday-search-box input {
+  padding-left:
+    42px !important;
+}
+
+
+/* =========================================================
+   FILTER INPUTS
+========================================================= */
+
+.holiday-filter-bar input,
+.holiday-filter-bar select {
+  width: 100%;
+
+  height: 48px;
+
+  padding:
+    0 13px;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(
+      --admin-input,
+      #ffffff
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  -webkit-text-fill-color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  box-sizing: border-box;
+}
+
+
+.holiday-filter-bar input:focus,
+.holiday-filter-bar select:focus {
+  border-color:
+    #ec4899;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      236,
+      72,
+      153,
+      0.10
+    );
+}
+
+
+/* =========================================================
+   ADD HOLIDAY
+========================================================= */
+
+.holiday-add-button {
+  width: 100%;
+
+  height: 48px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0 18px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background:
+    #111827;
+
+  color:
+    #ffffff !important;
+
+  -webkit-text-fill-color:
+    #ffffff !important;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+
+.holiday-add-button:hover {
+  opacity: 0.92;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.holiday-table-card {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+
+  border-radius: 14px;
+
+  background:
+    var(
+      --admin-card,
+      #ffffff
+    );
+}
+
+
+/* =========================================================
+   TABLE SCROLL
+========================================================= */
+
+.holiday-table-scroll {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  overflow-y: auto;
+  overflow-x: auto;
+
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
+}
+
+
+.holiday-table-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.holiday-table {
+  width: 100%;
+
+  min-width: 1180px;
+
+  table-layout: fixed;
+
+  border-collapse:
+    separate;
+
+  border-spacing: 0;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.holiday-table thead {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+}
+
+
+.holiday-table th {
+  height: 58px;
+
+  padding:
+    12px 10px;
+
+  vertical-align: middle;
+
+  border-bottom:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+
+  background:
+    var(
+      --admin-table-header,
+      #f9fafb
+    );
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  text-align:
+    center !important;
+
+  white-space: nowrap;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.holiday-table td {
+  height: 66px;
+
+  padding:
+    12px 10px;
+
+  vertical-align: middle;
+
+  border-bottom:
+    1px solid
+    var(
+      --admin-border,
+      #edf0f3
+    );
+
+  background:
+    var(
+      --admin-card,
+      #ffffff
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 13px;
+
+  text-align:
+    center !important;
+
+  box-sizing: border-box;
+}
+
+
+.holiday-table tbody
+tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+========================================================= */
+
+.holiday-table th:nth-child(1),
+.holiday-table td:nth-child(1) {
+  width: 12%;
+}
+
+
+.holiday-table th:nth-child(2),
+.holiday-table td:nth-child(2) {
+  width: 14%;
+}
+
+
+.holiday-table th:nth-child(3),
+.holiday-table td:nth-child(3) {
+  width: 11%;
+}
+
+
+.holiday-table th:nth-child(4),
+.holiday-table td:nth-child(4) {
+  width: 11%;
+}
+
+
+.holiday-table th:nth-child(5),
+.holiday-table td:nth-child(5) {
+  width: 9%;
+}
+
+
+.holiday-table th:nth-child(6),
+.holiday-table td:nth-child(6) {
+  width: 15%;
+}
+
+
+.holiday-table th:nth-child(7),
+.holiday-table td:nth-child(7) {
+  width: 11%;
+}
+
+
+.holiday-table th:nth-child(8),
+.holiday-table td:nth-child(8) {
+  width: 17%;
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+.holiday-table
+td:nth-child(1)
+strong {
+  display: block;
+
+  width: 100%;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   HOLIDAY NAME
+========================================================= */
+
+.holiday-name-cell {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  text-align: center;
+}
+
+
+.holiday-name-cell strong {
+  width: 100%;
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 13px;
+
+  text-align: center;
+}
+
+
+.holiday-name-cell small {
+  width: 100%;
+
+  overflow: hidden;
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 10px;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  text-overflow:
+    ellipsis;
+}
+
+
+/* =========================================================
+   COMPANY / COM-OFF
+========================================================= */
+
+.holiday-company-status,
+.holiday-comoff-status {
+  min-width: 78px;
+
+  height: 30px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin:
+    0 auto;
+
+  padding:
+    0 10px;
+
+  border-radius:
+    999px;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+
+.holiday-company-status.open {
+  background:
+    #dcfce7;
+
+  color:
+    #15803d;
+}
+
+
+.holiday-company-status.closed {
+  background:
+    #fee2e2;
+
+  color:
+    #b91c1c;
+}
+
+
+.holiday-comoff-status.eligible {
+  background:
+    #ede9fe;
+
+  color:
+    #6d28d9;
+}
+
+
+.holiday-comoff-status.not-eligible {
+  background:
+    #f3f4f6;
+
+  color:
+    #6b7280;
+}
+
+
+/* =========================================================
+   CREDIT
+========================================================= */
+
+.holiday-credit-value {
+  display: block;
+
+  width: 100%;
+
+  color:
+    #7c3aed;
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   ENTITLED EMPLOYEES
+========================================================= */
+
+.holiday-entitlement-cell {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 5px;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+
+.holiday-entitlement-cell strong {
+  font-size: 16px;
+}
+
+
+.holiday-entitlement-cell span {
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 10px;
+}
+
+
+.holiday-entitlement-cell small {
+  color:
+    #dc2626;
+
+  font-size: 9px;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.holiday-status {
+  min-width: 72px;
+
+  height: 30px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin:
+    0 auto;
+
+  padding:
+    0 10px;
+
+  border-radius:
+    999px;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  text-transform:
+    capitalize;
+}
+
+
+.holiday-status-active {
+  background:
+    #dcfce7;
+
+  color:
+    #15803d;
+}
+
+
+.holiday-status-inactive {
+  background:
+    #f3f4f6;
+
+  color:
+    #6b7280;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.holiday-actions {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+}
+
+
+.holiday-actions button {
+  min-height: 34px;
+
+  flex-shrink: 0;
+
+  padding:
+    0 11px;
+
+  border-radius: 7px;
+
+  background:
+    transparent;
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+
+.holiday-sync-button {
+  border:
+    1px solid
+    #bfdbfe;
+
+  color:
+    #2563eb;
+}
+
+
+.holiday-edit-button {
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+}
+
+
+.holiday-delete-button {
+  border:
+    1px solid
+    #fecaca;
+
+  color:
+    #dc2626;
+}
+
+
+.holiday-actions
+button:disabled {
+  opacity: 0.5;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.holiday-empty-state {
+  flex: 1;
+
+  min-height: 250px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  text-align: center;
+}
+
+
+.holiday-empty-state strong {
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+}
+
+
+.holiday-empty-icon {
+  margin-bottom: 5px;
+
+  font-size: 28px;
+}
+
+
+/* =========================================================
+   MODAL OVERLAY
+========================================================= */
+
+.holiday-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 999999;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background:
+    rgba(
+      0,
+      0,
+      0,
+      0.64
+    );
+
+  backdrop-filter:
+    blur(5px);
+
+  -webkit-backdrop-filter:
+    blur(5px);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.holiday-modal {
+  width:
+    min(
+      760px,
+      100%
+    );
+
+  max-height:
+    calc(
+      100dvh - 48px
+    );
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  border-radius: 16px;
+
+  background:
+    var(
+      --admin-card,
+      #ffffff
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  box-shadow:
+    0 24px 70px
+    rgba(
+      0,
+      0,
+      0,
+      0.32
+    );
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.holiday-modal-header {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  gap: 20px;
+
+  padding:
+    22px 26px;
+
+  border-bottom:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+}
+
+
+.holiday-modal-header h2 {
+  margin: 0;
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 22px;
+}
+
+
+.holiday-modal-header p {
+  margin:
+    5px 0 0;
+
+  max-width: 540px;
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+.holiday-modal-close {
+  width: 36px;
+  height: 36px;
+
+  border: none;
+
+  background:
+    transparent;
+
+  color: inherit;
+
+  font-size: 26px;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   MODAL BODY
+========================================================= */
+
+.holiday-modal-body {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap:
+    18px 20px;
+
+  padding:
+    24px 26px;
+
+  overflow-y: auto;
+
+  scrollbar-width: none;
+}
+
+
+.holiday-modal-body::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.holiday-form-group {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+
+.holiday-form-full {
+  grid-column:
+    1 / -1;
+}
+
+
+.holiday-form-group label {
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+
+.holiday-form-group label span {
+  margin-left: 3px;
+
+  color:
+    #ef4444;
+}
+
+
+.holiday-form-group input,
+.holiday-form-group select,
+.holiday-form-group textarea {
+  width: 100%;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(
+      --admin-input,
+      #ffffff
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  -webkit-text-fill-color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  box-sizing: border-box;
+}
+
+
+.holiday-form-group input,
+.holiday-form-group select {
+  height: 46px;
+
+  padding:
+    0 12px;
+}
+
+
+.holiday-form-group textarea {
+  padding: 12px;
+
+  resize: vertical;
+}
+
+
+.holiday-form-group input:focus,
+.holiday-form-group select:focus,
+.holiday-form-group textarea:focus {
+  border-color:
+    #ec4899;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(
+      236,
+      72,
+      153,
+      0.10
+    );
+}
+
+
+/* =========================================================
+   TOGGLE CARDS
+========================================================= */
+
+.holiday-toggle-card {
+  min-height: 78px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 20px;
+
+  padding:
+    14px 16px;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  border-radius: 10px;
+
+  background:
+    var(
+      --admin-table-header,
+      #f9fafb
+    );
+
+  box-sizing: border-box;
+}
+
+
+.holiday-toggle-card > div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+
+.holiday-toggle-card strong {
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 12px;
+}
+
+
+.holiday-toggle-card span {
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.holiday-switch {
+  position: relative;
+
+  width: 46px;
+  height: 25px;
+
+  flex-shrink: 0;
+}
+
+
+.holiday-switch input {
+  width: 0;
+  height: 0;
+
+  opacity: 0;
+}
+
+
+.holiday-switch-slider {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius:
+    999px;
+
+  background:
+    #9ca3af;
+
+  cursor: pointer;
+
+  transition:
+    0.2s ease;
+}
+
+
+.holiday-switch-slider::before {
+  content: '';
+
+  position: absolute;
+
+  width: 19px;
+  height: 19px;
+
+  left: 3px;
+  top: 3px;
+
+  border-radius: 50%;
+
+  background:
+    #ffffff;
+
+  transition:
+    0.2s ease;
+}
+
+
+.holiday-switch
+input:checked
++
+.holiday-switch-slider {
+  background:
+    #ec4899;
+}
+
+
+.holiday-switch
+input:checked
++
+.holiday-switch-slider::before {
+  transform:
+    translateX(
+      21px
+    );
+}
+
+
+/* =========================================================
+   AUTOMATIC RULE
+========================================================= */
+
+.holiday-auto-rule {
+  grid-column:
+    1 / -1;
+
+  display: flex;
+
+  gap: 13px;
+
+  padding:
+    15px 16px;
+
+  border:
+    1px solid
+    rgba(
+      236,
+      72,
+      153,
+      0.20
+    );
+
+  border-radius: 10px;
+
+  background:
+    rgba(
+      236,
+      72,
+      153,
+      0.06
+    );
+}
+
+
+.holiday-auto-rule-icon {
+  font-size: 20px;
+}
+
+
+.holiday-auto-rule strong {
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-size: 12px;
+}
+
+
+.holiday-auto-rule p {
+  margin:
+    4px 0 0;
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 10px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   MODAL ERROR
+========================================================= */
+
+.holiday-modal-error {
+  margin:
+    0 26px
+    18px;
+
+  padding:
+    12px 14px;
+
+  border:
+    1px solid
+    #fecaca;
+
+  border-radius: 8px;
+
+  background:
+    #fef2f2;
+
+  color:
+    #b91c1c;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+========================================================= */
+
+.holiday-modal-footer {
+  display: flex;
+
+  justify-content:
+    flex-end;
+
+  gap: 10px;
+
+  padding:
+    18px 26px;
+
+  border-top:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+}
+
+
+.holiday-modal-footer button {
+  min-height: 44px;
+
+  padding:
+    0 20px;
+
+  border-radius: 9px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+
+.holiday-cancel-button {
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  background:
+    transparent;
+
+  color:
+    inherit;
+}
+
+
+.holiday-save-button {
+  border: none;
+
+  background:
+    #111827;
+
+  color:
+    #ffffff;
+
+  -webkit-text-fill-color:
+    #ffffff;
+}
+
+
+/* =========================================================
+   DARK THEME
+========================================================= */
+
+html[data-theme='dark'],
+html[data-theme='classic-dark'],
+.theme-dark,
+.theme-classic-dark {
+  --admin-text: #f9fafb;
+  --admin-muted: #9ca3af;
+  --admin-card: #20242c;
+  --admin-input: #292e37;
+  --admin-border: #3b414c;
+  --admin-table-header: #252a32;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (
+  max-width: 1250px
+) {
+
+  .holiday-filter-bar {
+    grid-template-columns:
+      minmax(
+        260px,
+        1fr
+      )
+      140px
+      150px
+      145px;
+  }
+
+}
+
+
+@media (
+  max-width: 1050px
+) {
+
+  .admin-holidays-page {
+    padding:
+      22px 18px
+      16px;
+  }
+
+
+  .holiday-stat-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(
+          0,
+          1fr
+        )
+      );
+  }
+
+
+  .holiday-filter-bar {
+    grid-template-columns:
+      1fr
+      1fr
+      1fr;
+  }
+
+
+  .holiday-search-box {
+    grid-column:
+      1 / -1;
+  }
+
+
+  .holiday-add-button {
+    width: 100%;
+  }
+
+}
+
+
+@media (
+  max-width: 720px
+) {
+
+  .admin-holidays-page {
+    height:
+      calc(
+        100dvh - 70px
+      );
+
+    padding:
+      16px 12px
+      10px;
+  }
+
+
+  .holiday-stat-grid {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 10px;
+
+    margin-bottom: 14px;
+  }
+
+
+  .holiday-stat-card {
+    min-height: 82px;
+  }
+
+
+  .holiday-stat-card strong {
+    font-size: 22px;
+  }
+
+
+  .holiday-filter-bar {
+    grid-template-columns:
+      1fr;
+
+    gap: 8px;
+  }
+
+
+  .holiday-search-box {
+    grid-column:
+      auto;
+  }
+
+
+  .holiday-filter-bar input,
+  .holiday-filter-bar select,
+  .holiday-add-button {
+    height: 43px;
+  }
+
+
+  .holiday-modal-overlay {
+    padding: 10px;
+  }
+
+
+  .holiday-modal {
+    max-height:
+      calc(
+        100dvh - 20px
+      );
+  }
+
+
+  .holiday-modal-body {
+    grid-template-columns:
+      1fr;
+
+    padding: 18px;
+  }
+
+
+  .holiday-form-full,
+  .holiday-auto-rule {
+    grid-column: auto;
+  }
+
+
+  .holiday-modal-header,
+  .holiday-modal-footer {
+    padding:
+      17px 18px;
+  }
+
+}

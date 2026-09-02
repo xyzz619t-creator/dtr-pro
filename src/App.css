@@ -1,0 +1,728 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #15161c;
+}
+
+
+/* =========================================================
+   APP
+========================================================= */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 10px 20px 35px;
+
+  background: #15161c;
+  color: #ffffff;
+}
+
+.dtr-container {
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   ADMIN ICON
+========================================================= */
+
+.admin-icon-button {
+  position: fixed;
+
+  top: 16px;
+  left: 16px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none !important;
+  outline: none !important;
+
+  background: transparent !important;
+
+  color: #9ca3af !important;
+
+  font-size: 19px;
+
+  cursor: pointer;
+
+  opacity: 0.55;
+
+  box-shadow: none !important;
+
+  z-index: 1000;
+}
+
+.admin-icon-button:hover {
+  opacity: 1;
+
+  color: #ffffff !important;
+
+  background: transparent !important;
+}
+
+
+/* =========================================================
+   LOGO / CLOCK
+========================================================= */
+
+.clock-section {
+  width: 100%;
+
+  padding: 0 20px 8px !important;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+
+/* LOGO */
+
+.dtr-logo {
+  display: block;
+
+  width: auto;
+  height: 70px;
+
+  max-width: 250px;
+
+  margin: 0 auto 5px !important;
+
+  object-fit: contain;
+}
+
+
+/* LIVE CLOCK */
+
+.live-clock {
+  display: block;
+
+  width: 100%;
+
+  margin: 0 !important;
+
+  color: #ffffff !important;
+
+  font-size: clamp(
+    50px,
+    5vw,
+    78px
+  ) !important;
+
+  line-height: 1 !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: 2px !important;
+
+  text-align: center !important;
+}
+
+
+/* DATE */
+
+.current-date {
+  width: 100%;
+
+  margin-top: 9px !important;
+
+  color: #d1d5db !important;
+
+  font-size: 21px !important;
+
+  font-weight: 500;
+
+  text-align: center !important;
+}
+
+
+/* =========================================================
+   KIOSK ACTION NOTIFICATION
+========================================================= */
+
+.kiosk-notice {
+  width: 100%;
+  max-width: 420px;
+
+  margin: 13px auto 0;
+
+  padding: 12px 18px;
+
+  border-radius: 10px;
+
+  background: #dcfce7;
+  color: #166534;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  text-align: center;
+
+  animation: kioskNoticeIn 0.2s ease;
+}
+
+@keyframes kioskNoticeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   EMPLOYEE CODE
+========================================================= */
+
+.employee-section {
+  width: 100%;
+  max-width: 440px;
+
+  margin: 15px auto 0 !important;
+
+  padding: 0 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  background: transparent !important;
+
+  box-shadow: none !important;
+
+  text-align: center !important;
+}
+
+.employee-section label {
+  display: block !important;
+
+  width: 100%;
+
+  margin: 0 0 9px !important;
+
+  color: #ffffff !important;
+
+  font-size: 18px !important;
+  font-weight: 700 !important;
+
+  text-align: center !important;
+}
+
+.employee-code-input {
+  display: block !important;
+
+  width: 300px !important;
+  max-width: 100%;
+
+  height: 52px !important;
+
+  margin: 0 auto !important;
+
+  padding: 0 15px !important;
+
+  border: 2px solid #9ca3af !important;
+  border-radius: 8px !important;
+
+  background: #ffffff !important;
+
+  color: #111827 !important;
+
+  -webkit-text-fill-color: #111827 !important;
+
+  font-size: 23px !important;
+  font-weight: 700 !important;
+
+  text-align: center !important;
+
+  outline: none !important;
+}
+
+.employee-code-input:focus {
+  border-color: #ffffff !important;
+}
+
+.employee-code-input::placeholder {
+  color: #9ca3af !important;
+
+  -webkit-text-fill-color:
+    #9ca3af !important;
+
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+
+
+/* =========================================================
+   LOOKUP
+========================================================= */
+
+.lookup-message {
+  margin-top: 10px;
+
+  color: #d1d5db !important;
+
+  font-size: 13px;
+}
+
+.lookup-error {
+  margin-top: 12px;
+
+  padding: 10px 16px;
+
+  border-radius: 8px;
+
+  background: #991b1b;
+
+  color: #ffffff !important;
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   EMPLOYEE DUTY
+========================================================= */
+
+.employee-duty-card {
+  width: 100%;
+  max-width: 700px;
+
+  margin: 22px auto 0 !important;
+
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  box-shadow: none !important;
+
+  text-align: center !important;
+}
+
+
+/* EMPLOYEE NAME */
+
+.employee-name {
+  color: #ffffff !important;
+
+  font-size: 34px !important;
+  font-weight: 800 !important;
+
+  line-height: 1.1;
+
+  text-align: center !important;
+}
+
+
+/* =========================================================
+   DUTY TIME
+========================================================= */
+
+.employee-duty {
+  margin-top: 8px !important;
+}
+
+.duty-time {
+  display: flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 15px !important;
+
+  color: #ffffff !important;
+
+  font-size: 29px !important;
+  font-weight: 700 !important;
+
+  line-height: 1.1;
+
+  text-align: center !important;
+}
+
+.duty-arrow {
+  color: #9ca3af !important;
+}
+
+
+/* OVERNIGHT */
+
+.overnight-label {
+  display: inline-block;
+
+  margin-top: 7px !important;
+
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  color: #d1d5db !important;
+
+  font-size: 16px !important;
+  font-weight: 500 !important;
+}
+
+
+/* =========================================================
+   DTR ACTIONS
+========================================================= */
+
+.dtr-actions {
+  width: 100%;
+
+  display: flex !important;
+
+  justify-content: center !important;
+  align-items: center !important;
+
+  gap: 16px !important;
+
+  margin-top: 22px !important;
+}
+
+
+/* =========================================================
+   DTR BUTTONS
+========================================================= */
+
+.dtr-button {
+  min-width: 205px !important;
+  min-height: 64px !important;
+
+  padding: 13px 24px !important;
+
+  border: none !important;
+  border-radius: 13px !important;
+
+  color: #ffffff !important;
+
+  font-size: 18px !important;
+  font-weight: 800 !important;
+
+  cursor: pointer !important;
+
+  transition:
+    transform 0.12s ease,
+    opacity 0.12s ease;
+}
+
+.dtr-button:hover {
+  transform: translateY(-1px);
+}
+
+.dtr-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed !important;
+
+  transform: none;
+}
+
+
+/* TIME IN */
+
+.time-in-button {
+  background: #15803d !important;
+}
+
+
+/* BREAK START */
+
+.break-button {
+  background: #d97706 !important;
+}
+
+
+/* BREAK END */
+
+.break-end-button {
+  background: #2563eb !important;
+}
+
+
+/* TIME OUT */
+
+.time-out-button {
+  background: #dc2626 !important;
+}
+
+
+/* =========================================================
+   STATUS MESSAGES
+========================================================= */
+
+.off-message,
+.too-early-card,
+.completed-message,
+.dtr-action-error {
+  margin-top: 20px;
+
+  padding: 13px 18px;
+
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+
+/* OFF */
+
+.off-message {
+  background: #374151;
+
+  color: #ffffff;
+}
+
+
+/* TOO EARLY */
+
+.too-early-card {
+  background: #7c2d12;
+
+  color: #ffffff;
+}
+
+
+/* COMPLETED */
+
+.completed-message {
+  background: #166534;
+
+  color: #ffffff;
+}
+
+
+/* ERROR */
+
+.dtr-action-error {
+  background: #991b1b;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   ADMIN TOP BAR
+========================================================= */
+
+/* =========================================================
+   ADMIN TOP BAR
+========================================================= */
+
+.admin-top-bar {
+  padding: 14px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-top-logo-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.admin-top-logo {
+  display: block;
+
+  height: 42px;
+  width: auto;
+  max-width: 220px;
+
+  object-fit: contain;
+}
+
+.admin-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-top-actions button {
+  padding: 8px 14px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #111827;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.admin-top-actions button:hover {
+  background: #f9fafb;
+}
+
+@media (max-width: 700px) {
+  .admin-top-bar {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .admin-top-logo {
+    height: 36px;
+    max-width: 180px;
+  }
+
+  .admin-top-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+
+/* =========================================================
+   SMALLER LAPTOP HEIGHT
+========================================================= */
+
+@media (max-height: 800px) {
+  .dtr-logo {
+    height: 55px;
+
+    margin-bottom: 3px !important;
+  }
+
+  .live-clock {
+    font-size: 56px !important;
+  }
+
+  .current-date {
+    margin-top: 7px !important;
+
+    font-size: 18px !important;
+  }
+
+  .kiosk-notice {
+    margin-top: 10px;
+
+    padding: 10px 16px;
+  }
+
+  .employee-section {
+    margin-top: 12px !important;
+  }
+
+  .employee-duty-card {
+    margin-top: 17px !important;
+  }
+
+  .employee-name {
+    font-size: 30px !important;
+  }
+
+  .duty-time {
+    font-size: 26px !important;
+  }
+
+  .dtr-actions {
+    margin-top: 18px !important;
+  }
+
+  .dtr-button {
+    min-height: 58px !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .app {
+    padding:
+      10px 12px 25px;
+  }
+
+  .dtr-logo {
+    height: 55px;
+    max-width: 200px;
+  }
+
+  .live-clock {
+    font-size: 50px !important;
+  }
+
+  .current-date {
+    font-size: 17px !important;
+  }
+
+  .kiosk-notice {
+    max-width: 300px;
+
+    font-size: 15px;
+  }
+
+  .employee-section {
+    margin-top: 14px !important;
+  }
+
+  .employee-code-input {
+    width: 270px !important;
+  }
+
+  .employee-name {
+    font-size: 28px !important;
+  }
+
+  .duty-time {
+    font-size: 24px !important;
+
+    gap: 10px !important;
+  }
+
+  .dtr-actions {
+    flex-direction: column !important;
+  }
+
+  .dtr-button {
+    width: 100% !important;
+
+    max-width: 300px;
+  }
+}

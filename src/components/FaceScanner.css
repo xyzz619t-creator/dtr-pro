@@ -1,0 +1,569 @@
+/* =========================================================
+   DTR PRO
+   FACE SCANNER
+========================================================= */
+
+.face-scanner {
+  width: 100%;
+
+  max-width: 390px;
+
+  margin: 10px auto 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+
+/* =========================================================
+   CAMERA
+========================================================= */
+
+.face-scanner-camera {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  background: #090b10;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.12
+    );
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 12px 35px
+    rgba(
+      0,
+      0,
+      0,
+      0.28
+    );
+
+  transition:
+    opacity 0.2s ease;
+}
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.face-scanner-video {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  background: #090b10;
+
+  transform:
+    scaleX(-1);
+}
+
+
+/* =========================================================
+   FACE GUIDE
+========================================================= */
+
+.face-scanner-guide {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+
+.face-scanner-oval {
+  width: 26%;
+  height: 72%;
+
+  border:
+    2px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.75
+    );
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 9999px
+    rgba(
+      0,
+      0,
+      0,
+      0.06
+    );
+}
+
+
+/* =========================================================
+   INITIALIZING
+========================================================= */
+
+.face-scanner-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background:
+    rgba(
+      9,
+      11,
+      16,
+      0.94
+    );
+
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   READY BADGE
+========================================================= */
+
+.face-scanner-ready {
+  position: absolute;
+
+  top: 10px;
+  left: 10px;
+
+  z-index: 6;
+
+  padding:
+    6px 10px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.14
+    );
+
+  border-radius: 20px;
+
+  background:
+    rgba(
+      17,
+      24,
+      39,
+      0.76
+    );
+
+  color: #86efac;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  backdrop-filter:
+    blur(5px);
+
+  -webkit-backdrop-filter:
+    blur(5px);
+}
+
+
+.face-scanner-ready span {
+  color: #22c55e;
+}
+
+
+/* =========================================================
+   RECOGNIZED
+========================================================= */
+
+.face-scanner-recognized {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 8;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  background:
+    rgba(
+      5,
+      46,
+      22,
+      0.78
+    );
+
+  color: #ffffff;
+
+  backdrop-filter:
+    blur(2px);
+
+  -webkit-backdrop-filter:
+    blur(2px);
+}
+
+
+.face-recognized-check {
+  width: 46px;
+  height: 46px;
+
+  margin-bottom: 3px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  color: #ffffff;
+
+  font-size: 24px;
+  font-weight: 900;
+}
+
+
+.face-scanner-recognized strong {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+
+.face-scanner-recognized span {
+  font-size: 12px;
+  font-weight: 600;
+
+  opacity: 0.92;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.face-scanner-status {
+  min-height: 27px;
+
+  padding: 0 10px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  color: #aeb4c0;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   STATUS DOT
+========================================================= */
+
+.face-scanner-indicator {
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #6b7280;
+}
+
+
+.face-scanner-indicator.scanning {
+  background: #22c55e;
+
+  animation:
+    faceScannerPulse
+    1.25s ease-in-out
+    infinite;
+}
+
+
+@keyframes faceScannerPulse {
+
+  0% {
+    opacity: 0.35;
+
+    transform:
+      scale(0.8);
+  }
+
+
+  50% {
+    opacity: 1;
+
+    transform:
+      scale(1.25);
+  }
+
+
+  100% {
+    opacity: 0.35;
+
+    transform:
+      scale(0.8);
+  }
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.face-scanner-error {
+  width: 100%;
+
+  padding:
+    9px 12px;
+
+  box-sizing: border-box;
+
+  border:
+    1px solid
+    rgba(
+      239,
+      68,
+      68,
+      0.4
+    );
+
+  border-radius: 8px;
+
+  background:
+    rgba(
+      127,
+      29,
+      29,
+      0.2
+    );
+
+  color: #fca5a5;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   NO FACE
+========================================================= */
+
+/*
+   IMPORTANT:
+
+   We cannot use display:none on the video.
+
+   Face detection still needs the live video frames.
+
+   So when nobody is standing in front of the kiosk,
+   the video remains active but is moved outside the
+   visible screen.
+*/
+
+.face-scanner.no-face {
+  max-width: 390px;
+
+  margin-top: 4px;
+  margin-bottom: 7px;
+}
+
+
+.face-scanner.no-face
+.face-scanner-camera {
+  position: fixed;
+
+  top: -20px;
+  left: -20px;
+
+  width: 2px;
+  height: 2px;
+
+  aspect-ratio: auto;
+
+  opacity: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  border: none;
+
+  border-radius: 0;
+
+  box-shadow: none;
+
+  z-index: -1;
+}
+
+
+/* =========================================================
+   HIDE CAMERA ELEMENTS WHEN EMPTY
+========================================================= */
+
+.face-scanner.no-face
+.face-scanner-guide,
+.face-scanner.no-face
+.face-scanner-ready {
+  display: none;
+}
+
+
+/* =========================================================
+   EMPTY STATUS
+========================================================= */
+
+.face-scanner.no-face
+.face-scanner-status {
+  margin-top: 0;
+
+  min-height: 28px;
+
+  color: #8f96a3;
+}
+
+
+/* =========================================================
+   FACE PRESENT
+========================================================= */
+
+.face-scanner.face-present {
+  margin-top: 10px;
+}
+
+
+.face-scanner.face-present
+.face-scanner-camera {
+  position: relative;
+
+  width: 100%;
+  height: auto;
+
+  aspect-ratio: 16 / 9;
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+  z-index: auto;
+}
+
+
+/* =========================================================
+   INACTIVE
+========================================================= */
+
+.face-scanner.inactive {
+  opacity: 0.7;
+}
+
+
+/* =========================================================
+   IPAD
+========================================================= */
+
+@media (max-width: 1024px) {
+
+  .face-scanner {
+    max-width: 360px;
+  }
+
+
+  .face-scanner.no-face {
+    max-width: 360px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .face-scanner {
+    max-width: 330px;
+  }
+
+
+  .face-scanner.no-face {
+    max-width: 330px;
+  }
+
+
+  .face-scanner-camera {
+    border-radius: 13px;
+  }
+
+
+  .face-scanner-status {
+    font-size: 10px;
+  }
+
+}

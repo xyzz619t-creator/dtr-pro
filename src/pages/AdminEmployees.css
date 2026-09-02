@@ -1,0 +1,1841 @@
+/* =========================================================
+   ADMIN EMPLOYEES PAGE
+   - Summary remains frozen
+   - Search + Add Employee same row
+   - Only employee list scrolls
+   - Scrollbar hidden
+========================================================= */
+
+.admin-employees-page {
+  width: 100%;
+  min-width: 0;
+
+  height:
+    calc(
+      100dvh - 80px
+    );
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding:
+    28px 32px
+    20px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.employee-summary-grid {
+  flex-shrink: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+}
+
+
+.employee-summary-card {
+  min-height: 100px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  border-radius: 12px;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  box-sizing: border-box;
+}
+
+
+.employee-summary-card span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-align: center;
+}
+
+
+.employee-summary-card strong {
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  font-size: 28px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.employee-message {
+  flex-shrink: 0;
+
+  margin-bottom: 14px;
+
+  padding:
+    12px 15px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+.employee-message.success {
+  background:
+    #dcfce7;
+
+  color:
+    #166534;
+}
+
+
+.employee-message.error {
+  background:
+    #fee2e2;
+
+  color:
+    #991b1b;
+}
+
+
+/* =========================================================
+   SEARCH + ADD EMPLOYEE TOOLBAR
+========================================================= */
+
+.employee-toolbar {
+  flex-shrink: 0;
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.employee-search-wrapper {
+  position: relative;
+
+  width:
+    min(
+      580px,
+      100%
+    );
+
+  min-width: 0;
+}
+
+
+.employee-search-icon {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  font-size: 14px;
+
+  pointer-events: none;
+}
+
+
+.employee-search-wrapper input {
+  width: 100%;
+  height: 44px;
+
+  padding:
+    0 15px
+    0 42px;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(
+      --input-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --input-text,
+      #111827
+    );
+
+  -webkit-text-fill-color:
+    var(
+      --input-text,
+      #111827
+    );
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  box-sizing: border-box;
+}
+
+
+.employee-search-wrapper input:focus {
+  border-color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+/* =========================================================
+   ADD EMPLOYEE BUTTON
+========================================================= */
+
+.employee-add-button {
+  height: 44px;
+
+  min-width: 145px;
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0 18px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background:
+    #111827;
+
+  color:
+    #ffffff;
+
+  -webkit-text-fill-color:
+    #ffffff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+
+.employee-add-button:hover {
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.employees-table-card {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  border-radius: 12px;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+   ONLY EMPLOYEE LIST SCROLLS
+========================================================= */
+
+.employees-table-wrapper {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  overflow-y: auto;
+  overflow-x: auto;
+
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
+
+  overscroll-behavior: contain;
+}
+
+
+.employees-table-wrapper::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+
+  display: none;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.employees-table {
+  width: 100%;
+
+  min-width: 1050px;
+
+  table-layout: fixed;
+
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.employees-table thead {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+}
+
+
+.employees-table th {
+  height: 54px;
+
+  padding:
+    0 10px;
+
+  vertical-align: middle;
+
+  border-bottom:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  background:
+    var(
+      --panel-secondary,
+      #f9fafb
+    );
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.employees-table td {
+  height: 72px;
+
+  padding:
+    10px;
+
+  vertical-align: middle;
+
+  border-bottom:
+    1px solid
+    var(
+      --border,
+      #f1f5f9
+    );
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --text-secondary,
+      #374151
+    );
+
+  font-size: 13px;
+
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+
+.employees-table tbody tr:hover td {
+  background:
+    var(
+      --panel-secondary,
+      #fafafa
+    );
+}
+
+
+.employees-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+========================================================= */
+
+.employees-table th:nth-child(1),
+.employees-table td:nth-child(1) {
+  width: 7%;
+}
+
+
+.employees-table th:nth-child(2),
+.employees-table td:nth-child(2) {
+  width: 15%;
+}
+
+
+.employees-table th:nth-child(3),
+.employees-table td:nth-child(3) {
+  width: 12%;
+}
+
+
+.employees-table th:nth-child(4),
+.employees-table td:nth-child(4) {
+  width: 16%;
+}
+
+
+.employees-table th:nth-child(5),
+.employees-table td:nth-child(5) {
+  width: 20%;
+}
+
+
+.employees-table th:nth-child(6),
+.employees-table td:nth-child(6) {
+  width: 11%;
+}
+
+
+.employees-table th:nth-child(7),
+.employees-table td:nth-child(7) {
+  width: 8%;
+}
+
+
+.employees-table th:nth-child(8),
+.employees-table td:nth-child(8) {
+  width: 11%;
+}
+
+
+/* =========================================================
+   CODE
+========================================================= */
+
+.employee-code-value {
+  display: block;
+
+  width: 100%;
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  font-weight: 700;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   EMPLOYEE NAME
+========================================================= */
+
+.employee-table-name {
+  width: 100%;
+
+  overflow: hidden;
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  font-weight: 700;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.employee-contact {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  text-align: center;
+}
+
+
+.employee-contact span,
+.employee-contact small {
+  display: block;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+
+.employee-contact span {
+  color:
+    var(
+      --text-secondary,
+      #374151
+    );
+}
+
+
+.employee-contact small {
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.employee-status {
+  min-width: 58px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+
+  padding:
+    6px 10px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  box-sizing: border-box;
+}
+
+
+.employee-status.active {
+  background:
+    #dcfce7;
+
+  color:
+    #166534;
+}
+
+
+.employee-status.inactive {
+  background:
+    #f3f4f6;
+
+  color:
+    #6b7280;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.employee-actions-heading {
+  text-align: center !important;
+}
+
+
+.employee-row-actions {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+}
+
+
+.employee-row-actions button {
+  min-height: 34px;
+
+  flex-shrink: 0;
+
+  padding:
+    0 10px;
+
+  border-radius: 7px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+
+.employee-edit-button {
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+.employee-edit-button:hover {
+  background:
+    var(
+      --panel-secondary,
+      #f9fafb
+    );
+}
+
+
+.employee-status-button.deactivate {
+  border:
+    1px solid
+    #fecaca;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    #b91c1c;
+}
+
+
+.employee-status-button.activate {
+  border:
+    1px solid
+    #bbf7d0;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    #15803d;
+}
+
+
+/* =========================================================
+   EMPTY / LOADING
+========================================================= */
+
+.employees-loading,
+.employees-empty {
+  flex: 1;
+
+  min-height: 200px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    30px 20px;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   EMPLOYEE MODAL BACKDROP
+========================================================= */
+
+.employee-modal-backdrop {
+  position: fixed !important;
+
+  inset: 0 !important;
+
+  z-index: 50000 !important;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  overflow: hidden;
+
+  background:
+    rgba(
+      8,
+      12,
+      20,
+      0.74
+    );
+
+  backdrop-filter:
+    blur(3px);
+
+  -webkit-backdrop-filter:
+    blur(3px);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   EMPLOYEE MODAL
+========================================================= */
+
+.employee-modal {
+  position: relative;
+
+  z-index: 50001;
+
+  width:
+    min(
+      720px,
+      calc(
+        100vw - 48px
+      )
+    );
+
+  max-height:
+    calc(
+      100vh - 48px
+    );
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  border-radius: 14px;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  box-shadow:
+    0 30px 100px
+    rgba(
+      0,
+      0,
+      0,
+      0.5
+    );
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.employee-modal-header {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding:
+    22px 24px;
+
+  border-bottom:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+}
+
+
+.employee-modal-header h2 {
+  margin: 0;
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  font-size: 21px;
+}
+
+
+.employee-modal-header p {
+  margin:
+    5px 0 0;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 13px;
+}
+
+
+.employee-modal-close {
+  width: 35px;
+  height: 35px;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: none;
+
+  background:
+    transparent;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 28px;
+
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+
+.employee-modal-close:hover:not(:disabled) {
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+.employee-modal-close:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.employee-form {
+  padding: 24px;
+}
+
+
+.employee-form-row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 16px;
+}
+
+
+.employee-form-field {
+  margin-bottom: 17px;
+}
+
+
+.employee-form-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color:
+    var(
+      --text-main,
+      #374151
+    );
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+.employee-form-field label span {
+  margin-left: 3px;
+
+  color:
+    #dc2626;
+}
+
+
+.employee-form-field input,
+.employee-form-field select {
+  width: 100%;
+  height: 44px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background:
+    var(
+      --input-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --input-text,
+      #111827
+    );
+
+  -webkit-text-fill-color:
+    var(
+      --input-text,
+      #111827
+    );
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  box-sizing: border-box;
+}
+
+
+.employee-form-field input:focus,
+.employee-form-field select:focus {
+  border-color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+/* =========================================================
+   FACE RECOGNITION
+========================================================= */
+
+.employee-face-section {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  margin:
+    5px 0 20px;
+
+  padding: 16px;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  border-radius: 12px;
+
+  background:
+    var(
+      --panel-secondary,
+      #f9fafb
+    );
+}
+
+
+.employee-face-main {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 13px;
+}
+
+
+.employee-face-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background:
+    #fce7f3;
+
+  color:
+    #db2777;
+
+  font-size: 21px;
+}
+
+
+.employee-face-info {
+  min-width: 0;
+
+  flex: 1;
+}
+
+
+.employee-face-title-row {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+}
+
+
+.employee-face-title-row strong {
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+
+.employee-face-info p {
+  max-width: 420px;
+
+  margin:
+    5px 0 0;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 11px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   FACE STATUS
+========================================================= */
+
+.employee-face-status {
+  min-height: 25px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0 9px;
+
+  border-radius: 20px;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+
+.employee-face-status.enrolled {
+  background:
+    #dcfce7;
+
+  color:
+    #166534;
+}
+
+
+.employee-face-status.not-enrolled {
+  border:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  background:
+    var(
+      --panel-bg,
+      #f3f4f6
+    );
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+}
+
+
+.employee-face-status.incomplete {
+  border:
+    1px solid
+    #fed7aa;
+
+  background:
+    #fff7ed;
+
+  color:
+    #c2410c;
+}
+
+
+.employee-face-status.loading {
+  background:
+    #eff6ff;
+
+  color:
+    #1d4ed8;
+}
+
+
+/* =========================================================
+   FACE SAMPLES
+========================================================= */
+
+.employee-face-samples {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 9px;
+}
+
+
+.employee-face-samples span {
+  padding:
+    4px 7px;
+
+  border-radius: 6px;
+
+  background:
+    #dcfce7;
+
+  color:
+    #166534;
+
+  font-size: 9px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   FACE BUTTON
+========================================================= */
+
+.employee-register-face-button {
+  min-height: 40px;
+
+  flex-shrink: 0;
+
+  padding:
+    0 14px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background:
+    #111827;
+
+  color:
+    #ffffff;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+
+.employee-register-face-button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+
+.employee-register-face-button:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   NEW EMPLOYEE FACE NOTICE
+========================================================= */
+
+.employee-face-new-notice {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 11px;
+
+  margin:
+    5px 0 20px;
+
+  padding:
+    14px 15px;
+
+  border:
+    1px dashed
+    var(
+      --border,
+      #d1d5db
+    );
+
+  border-radius: 10px;
+
+  background:
+    var(
+      --panel-secondary,
+      #f9fafb
+    );
+}
+
+
+.employee-face-new-notice > span {
+  color:
+    #db2777;
+
+  font-size: 18px;
+}
+
+
+.employee-face-new-notice strong {
+  display: block;
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  font-size: 12px;
+}
+
+
+.employee-face-new-notice p {
+  margin:
+    4px 0 0;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 10px;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   FORM ERROR
+========================================================= */
+
+.employee-form-error {
+  margin-bottom: 18px;
+
+  padding:
+    12px 14px;
+
+  border-radius: 8px;
+
+  background:
+    #fee2e2;
+
+  color:
+    #991b1b;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   FORM ACTIONS
+========================================================= */
+
+.employee-form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding-top: 5px;
+}
+
+
+.employee-form-actions button {
+  min-height: 42px;
+
+  padding:
+    0 17px;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+.employee-cancel-button {
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --text-main,
+      #374151
+    );
+}
+
+
+.employee-save-button {
+  border: none;
+
+  background:
+    #111827;
+
+  color:
+    #ffffff;
+}
+
+
+.employee-form-actions button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   MODAL SCROLLBAR
+========================================================= */
+
+.employee-modal::-webkit-scrollbar {
+  width: 9px;
+}
+
+
+.employee-modal::-webkit-scrollbar-track {
+  background:
+    var(
+      --panel-secondary,
+      #f3f4f6
+    );
+}
+
+
+.employee-modal::-webkit-scrollbar-thumb {
+  background:
+    #6b7280;
+
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   DARK THEME
+========================================================= */
+
+.admin-dashboard[data-admin-theme="dark"]
+.employee-face-icon,
+.admin-dashboard[data-admin-theme="classic-dark"]
+.employee-face-icon {
+  background:
+    rgba(
+      219,
+      39,
+      119,
+      0.15
+    );
+
+  color:
+    #f472b6;
+}
+
+
+.admin-dashboard[data-admin-theme="dark"]
+.employee-register-face-button {
+  background:
+    #ffffff;
+
+  color:
+    #111827;
+}
+
+
+.admin-dashboard[data-admin-theme="classic-dark"]
+.employee-register-face-button {
+  background:
+    #ec4899;
+
+  color:
+    #ffffff;
+}
+
+
+/* =========================================================
+   RESPONSIVE 1000
+========================================================= */
+
+@media (
+  max-width: 1000px
+) {
+
+  .admin-employees-page {
+    padding:
+      24px 20px
+      16px;
+  }
+
+
+  .employees-table {
+    min-width:
+      980px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE 800
+========================================================= */
+
+@media (
+  max-width: 800px
+) {
+
+  .admin-employees-page {
+    height:
+      calc(
+        100dvh - 70px
+      );
+
+    padding:
+      18px 16px
+      12px;
+  }
+
+
+  .employee-summary-grid {
+    grid-template-columns:
+      1fr 1fr 1fr;
+
+    gap: 8px;
+  }
+
+
+  .employee-summary-card {
+    min-height: 82px;
+
+    padding: 10px;
+  }
+
+
+  .employee-summary-card span {
+    font-size: 10px;
+  }
+
+
+  .employee-summary-card strong {
+    font-size: 22px;
+  }
+
+
+  .employee-toolbar {
+    align-items: center;
+  }
+
+
+  .employee-search-wrapper {
+    max-width: none;
+  }
+
+
+  .employee-modal-backdrop {
+    padding: 14px;
+  }
+
+
+  .employee-modal {
+    width:
+      calc(
+        100vw - 28px
+      );
+
+    max-height:
+      calc(
+        100vh - 28px
+      );
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE 650
+========================================================= */
+
+@media (
+  max-width: 650px
+) {
+
+  .employee-face-section {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .employee-register-face-button {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE 600
+========================================================= */
+
+@media (
+  max-width: 600px
+) {
+
+  .employee-toolbar {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 10px;
+  }
+
+
+  .employee-search-wrapper {
+    width: 100%;
+  }
+
+
+  .employee-add-button {
+    width: 100%;
+  }
+
+
+  .employee-summary-grid {
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
+  }
+
+
+  .employee-form-row {
+    grid-template-columns:
+      1fr;
+
+    gap: 0;
+  }
+
+
+  .employee-form-actions {
+    flex-direction:
+      column-reverse;
+  }
+
+
+  .employee-form-actions button {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE 520
+========================================================= */
+
+@media (
+  max-width: 520px
+) {
+
+  .employee-modal-backdrop {
+    padding: 0;
+
+    align-items: stretch;
+  }
+
+
+  .employee-modal {
+    width: 100vw;
+
+    max-height: 100vh;
+
+    border-radius: 0;
+  }
+
+}
