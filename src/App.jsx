@@ -1,4 +1,5 @@
 import {
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -35,10 +36,42 @@ const ENABLE_BREAK_END = true
 
 
 // ===========================================================
+// ADMIN ROUTES
+// ===========================================================
+
+const ADMIN_LOGIN_PATH = '/admin/login'
+
+const ADMIN_PAGE_PATHS = {
+  employees: '/admin/employees',
+  schedules: '/admin/schedules',
+  leave: '/admin/leave',
+  holidays: '/admin/holidays',
+  comoff: '/admin/com-off',
+  reports: '/admin/reports',
+}
+
+
+// ===========================================================
+// NORMALIZE PATH
+// ===========================================================
+
+function normalizePath(pathname) {
+  const value =
+    String(pathname || '/')
+      .replace(/\/+$/, '')
+
+  return value || '/'
+}
+
+
+// ===========================================================
 // DTR APPLICATION
 // ===========================================================
 
-function DtrApp() {
+function DtrApp({
+  pathname,
+  navigate,
+}) {
   // =========================================================
   // CLOCK
   // =========================================================
@@ -49,6 +82,7 @@ function DtrApp() {
   ] = useState(
     new Date()
   )
+
 
   // =========================================================
   // EMPLOYEE
@@ -99,6 +133,7 @@ function DtrApp() {
     setKioskNotice,
   ] = useState('')
 
+
   // =========================================================
   // ACTIVITY PANELS
   // =========================================================
@@ -107,6 +142,7 @@ function DtrApp() {
     activityRefreshKey,
     setActivityRefreshKey,
   ] = useState(0)
+
 
   // =========================================================
   // FACE RECOGNITION
@@ -117,19 +153,21 @@ function DtrApp() {
     setFaceRecognizing,
   ] = useState(false)
 
+
   // =========================================================
   // ADMIN
   // =========================================================
 
   const [
-    page,
-    setPage,
-  ] = useState('employee')
-
-  const [
     adminUser,
     setAdminUser,
   ] = useState(null)
+
+  const [
+    checkingAdminSession,
+    setCheckingAdminSession,
+  ] = useState(true)
+
 
   // =========================================================
   // REFS
@@ -140,6 +178,25 @@ function DtrApp() {
 
   const employeeInputRef =
     useRef(null)
+
+
+  // =========================================================
+  // ROUTE STATUS
+  // =========================================================
+
+  const isAdminRoute =
+    pathname === '/admin' ||
+    pathname === ADMIN_LOGIN_PATH ||
+    pathname.startsWith('/admin/')
+
+
+  const isKnownAdminPage =
+    Object.values(
+      ADMIN_PAGE_PATHS
+    ).includes(
+      pathname
+    )
+
 
   // =========================================================
   // LIVE CLOCK
@@ -163,30 +220,52 @@ function DtrApp() {
     }
   }, [])
 
+
   // =========================================================
   // ADMIN SESSION
   // =========================================================
 
   useEffect(() => {
-    async function checkSession() {
-      const {
-        data: {
-          session,
-        },
-      } =
-        await supabase.auth
-          .getSession()
+    let mounted = true
 
-      if (
-        session?.user
-      ) {
+    async function checkSession() {
+      try {
+        const {
+          data: {
+            session,
+          },
+        } =
+          await supabase.auth
+            .getSession()
+
+        if (!mounted) {
+          return
+        }
+
         setAdminUser(
-          session.user
+          session?.user ||
+          null
         )
+      } catch (error) {
+        console.error(
+          'Admin session error:',
+          error
+        )
+
+        if (mounted) {
+          setAdminUser(null)
+        }
+      } finally {
+        if (mounted) {
+          setCheckingAdminSession(
+            false
+          )
+        }
       }
     }
 
     checkSession()
+
 
     const {
       data: {
@@ -199,17 +278,99 @@ function DtrApp() {
             _event,
             session
           ) => {
+            if (!mounted) {
+              return
+            }
+
             setAdminUser(
               session?.user ||
               null
             )
+
+            setCheckingAdminSession(
+              false
+            )
           }
         )
 
+
     return () => {
+      mounted = false
+
       subscription.unsubscribe()
     }
   }, [])
+
+
+  // =========================================================
+  // ADMIN ROUTE NORMALIZATION
+  // =========================================================
+
+  useEffect(() => {
+    if (!isAdminRoute) {
+      return
+    }
+
+    if (checkingAdminSession) {
+      return
+    }
+
+    // -------------------------------------------------------
+    // ADMIN LOGGED IN
+    // -------------------------------------------------------
+
+    if (adminUser) {
+      if (
+        pathname === '/admin' ||
+        pathname === ADMIN_LOGIN_PATH
+      ) {
+        navigate(
+          ADMIN_PAGE_PATHS.employees,
+          {
+            replace: true,
+          }
+        )
+
+        return
+      }
+
+      if (!isKnownAdminPage) {
+        navigate(
+          ADMIN_PAGE_PATHS.employees,
+          {
+            replace: true,
+          }
+        )
+      }
+
+      return
+    }
+
+
+    // -------------------------------------------------------
+    // ADMIN NOT LOGGED IN
+    // -------------------------------------------------------
+
+    if (
+      pathname !==
+      ADMIN_LOGIN_PATH
+    ) {
+      navigate(
+        ADMIN_LOGIN_PATH,
+        {
+          replace: true,
+        }
+      )
+    }
+  }, [
+    adminUser,
+    checkingAdminSession,
+    isAdminRoute,
+    isKnownAdminPage,
+    navigate,
+    pathname,
+  ])
+
 
   // =========================================================
   // CLEAN LOOKUP TIMER
@@ -227,6 +388,7 @@ function DtrApp() {
     }
   }, [])
 
+
   // =========================================================
   // DATE / TIME
   // =========================================================
@@ -236,35 +398,25 @@ function DtrApp() {
       .toLocaleDateString(
         'en-US',
         {
-          weekday:
-            'long',
-
-          year:
-            'numeric',
-
-          month:
-            'long',
-
-          day:
-            'numeric',
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
         }
       )
+
 
   const timeText =
     currentTime
       .toLocaleTimeString(
         'en-US',
         {
-          hour:
-            '2-digit',
-
-          minute:
-            '2-digit',
-
-          second:
-            '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
         }
       )
+
 
   // =========================================================
   // RESET EMPLOYEE DATA
@@ -279,6 +431,7 @@ function DtrApp() {
       'none'
     )
   }
+
 
   // =========================================================
   // RESET KIOSK
@@ -316,6 +469,7 @@ function DtrApp() {
     )
   }
 
+
   // =========================================================
   // ACTION SUCCESS
   // =========================================================
@@ -347,6 +501,7 @@ function DtrApp() {
     )
   }
 
+
   // =========================================================
   // LOAD EMPLOYEE DASHBOARD
   // =========================================================
@@ -365,9 +520,7 @@ function DtrApp() {
       return
     }
 
-    if (
-      showLoader
-    ) {
+    if (showLoader) {
       setLoading(true)
     }
 
@@ -440,15 +593,14 @@ function DtrApp() {
         `Unable to load employee information: ${error.message}`
       )
     } finally {
-      if (
-        showLoader
-      ) {
+      if (showLoader) {
         setLoading(false)
       }
 
       setFaceRecognizing(false)
     }
   }
+
 
   // =========================================================
   // FACE RECOGNIZED
@@ -494,6 +646,7 @@ function DtrApp() {
       code
     )
 
+
     const recognizedName =
       [
         match?.employee
@@ -505,6 +658,7 @@ function DtrApp() {
         .filter(Boolean)
         .join(' ')
         .trim()
+
 
     if (
       recognizedName
@@ -525,6 +679,7 @@ function DtrApp() {
       code
     )
   }
+
 
   // =========================================================
   // MANUAL EMPLOYEE CODE
@@ -579,6 +734,7 @@ function DtrApp() {
         500
       )
   }
+
 
   // =========================================================
   // DTR ACTION
@@ -657,6 +813,7 @@ function DtrApp() {
     }
   }
 
+
   // =========================================================
   // TIME IN
   // =========================================================
@@ -667,6 +824,7 @@ function DtrApp() {
       'p_time_in'
     )
   }
+
 
   // =========================================================
   // BREAK START
@@ -679,6 +837,7 @@ function DtrApp() {
     )
   }
 
+
   // =========================================================
   // BREAK END
   // =========================================================
@@ -690,6 +849,7 @@ function DtrApp() {
     )
   }
 
+
   // =========================================================
   // TIME OUT
   // =========================================================
@@ -700,6 +860,7 @@ function DtrApp() {
       'p_time_out'
     )
   }
+
 
   // =========================================================
   // FORMAT SCHEDULE TIME
@@ -741,14 +902,12 @@ function DtrApp() {
       .toLocaleTimeString(
         'en-US',
         {
-          hour:
-            'numeric',
-
-          minute:
-            '2-digit',
+          hour: 'numeric',
+          minute: '2-digit',
         }
       )
   }
+
 
   // =========================================================
   // DUTY END DATE
@@ -778,6 +937,7 @@ function DtrApp() {
 
     return dutyEnd
   }
+
 
   // =========================================================
   // TIME OUT AVAILABLE
@@ -846,6 +1006,7 @@ function DtrApp() {
     )
   }
 
+
   // =========================================================
   // FINAL 5 MINUTES
   // =========================================================
@@ -878,23 +1039,27 @@ function DtrApp() {
     )
   }
 
+
   const canTimeOut =
     canTimeOutNow()
 
+
   const finalFiveMinutes =
     isLastFiveMinutesOrLater()
+
 
   // =========================================================
   // FACE SCANNER ACTIVE
   // =========================================================
 
   const faceScannerActive =
-    page === 'employee' &&
+    !isAdminRoute &&
     !employee &&
     !employeeCode.trim() &&
     !loading &&
     !actionLoading &&
     !faceRecognizing
+
 
   // =========================================================
   // ADMIN LOGIN
@@ -907,10 +1072,14 @@ function DtrApp() {
       loginData.user
     )
 
-    setPage(
-      'admin'
+    navigate(
+      ADMIN_PAGE_PATHS.employees,
+      {
+        replace: true,
+      }
     )
   }
+
 
   // =========================================================
   // ADMIN LOGOUT
@@ -929,9 +1098,23 @@ function DtrApp() {
 
     setAdminUser(null)
 
-    setPage(
-      'employee'
+    navigate(
+      ADMIN_LOGIN_PATH,
+      {
+        replace: true,
+      }
     )
+  }
+
+
+  // =========================================================
+  // EMPLOYEE DTR
+  // =========================================================
+
+  function handleEmployeeDtr() {
+    navigate('/')
+
+    resetKiosk()
 
     window.setTimeout(
       () => {
@@ -943,43 +1126,65 @@ function DtrApp() {
     )
   }
 
-  // =========================================================
-  // ADMIN LOGIN PAGE
-  // =========================================================
-
-  if (
-    page === 'login'
-  ) {
-    return (
-      <AdminLogin
-        onLogin={
-          handleAdminLogin
-        }
-      />
-    )
-  }
 
   // =========================================================
-  // ADMIN DASHBOARD
+  // ADMIN ROUTE
   // =========================================================
 
-  if (
-    page === 'admin' &&
-    adminUser
-  ) {
+  if (isAdminRoute) {
+    // -------------------------------------------------------
+    // SESSION CHECKING
+    // -------------------------------------------------------
+
+    if (
+      checkingAdminSession
+    ) {
+      return (
+        <AdminLogin
+          onLogin={
+            handleAdminLogin
+          }
+        />
+      )
+    }
+
+
+    // -------------------------------------------------------
+    // NOT LOGGED IN
+    // -------------------------------------------------------
+
+    if (!adminUser) {
+      return (
+        <AdminLogin
+          onLogin={
+            handleAdminLogin
+          }
+        />
+      )
+    }
+
+
+    // -------------------------------------------------------
+    // ADMIN DASHBOARD
+    // -------------------------------------------------------
+
     return (
       <AdminDashboard
         adminUser={
           adminUser
         }
 
-        onEmployeeDtr={() => {
-          setPage(
-            'employee'
-          )
+        currentPath={
+          pathname
+        }
 
-          resetKiosk()
-        }}
+        onNavigate={
+          navigate
+        }
+
+        onEmployeeDtr={
+          handleEmployeeDtr
+        }
 
         onLogout={
           handleLogout
@@ -987,6 +1192,7 @@ function DtrApp() {
       />
     )
   }
+
 
   // =========================================================
   // EMPLOYEE KIOSK
@@ -1002,12 +1208,15 @@ function DtrApp() {
       <button
         type="button"
         className="admin-icon-button"
-        onClick={() =>
-          setPage(
-            'login'
+
+        onClick={() => {
+          navigate(
+            ADMIN_LOGIN_PATH
           )
-        }
+        }}
+
         title="Administrator"
+
         aria-label="Administrator"
       >
         ⚙
@@ -1016,10 +1225,6 @@ function DtrApp() {
 
       {/* =====================================================
           THREE-COLUMN KIOSK
-
-          LEFT   = ON BREAKS
-          CENTER = DTR
-          RIGHT  = LOG HISTORY
       ===================================================== */}
 
       <KioskActivityPanels
@@ -1060,11 +1265,9 @@ function DtrApp() {
           ================================================= */}
 
           {kioskNotice && (
-
             <div className="kiosk-notice">
               {kioskNotice}
             </div>
-
           )}
 
 
@@ -1133,11 +1336,9 @@ function DtrApp() {
 
 
             {loading && (
-
               <div className="lookup-message">
                 Checking employee...
               </div>
-
             )}
 
 
@@ -1161,10 +1362,6 @@ function DtrApp() {
 
             <section className="employee-duty-card">
 
-              {/* ===============================================
-                  EMPLOYEE NAME
-              =============================================== */}
-
               <div className="employee-name">
 
                 {employee.first_name}{' '}
@@ -1172,10 +1369,6 @@ function DtrApp() {
 
               </div>
 
-
-              {/* ===============================================
-                  DUTY TIME
-              =============================================== */}
 
               {schedule && (
 
@@ -1216,10 +1409,6 @@ function DtrApp() {
               )}
 
 
-              {/* ===============================================
-                  ACTION ERROR
-              =============================================== */}
-
               {actionError && (
 
                 <div className="dtr-action-error">
@@ -1228,10 +1417,6 @@ function DtrApp() {
 
               )}
 
-
-              {/* ===============================================
-                  OFF
-              =============================================== */}
 
               {dashboardStatus ===
                 'off' && (
@@ -1242,10 +1427,6 @@ function DtrApp() {
 
               )}
 
-
-              {/* ===============================================
-                  TOO EARLY
-              =============================================== */}
 
               {dashboardStatus ===
                 'too_early' && (
@@ -1261,30 +1442,25 @@ function DtrApp() {
               )}
 
 
-              {/* ===============================================
-                  READY
-              =============================================== */}
-
               {dashboardStatus ===
                 'ready' && (
 
                 <div className="dtr-actions">
 
-                  {/* =========================================
-                      TIME IN
-                  ========================================= */}
-
                   {ENABLE_TIME_IN && (
 
                     <button
                       type="button"
+
                       className="
                         dtr-button
                         time-in-button
                       "
+
                       onClick={
                         handleTimeIn
                       }
+
                       disabled={
                         actionLoading
                       }
@@ -1299,21 +1475,20 @@ function DtrApp() {
                   )}
 
 
-                  {/* =========================================
-                      BREAK START
-                  ========================================= */}
-
                   {ENABLE_BREAK_START && (
 
                     <button
                       type="button"
+
                       className="
                         dtr-button
                         break-button
                       "
+
                       onClick={
                         handleBreakStart
                       }
+
                       disabled={
                         actionLoading
                       }
@@ -1332,10 +1507,6 @@ function DtrApp() {
               )}
 
 
-              {/* ===============================================
-                  WORKING
-              =============================================== */}
-
               {dashboardStatus ===
                 'working' && (
 
@@ -1346,13 +1517,16 @@ function DtrApp() {
 
                     <button
                       type="button"
+
                       className="
                         dtr-button
                         time-out-button
                       "
+
                       onClick={
                         handleTimeOut
                       }
+
                       disabled={
                         actionLoading
                       }
@@ -1368,21 +1542,20 @@ function DtrApp() {
 
                     <>
 
-                      {/* ======================================
-                          BREAK START
-                      ====================================== */}
-
                       {ENABLE_BREAK_START && (
 
                         <button
                           type="button"
+
                           className="
                             dtr-button
                             break-button
                           "
+
                           onClick={
                             handleBreakStart
                           }
+
                           disabled={
                             actionLoading
                           }
@@ -1397,22 +1570,21 @@ function DtrApp() {
                       )}
 
 
-                      {/* ======================================
-                          TIME OUT
-                      ====================================== */}
-
                       {ENABLE_TIME_OUT &&
                         canTimeOut && (
 
                         <button
                           type="button"
+
                           className="
                             dtr-button
                             time-out-button
                           "
+
                           onClick={
                             handleTimeOut
                           }
+
                           disabled={
                             actionLoading
                           }
@@ -1435,10 +1607,6 @@ function DtrApp() {
               )}
 
 
-              {/* ===============================================
-                  ON BREAK
-              =============================================== */}
-
               {dashboardStatus ===
                 'on_break' && (
 
@@ -1448,13 +1616,16 @@ function DtrApp() {
 
                     <button
                       type="button"
+
                       className="
                         dtr-button
                         break-end-button
                       "
+
                       onClick={
                         handleBreakEnd
                       }
+
                       disabled={
                         actionLoading
                       }
@@ -1472,10 +1643,6 @@ function DtrApp() {
 
               )}
 
-
-              {/* ===============================================
-                  COMPLETED
-              =============================================== */}
 
               {dashboardStatus ===
                 'completed' && (
@@ -1501,21 +1668,97 @@ function DtrApp() {
 
 // ===========================================================
 // APPLICATION ROUTER
-//
-// /
-// → Employee DTR
-//
-// /leave-request
-// → Employee Leave / Sick Leave / Com-off Request
 // ===========================================================
 
 function App() {
-  const pathname =
-    window.location.pathname
-      .replace(
-        /\/+$/,
-        ''
-      ) || '/'
+  const [
+    pathname,
+    setPathname,
+  ] = useState(
+    () =>
+      normalizePath(
+        window.location.pathname
+      )
+  )
+
+
+  // =========================================================
+  // NAVIGATE
+  // =========================================================
+
+  const navigate =
+    useCallback(
+      (
+        path,
+        options = {}
+      ) => {
+        const nextPath =
+          normalizePath(
+            path
+          )
+
+        const currentPath =
+          normalizePath(
+            window.location.pathname
+          )
+
+        if (
+          currentPath !==
+          nextPath
+        ) {
+          if (
+            options.replace
+          ) {
+            window.history
+              .replaceState(
+                {},
+                '',
+                nextPath
+              )
+          } else {
+            window.history
+              .pushState(
+                {},
+                '',
+                nextPath
+              )
+          }
+        }
+
+        setPathname(
+          nextPath
+        )
+      },
+      []
+    )
+
+
+  // =========================================================
+  // BACK / FORWARD
+  // =========================================================
+
+  useEffect(() => {
+    function handlePopState() {
+      setPathname(
+        normalizePath(
+          window.location.pathname
+        )
+      )
+    }
+
+    window.addEventListener(
+      'popstate',
+      handlePopState
+    )
+
+    return () => {
+      window.removeEventListener(
+        'popstate',
+        handlePopState
+      )
+    }
+  }, [])
+
 
   // =========================================================
   // EMPLOYEE LEAVE REQUEST
@@ -1526,16 +1769,31 @@ function App() {
     '/leave-request'
   ) {
     return (
-      <EmployeeLeaveRequest />
+      <EmployeeLeaveRequest
+        onBack={() =>
+          navigate('/')
+        }
+      />
     )
   }
 
+
   // =========================================================
-  // DEFAULT
-  // EMPLOYEE DTR + ADMIN
+  // DTR / ADMIN
   // =========================================================
 
-  return <DtrApp />
+  return (
+    <DtrApp
+      pathname={
+        pathname
+      }
+
+      navigate={
+        navigate
+      }
+    />
+  )
 }
+
 
 export default App

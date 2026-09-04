@@ -31,11 +31,37 @@ const SIDEBAR_STORAGE_KEY =
 
 
 // ===========================================================
+// ADMIN PAGE ROUTES
+// ===========================================================
+
+const ADMIN_PAGE_ROUTES = {
+  employees: '/admin/employees',
+  schedules: '/admin/schedules',
+  leave: '/admin/leave',
+  holidays: '/admin/holidays',
+  comoff: '/admin/com-off',
+  reports: '/admin/reports',
+}
+
+
+const ADMIN_ROUTE_PAGES = {
+  '/admin/employees': 'employees',
+  '/admin/schedules': 'schedules',
+  '/admin/leave': 'leave',
+  '/admin/holidays': 'holidays',
+  '/admin/com-off': 'comoff',
+  '/admin/reports': 'reports',
+}
+
+
+// ===========================================================
 // ADMIN DASHBOARD
 // ===========================================================
 
 function AdminDashboard({
   adminUser,
+  currentPath,
+  onNavigate,
   onEmployeeDtr,
   onLogout,
 }) {
@@ -43,10 +69,11 @@ function AdminDashboard({
   // ACTIVE PAGE
   // =========================================================
 
-  const [
-    activePage,
-    setActivePage,
-  ] = useState('employees')
+  const activePage =
+    ADMIN_ROUTE_PAGES[
+      currentPath
+    ] ||
+    'employees'
 
 
   // =========================================================
@@ -88,11 +115,8 @@ function AdminDashboard({
   // =========================================================
   // THEME
   //
-  // First-time default:
-  // System
-  //
-  // After user touches switch:
-  // Light / Dark is saved manually.
+  // DEFAULT:
+  // SYSTEM
   // =========================================================
 
   const [
@@ -111,9 +135,9 @@ function AdminDashboard({
       return saved
     }
 
-    // Old Classic Dark preference becomes normal Dark.
     if (
-      saved === 'classic-dark'
+      saved ===
+      'classic-dark'
     ) {
       return 'dark'
     }
@@ -144,7 +168,6 @@ function AdminDashboard({
         return
       }
 
-
       try {
         const {
           data,
@@ -167,7 +190,6 @@ function AdminDashboard({
             )
             .maybeSingle()
 
-
         if (error) {
           console.error(
             'Admin profile error:',
@@ -176,7 +198,6 @@ function AdminDashboard({
 
           return
         }
-
 
         setAdminProfile(
           data || null
@@ -189,7 +210,6 @@ function AdminDashboard({
       }
     }
 
-
     loadAdminProfile()
   }, [
     adminUser?.id,
@@ -197,7 +217,7 @@ function AdminDashboard({
 
 
   // =========================================================
-  // WATCH DEVICE / WINDOWS THEME
+  // WATCH SYSTEM THEME
   // =========================================================
 
   useEffect(() => {
@@ -286,7 +306,8 @@ function AdminDashboard({
   // =========================================================
 
   const resolvedTheme =
-    themePreference === 'system'
+    themePreference ===
+    'system'
       ? systemDark
         ? 'dark'
         : 'light'
@@ -321,7 +342,9 @@ function AdminDashboard({
         ? 'light'
         : 'dark'
 
-    changeTheme(next)
+    changeTheme(
+      next
+    )
   }
 
 
@@ -355,8 +378,20 @@ function AdminDashboard({
   function openPage(
     page
   ) {
-    setActivePage(page)
+    const path =
+      ADMIN_PAGE_ROUTES[
+        page
+      ]
+
+    if (!path) {
+      return
+    }
+
     setProfileOpen(false)
+
+    onNavigate(
+      path
+    )
   }
 
 
@@ -398,25 +433,28 @@ function AdminDashboard({
   // =========================================================
 
   const initials =
-    useMemo(() => {
-      const first =
-        firstName
-          ?.charAt(0) ||
-        'A'
+    useMemo(
+      () => {
+        const first =
+          firstName
+            ?.charAt(0) ||
+          'A'
 
-      const last =
-        lastName
-          ?.charAt(0) ||
-        ''
+        const last =
+          lastName
+            ?.charAt(0) ||
+          ''
 
-      return (
-        `${first}${last}`
-          .toUpperCase()
-      )
-    }, [
-      firstName,
-      lastName,
-    ])
+        return (
+          `${first}${last}`
+            .toUpperCase()
+        )
+      },
+      [
+        firstName,
+        lastName,
+      ]
+    )
 
 
   // =========================================================
@@ -439,7 +477,9 @@ function AdminDashboard({
   // =========================================================
 
   function renderPage() {
-    switch (activePage) {
+    switch (
+      activePage
+    ) {
       case 'employees':
         return (
           <AdminEmployees />
@@ -553,7 +593,9 @@ function AdminDashboard({
         <button
           type="button"
           className="admin-secondary-button"
-          onClick={onEmployeeDtr}
+          onClick={
+            onEmployeeDtr
+          }
         >
           Employee DTR
         </button>
@@ -585,13 +627,19 @@ function AdminDashboard({
 
           <button
             type="button"
+
             className="admin-sidebar-toggle"
-            onClick={toggleSidebar}
+
+            onClick={
+              toggleSidebar
+            }
+
             aria-label={
               sidebarCollapsed
                 ? 'Expand sidebar'
                 : 'Collapse sidebar'
             }
+
             title={
               sidebarCollapsed
                 ? 'Expand sidebar'
@@ -614,19 +662,26 @@ function AdminDashboard({
 
               {navigationItems.map(
                 (item) => (
+
                   <button
-                    key={item.id}
+                    key={
+                      item.id
+                    }
+
                     type="button"
+
                     className={
                       getNavClass(
                         item.id
                       )
                     }
+
                     onClick={() =>
                       openPage(
                         item.id
                       )
                     }
+
                     title={
                       sidebarCollapsed
                         ? item.label
@@ -644,6 +699,7 @@ function AdminDashboard({
                     </span>
 
                   </button>
+
                 )
               )}
 
@@ -658,7 +714,9 @@ function AdminDashboard({
 
           <div
             className="admin-profile-area"
-            ref={profileMenuRef}
+            ref={
+              profileMenuRef
+            }
           >
 
             {/* ===============================================
@@ -666,6 +724,7 @@ function AdminDashboard({
             =============================================== */}
 
             {profileOpen && (
+
               <div className="admin-profile-popover">
 
                 {/* ===========================================
@@ -682,17 +741,22 @@ function AdminDashboard({
                   <div className="admin-profile-info">
 
                     <strong>
+
                       {firstName}
+
                       {lastName
                         ? ` ${lastName}`
                         : ''}
+
                     </strong>
 
 
                     {email && (
+
                       <span>
                         {email}
                       </span>
+
                     )}
 
 
@@ -726,17 +790,23 @@ function AdminDashboard({
 
                   <button
                     type="button"
+
                     className={
-                      resolvedTheme === 'dark'
+                      resolvedTheme ===
+                      'dark'
                         ? 'admin-appearance-switch dark'
                         : 'admin-appearance-switch light'
                     }
+
                     onClick={
                       toggleLightDarkTheme
                     }
+
                     aria-label="Toggle light or dark appearance"
+
                     title={
-                      themePreference === 'system'
+                      themePreference ===
+                      'system'
                         ? 'Following system appearance. Click to choose manually.'
                         : `Current appearance: ${resolvedTheme}`
                     }
@@ -744,10 +814,14 @@ function AdminDashboard({
 
                     <span className="admin-appearance-thumb" />
 
+
                     <span className="admin-appearance-label">
-                      {resolvedTheme === 'dark'
+
+                      {resolvedTheme ===
+                      'dark'
                         ? 'DARK'
                         : 'LIGHT'}
+
                     </span>
 
                   </button>
@@ -761,8 +835,12 @@ function AdminDashboard({
 
                 <button
                   type="button"
+
                   className="admin-profile-logout"
-                  onClick={onLogout}
+
+                  onClick={
+                    onLogout
+                  }
                 >
 
                   <span className="admin-logout-icon">
@@ -776,6 +854,7 @@ function AdminDashboard({
                 </button>
 
               </div>
+
             )}
 
 
@@ -785,13 +864,16 @@ function AdminDashboard({
 
             <button
               type="button"
+
               className="admin-profile-button"
+
               onClick={() =>
                 setProfileOpen(
                   (previous) =>
                     !previous
                 )
               }
+
               title={
                 sidebarCollapsed
                   ? `${firstName} - ${role}`
@@ -829,7 +911,7 @@ function AdminDashboard({
 
 
         {/* ===================================================
-            PAGE
+            PAGE CONTENT
         =================================================== */}
 
         <main className="admin-main-content">
