@@ -1,0 +1,1634 @@
+/* =========================================================
+   ADMIN DEVICES PAGE
+   - Matches Admin Employees layout
+   - Summary remains frozen
+   - Search / filters / add device remain frozen
+   - Only device list scrolls
+   - Scrollbar hidden
+========================================================= */
+
+.admin-devices-page {
+  width: 100%;
+  min-width: 0;
+
+  height:
+    calc(
+      100dvh - 80px
+    );
+
+  display: flex;
+  flex-direction: column;
+
+  padding:
+    28px 32px
+    20px;
+
+  box-sizing: border-box;
+  overflow: hidden;
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.device-summary-grid {
+  flex-shrink: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+
+.device-summary-card {
+  min-height: 100px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 18px;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  border-radius: 12px;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  box-sizing: border-box;
+}
+
+
+.device-summary-card span {
+  display: block;
+  margin-bottom: 8px;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+.device-summary-card strong {
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  font-size: 28px;
+  text-align: center;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.device-message {
+  flex-shrink: 0;
+
+  margin-bottom: 14px;
+
+  padding:
+    12px 15px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+.device-message.success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+
+.device-message.error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.device-toolbar {
+  flex-shrink: 0;
+
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 15px;
+}
+
+
+.device-toolbar-left {
+  min-width: 0;
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.device-toolbar-actions {
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.device-search-wrapper {
+  position: relative;
+
+  width:
+    min(
+      500px,
+      100%
+    );
+
+  min-width: 220px;
+}
+
+
+.device-search-icon {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  font-size: 14px;
+
+  pointer-events: none;
+}
+
+
+.device-search-wrapper input {
+  width: 100%;
+  height: 44px;
+
+  padding:
+    0 15px
+    0 42px;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(
+      --input-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --input-text,
+      #111827
+    );
+
+  -webkit-text-fill-color:
+    var(
+      --input-text,
+      #111827
+    );
+
+  font-family: inherit;
+  font-size: 14px;
+
+  box-sizing: border-box;
+}
+
+
+.device-search-wrapper input:focus {
+  border-color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+.device-filter {
+  height: 44px;
+  min-width: 145px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(
+      --input-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --input-text,
+      #111827
+    );
+
+  font-family: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   ADD / CLEAR BROWSER BUTTONS
+========================================================= */
+
+.device-add-button {
+  height: 44px;
+  min-width: 135px;
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0 18px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #111827;
+
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+
+.device-add-button:hover {
+  opacity: 0.9;
+}
+
+
+.device-clear-browser-button {
+  height: 44px;
+
+  flex-shrink: 0;
+
+  padding:
+    0 14px;
+
+  border:
+    1px solid
+    #fecaca;
+
+  border-radius: 9px;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color: #b91c1c;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.devices-table-card {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  border-radius: 12px;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+}
+
+
+/* =========================================================
+   TABLE WRAPPER
+========================================================= */
+
+.devices-table-wrapper {
+  flex: 1;
+
+  min-height: 0;
+
+  width: 100%;
+
+  overflow-y: auto;
+  overflow-x: auto;
+
+  scrollbar-width: none;
+
+  -ms-overflow-style: none;
+
+  overscroll-behavior: contain;
+}
+
+
+.devices-table-wrapper::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+
+  display: none;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.devices-table {
+  width: 100%;
+
+  min-width: 1100px;
+
+  table-layout: fixed;
+
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.devices-table thead {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+}
+
+
+.devices-table th {
+  height: 54px;
+
+  padding:
+    0 10px;
+
+  vertical-align: middle;
+
+  border-bottom:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  background:
+    var(
+      --panel-secondary,
+      #f9fafb
+    );
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TABLE BODY
+========================================================= */
+
+.devices-table td {
+  height: 72px;
+
+  padding: 10px;
+
+  vertical-align: middle;
+
+  border-bottom:
+    1px solid
+    var(
+      --border,
+      #f1f5f9
+    );
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --text-secondary,
+      #374151
+    );
+
+  font-size: 13px;
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+
+.devices-table tbody tr:hover td {
+  background:
+    var(
+      --panel-secondary,
+      #fafafa
+    );
+}
+
+
+.devices-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/* =========================================================
+   COLUMN WIDTHS
+========================================================= */
+
+.devices-table th:nth-child(1),
+.devices-table td:nth-child(1) {
+  width: 18%;
+}
+
+
+.devices-table th:nth-child(2),
+.devices-table td:nth-child(2) {
+  width: 13%;
+}
+
+
+.devices-table th:nth-child(3),
+.devices-table td:nth-child(3) {
+  width: 9%;
+}
+
+
+.devices-table th:nth-child(4),
+.devices-table td:nth-child(4) {
+  width: 15%;
+}
+
+
+.devices-table th:nth-child(5),
+.devices-table td:nth-child(5) {
+  width: 15%;
+}
+
+
+.devices-table th:nth-child(6),
+.devices-table td:nth-child(6) {
+  width: 30%;
+}
+
+
+/* =========================================================
+   DEVICE NAME / STATUS
+========================================================= */
+
+.device-name-value {
+  display: block;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  font-weight: 700;
+
+  text-align: center;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
+.device-status {
+  min-width: 58px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin: 0 auto;
+
+  padding:
+    6px 10px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  box-sizing: border-box;
+}
+
+
+.device-status.active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+
+.device-status.inactive {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.device-actions-heading {
+  text-align: center !important;
+}
+
+
+.device-row-actions {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+}
+
+
+.device-row-actions button {
+  min-height: 34px;
+
+  flex-shrink: 0;
+
+  padding:
+    0 10px;
+
+  border-radius: 7px;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+
+.device-row-actions button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+.device-edit-button,
+.device-token-button {
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+.device-edit-button:hover:not(:disabled),
+.device-token-button:hover:not(:disabled) {
+  background:
+    var(
+      --panel-secondary,
+      #f9fafb
+    );
+}
+
+
+.device-token-button {
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+
+.device-status-button.deactivate {
+  border:
+    1px solid
+    #fecaca;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color: #b91c1c;
+}
+
+
+.device-status-button.activate {
+  border:
+    1px solid
+    #bbf7d0;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color: #15803d;
+}
+
+
+/* =========================================================
+   EMPTY / LOADING
+========================================================= */
+
+.devices-loading,
+.devices-empty {
+  flex: 1;
+
+  min-height: 200px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    30px 20px;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   MODAL BACKDROP
+========================================================= */
+
+.device-modal-backdrop {
+  position: fixed !important;
+
+  inset: 0 !important;
+
+  z-index: 50000 !important;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  overflow: hidden;
+
+  background:
+    rgba(
+      8,
+      12,
+      20,
+      0.74
+    );
+
+  backdrop-filter:
+    blur(3px);
+
+  -webkit-backdrop-filter:
+    blur(3px);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   DEVICE MODAL
+========================================================= */
+
+.device-modal,
+.device-token-modal {
+  position: relative;
+
+  z-index: 50001;
+
+  width:
+    min(
+      620px,
+      calc(
+        100vw - 48px
+      )
+    );
+
+  max-height:
+    calc(
+      100vh - 48px
+    );
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  border-radius: 14px;
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  box-shadow:
+    0 30px 100px
+    rgba(
+      0,
+      0,
+      0,
+      0.5
+    );
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MODAL HEADER
+========================================================= */
+
+.device-modal-header {
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding:
+    22px 24px;
+
+  border-bottom:
+    1px solid
+    var(
+      --border,
+      #e5e7eb
+    );
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+}
+
+
+.device-modal-header h2 {
+  margin: 0;
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  font-size: 21px;
+}
+
+
+.device-modal-header p {
+  margin:
+    5px 0 0;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 13px;
+}
+
+
+.device-modal-close {
+  width: 35px;
+  height: 35px;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 28px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+
+.device-modal-close:hover:not(:disabled) {
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+.device-modal-close:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.device-form,
+.device-token-body {
+  padding: 24px;
+}
+
+
+.device-form-field {
+  margin-bottom: 17px;
+}
+
+
+.device-form-field label,
+.device-token-label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color:
+    var(
+      --text-main,
+      #374151
+    );
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+.device-form-field label span {
+  margin-left: 3px;
+  color: #dc2626;
+}
+
+
+.device-form-field input,
+.device-form-field select {
+  width: 100%;
+  height: 44px;
+
+  padding:
+    0 12px;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background:
+    var(
+      --input-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --input-text,
+      #111827
+    );
+
+  -webkit-text-fill-color:
+    var(
+      --input-text,
+      #111827
+    );
+
+  font-family: inherit;
+  font-size: 14px;
+
+  box-sizing: border-box;
+}
+
+
+.device-form-field input:focus,
+.device-form-field select:focus {
+  border-color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+/* =========================================================
+   DEVICE FORM NOTE
+========================================================= */
+
+.device-form-note {
+  margin:
+    4px 0 20px;
+
+  padding:
+    14px 15px;
+
+  border:
+    1px dashed
+    var(
+      --border,
+      #d1d5db
+    );
+
+  border-radius: 10px;
+
+  background:
+    var(
+      --panel-secondary,
+      #f9fafb
+    );
+}
+
+
+.device-form-note strong {
+  display: block;
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+
+  font-size: 12px;
+}
+
+
+.device-form-note p {
+  margin:
+    4px 0 0;
+
+  color:
+    var(
+      --text-secondary,
+      #6b7280
+    );
+
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   FORM ERROR
+========================================================= */
+
+.device-form-error {
+  margin-bottom: 18px;
+
+  padding:
+    12px 14px;
+
+  border-radius: 8px;
+
+  background: #fee2e2;
+  color: #991b1b;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   FORM / TOKEN ACTIONS
+========================================================= */
+
+.device-form-actions,
+.device-token-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  padding-top: 5px;
+
+  flex-wrap: wrap;
+}
+
+
+.device-form-actions button,
+.device-token-actions button {
+  min-height: 42px;
+
+  padding:
+    0 17px;
+
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+.device-cancel-button {
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --text-main,
+      #374151
+    );
+}
+
+
+.device-secondary-save-button {
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  background:
+    var(
+      --panel-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --text-main,
+      #111827
+    );
+}
+
+
+.device-save-button {
+  border: none;
+
+  background: #111827;
+  color: #ffffff;
+}
+
+
+.device-form-actions button:disabled,
+.device-token-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   TOKEN
+========================================================= */
+
+.device-token-warning {
+  margin-bottom: 18px;
+
+  padding: 14px;
+
+  border:
+    1px solid
+    #fde68a;
+
+  border-radius: 10px;
+
+  background: #fffbeb;
+  color: #92400e;
+}
+
+
+.device-token-warning strong {
+  display: block;
+  font-size: 13px;
+}
+
+
+.device-token-warning p {
+  margin:
+    4px 0 0;
+
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+
+.device-token-value {
+  width: 100%;
+
+  min-height: 92px;
+
+  resize: none;
+
+  padding: 12px;
+
+  border:
+    1px solid
+    var(
+      --border,
+      #d1d5db
+    );
+
+  border-radius: 8px;
+
+  outline: none;
+
+  background:
+    var(
+      --input-bg,
+      #ffffff
+    );
+
+  color:
+    var(
+      --input-text,
+      #111827
+    );
+
+  font-family:
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace;
+
+  font-size: 12px;
+  line-height: 1.55;
+
+  word-break: break-all;
+
+  box-sizing: border-box;
+}
+
+
+.device-browser-registered {
+  margin-top: 12px;
+
+  padding:
+    10px 12px;
+
+  border-radius: 8px;
+
+  background: #dcfce7;
+  color: #166534;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   MODAL SCROLLBAR
+========================================================= */
+
+.device-modal::-webkit-scrollbar,
+.device-token-modal::-webkit-scrollbar {
+  width: 9px;
+}
+
+
+.device-modal::-webkit-scrollbar-track,
+.device-token-modal::-webkit-scrollbar-track {
+  background:
+    var(
+      --panel-secondary,
+      #f3f4f6
+    );
+}
+
+
+.device-modal::-webkit-scrollbar-thumb,
+.device-token-modal::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 10px;
+}
+
+
+/* =========================================================
+   DARK THEME
+========================================================= */
+
+.admin-dashboard[data-admin-theme="dark"]
+.device-add-button,
+.admin-dashboard[data-admin-theme="dark"]
+.device-save-button {
+  background: #ffffff;
+  color: #111827;
+}
+
+
+.admin-dashboard[data-admin-theme="classic-dark"]
+.device-add-button,
+.admin-dashboard[data-admin-theme="classic-dark"]
+.device-save-button {
+  background: #ec4899;
+  color: #ffffff;
+}
+
+
+.admin-dashboard[data-admin-theme="dark"]
+.device-token-warning,
+.admin-dashboard[data-admin-theme="classic-dark"]
+.device-token-warning {
+  background:
+    rgba(
+      245,
+      158,
+      11,
+      0.12
+    );
+
+  color: #fbbf24;
+}
+
+
+/* =========================================================
+   RESPONSIVE 1100
+========================================================= */
+
+@media (
+  max-width: 1100px
+) {
+
+  .admin-devices-page {
+    padding:
+      24px 20px
+      16px;
+  }
+
+
+  .device-toolbar {
+    align-items: flex-start;
+  }
+
+
+  .device-toolbar-left {
+    flex-wrap: wrap;
+  }
+
+
+  .devices-table {
+    min-width: 1040px;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE 800
+========================================================= */
+
+@media (
+  max-width: 800px
+) {
+
+  .admin-devices-page {
+    height:
+      calc(
+        100dvh - 70px
+      );
+
+    padding:
+      18px 16px
+      12px;
+  }
+
+
+  .device-summary-grid {
+    grid-template-columns:
+      1fr 1fr 1fr;
+
+    gap: 8px;
+  }
+
+
+  .device-summary-card {
+    min-height: 82px;
+    padding: 10px;
+  }
+
+
+  .device-summary-card span {
+    font-size: 10px;
+  }
+
+
+  .device-summary-card strong {
+    font-size: 22px;
+  }
+
+
+  .device-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  .device-toolbar-left,
+  .device-toolbar-actions {
+    width: 100%;
+  }
+
+
+  .device-search-wrapper {
+    flex: 1;
+    width: auto;
+  }
+
+
+  .device-toolbar-actions {
+    justify-content: flex-end;
+  }
+
+
+  .device-modal-backdrop {
+    padding: 14px;
+  }
+
+
+  .device-modal,
+  .device-token-modal {
+    width:
+      calc(
+        100vw - 28px
+      );
+
+    max-height:
+      calc(
+        100vh - 28px
+      );
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE 650
+========================================================= */
+
+@media (
+  max-width: 650px
+) {
+
+  .device-toolbar-left {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  .device-search-wrapper,
+  .device-filter {
+    width: 100%;
+    min-width: 0;
+  }
+
+
+  .device-toolbar-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+
+  .device-add-button,
+  .device-clear-browser-button {
+    width: 100%;
+  }
+
+
+  .device-form-actions,
+  .device-token-actions {
+    flex-direction:
+      column-reverse;
+  }
+
+
+  .device-form-actions button,
+  .device-token-actions button {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE 520
+========================================================= */
+
+@media (
+  max-width: 520px
+) {
+
+  .device-modal-backdrop {
+    padding: 0;
+    align-items: stretch;
+  }
+
+
+  .device-modal,
+  .device-token-modal {
+    width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+}

@@ -574,165 +574,77 @@ function AdminReports() {
     setErrorMessage('')
 
     try {
-      const [
-        attendanceResult,
-        leaveResult,
-        comOffRequestResult,
-        comOffBalanceResult,
-        breakLogResult,
-      ] =
-        await Promise.all([
-          supabase
-            .from(
-              'v_admin_attendance_report'
-            )
-            .select('*')
-            .order(
-              'duty_date',
-              {
-                ascending: false,
-              }
-            ),
+      const {
+        data,
+        error,
+      } =
+        await supabase.rpc(
+          'admin_list_reports_scoped'
+        )
 
-          supabase
-            .from(
-              'v_admin_leave_report'
-            )
-            .select('*')
-            .order(
-              'created_at',
-              {
-                ascending: false,
-              }
-            ),
-
-          supabase
-            .from(
-              'v_admin_com_off_request_report'
-            )
-            .select('*')
-            .order(
-              'created_at',
-              {
-                ascending: false,
-              }
-            ),
-
-          supabase
-            .from(
-              'v_admin_com_off_balance_report'
-            )
-            .select('*')
-            .order(
-              'employee_name',
-              {
-                ascending: true,
-              }
-            ),
-
-          supabase
-            .from(
-              'attendance_breaks'
-            )
-            .select(`
-              id,
-              attendance_id,
-              break_start,
-              break_end,
-              break_minutes,
-              created_at,
-              updated_at,
-
-              attendance_records (
-                id,
-                duty_date,
-                employee_id,
-                shift_id,
-
-                employees (
-                  id,
-                  employee_code,
-                  first_name,
-                  last_name,
-                  department,
-                  position
-                ),
-
-                shifts (
-                  id,
-                  name
-                )
-              )
-            `)
-            .order(
-              'break_start',
-              {
-                ascending: false,
-              }
-            ),
-        ])
-
-
-      if (
-        attendanceResult.error
-      ) {
-        throw attendanceResult.error
+      if (error) {
+        throw error
       }
 
       if (
-        leaveResult.error
+        data?.success !== true
       ) {
-        throw leaveResult.error
+        throw new Error(
+          data?.message ||
+          'Unable to load reports.'
+        )
       }
-
-      if (
-        comOffRequestResult.error
-      ) {
-        throw comOffRequestResult.error
-      }
-
-      if (
-        comOffBalanceResult.error
-      ) {
-        throw comOffBalanceResult.error
-      }
-
-      if (
-        breakLogResult.error
-      ) {
-        throw breakLogResult.error
-      }
-
 
       setAttendance(
-        attendanceResult.data ||
-        []
+        Array.isArray(
+          data?.attendance
+        )
+          ? data.attendance
+          : []
       )
 
       setLeave(
-        leaveResult.data ||
-        []
+        Array.isArray(
+          data?.leave
+        )
+          ? data.leave
+          : []
       )
 
       setComOffRequests(
-        comOffRequestResult.data ||
-        []
+        Array.isArray(
+          data?.com_off_requests
+        )
+          ? data.com_off_requests
+          : []
       )
 
       setComOffBalances(
-        comOffBalanceResult.data ||
-        []
+        Array.isArray(
+          data?.com_off_balances
+        )
+          ? data.com_off_balances
+          : []
       )
 
       setBreakLogs(
-        breakLogResult.data ||
-        []
+        Array.isArray(
+          data?.break_logs
+        )
+          ? data.break_logs
+          : []
       )
     } catch (error) {
       console.error(
         'Reports load error:',
         error
       )
+
+      setAttendance([])
+      setLeave([])
+      setComOffRequests([])
+      setComOffBalances([])
+      setBreakLogs([])
 
       setErrorMessage(
         `Unable to load reports: ${error.message}`
