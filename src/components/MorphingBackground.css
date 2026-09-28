@@ -1,0 +1,327 @@
+/* ===========================================================
+   DTR MORPHING BACKGROUND
+   Inspired by the CSS + SVG "gooey" morphing-gradient approach.
+   This file is intentionally isolated from the existing DTR CSS.
+=========================================================== */
+
+.app {
+  position: relative;
+  isolation: isolate;
+  background: transparent !important;
+}
+
+/* These are layout wrappers, so making them transparent lets the
+   animated background show through without changing the cards. */
+.app .kiosk-workspace,
+.app .kiosk-center-slot,
+.app .dtr-container {
+  background: transparent !important;
+}
+
+.app > *:not(.dtr-morphing-background) {
+  position: relative;
+  z-index: 1;
+}
+
+.dtr-morphing-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(25, 27, 38, 0.2) 0%,
+      rgba(16, 17, 24, 0.72) 56%,
+      rgba(12, 13, 18, 0.96) 100%
+    ),
+    #111218;
+}
+
+.dtr-morphing-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.dtr-morphing-field {
+  position: absolute;
+  inset: -12%;
+  filter:
+    url("#dtr-morphing-goo")
+    blur(18px);
+  opacity: 0.68;
+  transform: translateZ(0);
+}
+
+.dtr-morphing-blob {
+  position: absolute;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius:
+    48% 52% 63% 37% /
+    41% 44% 56% 59%;
+  opacity: 0.28;
+  will-change:
+    transform,
+    border-radius;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Katrina magenta */
+.dtr-morphing-blob-1 {
+  left: -12vmax;
+  top: -14vmax;
+  background:
+    radial-gradient(
+      circle at 36% 36%,
+      rgba(255, 45, 157, 0.95),
+      rgba(205, 20, 128, 0.42) 48%,
+      transparent 72%
+    );
+  animation:
+    dtrMorphOne 22s
+    ease-in-out infinite alternate;
+}
+
+/* Cyan from headings */
+.dtr-morphing-blob-2 {
+  right: -14vmax;
+  top: -8vmax;
+  background:
+    radial-gradient(
+      circle at 52% 42%,
+      rgba(42, 222, 255, 0.9),
+      rgba(22, 122, 216, 0.38) 50%,
+      transparent 73%
+    );
+  animation:
+    dtrMorphTwo 26s
+    ease-in-out infinite alternate;
+}
+
+/* Purple from avatars/history */
+.dtr-morphing-blob-3 {
+  left: 35%;
+  top: 22%;
+  width: 38vmax;
+  height: 38vmax;
+  background:
+    radial-gradient(
+      circle at 46% 42%,
+      rgba(141, 85, 255, 0.82),
+      rgba(100, 43, 196, 0.32) 52%,
+      transparent 74%
+    );
+  animation:
+    dtrMorphThree 30s
+    ease-in-out infinite alternate;
+}
+
+/* Green accent from face recognition / break state */
+.dtr-morphing-blob-4 {
+  left: -8vmax;
+  bottom: -18vmax;
+  width: 40vmax;
+  height: 40vmax;
+  background:
+    radial-gradient(
+      circle at 50% 44%,
+      rgba(51, 225, 168, 0.72),
+      rgba(24, 132, 117, 0.28) 54%,
+      transparent 75%
+    );
+  animation:
+    dtrMorphFour 28s
+    ease-in-out infinite alternate;
+}
+
+/* Warm counterweight, kept subtle */
+.dtr-morphing-blob-5 {
+  right: 5%;
+  bottom: -20vmax;
+  width: 34vmax;
+  height: 34vmax;
+  background:
+    radial-gradient(
+      circle at 48% 42%,
+      rgba(255, 136, 35, 0.58),
+      rgba(191, 74, 24, 0.22) 50%,
+      transparent 74%
+    );
+  animation:
+    dtrMorphFive 24s
+    ease-in-out infinite alternate;
+}
+
+.dtr-morphing-vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 12, 18, 0.2) 0%,
+      rgba(11, 12, 18, 0.05) 36%,
+      rgba(11, 12, 18, 0.42) 100%
+    ),
+    radial-gradient(
+      ellipse at center,
+      transparent 25%,
+      rgba(8, 9, 13, 0.2) 66%,
+      rgba(8, 9, 13, 0.64) 100%
+    );
+}
+
+@keyframes dtrMorphOne {
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(0deg)
+      scale(1);
+    border-radius:
+      48% 52% 63% 37% /
+      41% 44% 56% 59%;
+  }
+
+  45% {
+    transform:
+      translate3d(18vw, 12vh, 0)
+      rotate(55deg)
+      scale(1.12);
+    border-radius:
+      61% 39% 43% 57% /
+      55% 62% 38% 45%;
+  }
+
+  100% {
+    transform:
+      translate3d(30vw, 4vh, 0)
+      rotate(120deg)
+      scale(0.94);
+    border-radius:
+      36% 64% 58% 42% /
+      61% 36% 64% 39%;
+  }
+}
+
+@keyframes dtrMorphTwo {
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(0deg)
+      scale(0.95);
+  }
+
+  50% {
+    transform:
+      translate3d(-22vw, 18vh, 0)
+      rotate(-70deg)
+      scale(1.08);
+  }
+
+  100% {
+    transform:
+      translate3d(-34vw, 5vh, 0)
+      rotate(-145deg)
+      scale(1.15);
+  }
+}
+
+@keyframes dtrMorphThree {
+  0% {
+    transform:
+      translate3d(-8vw, 5vh, 0)
+      rotate(15deg)
+      scale(0.92);
+  }
+
+  50% {
+    transform:
+      translate3d(12vw, 18vh, 0)
+      rotate(85deg)
+      scale(1.18);
+  }
+
+  100% {
+    transform:
+      translate3d(-4vw, 30vh, 0)
+      rotate(170deg)
+      scale(1.02);
+  }
+}
+
+@keyframes dtrMorphFour {
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(0deg)
+      scale(1);
+  }
+
+  55% {
+    transform:
+      translate3d(25vw, -12vh, 0)
+      rotate(80deg)
+      scale(1.1);
+  }
+
+  100% {
+    transform:
+      translate3d(42vw, -18vh, 0)
+      rotate(150deg)
+      scale(0.9);
+  }
+}
+
+@keyframes dtrMorphFive {
+  0% {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(0deg)
+      scale(0.88);
+  }
+
+  50% {
+    transform:
+      translate3d(-18vw, -15vh, 0)
+      rotate(-85deg)
+      scale(1.16);
+  }
+
+  100% {
+    transform:
+      translate3d(-38vw, -8vh, 0)
+      rotate(-160deg)
+      scale(1);
+  }
+}
+
+/* Keep the animation comfortable on phones / weaker kiosk machines. */
+@media (max-width: 900px) {
+  .dtr-morphing-field {
+    opacity: 0.52;
+    filter: blur(22px);
+  }
+
+  .dtr-morphing-blob {
+    width: 58vmax;
+    height: 58vmax;
+  }
+
+  .dtr-morphing-blob-5 {
+    display: none;
+  }
+}
+
+/* Accessibility and lower-GPU fallback. */
+@media (prefers-reduced-motion: reduce) {
+  .dtr-morphing-blob {
+    animation: none !important;
+  }
+
+  .dtr-morphing-field {
+    filter: blur(34px);
+    opacity: 0.5;
+  }
+}
