@@ -10,7 +10,6 @@ import {
 
 import './AdminReports.css'
 
-
 // ===========================================================
 // HELPERS
 // ===========================================================
@@ -43,7 +42,6 @@ function formatDate(value) {
   )
 }
 
-
 function formatDateTime(value) {
   if (!value) {
     return '—'
@@ -72,7 +70,6 @@ function formatDateTime(value) {
   )
 }
 
-
 function formatTime(value) {
   if (!value) {
     return '—'
@@ -98,7 +95,6 @@ function formatTime(value) {
   )
 }
 
-
 function formatNumber(
   value,
   decimals = 2
@@ -118,7 +114,6 @@ function formatNumber(
     decimals
   )
 }
-
 
 function formatMinutes(value) {
   const total =
@@ -153,7 +148,6 @@ function formatMinutes(value) {
   return `${minutes}m`
 }
 
-
 function getInitials(
   firstName,
   lastName
@@ -178,7 +172,6 @@ function getInitials(
     '?'
   )
 }
-
 
 function calculateCalendarDays(
   startDate,
@@ -224,7 +217,6 @@ function calculateCalendarDays(
   )
 }
 
-
 function titleCase(value) {
   if (!value) {
     return '—'
@@ -242,7 +234,6 @@ function titleCase(value) {
     )
 }
 
-
 function getOne(value) {
   if (
     Array.isArray(value)
@@ -258,7 +249,6 @@ function getOne(value) {
     null
   )
 }
-
 
 // ===========================================================
 // CSV
@@ -280,7 +270,6 @@ function escapeCsv(value) {
     '""'
   )}"`
 }
-
 
 function downloadCsv(
   fileName,
@@ -366,23 +355,13 @@ function downloadCsv(
   )
 }
 
-
 // ===========================================================
 // ADMIN REPORTS
 // ===========================================================
 
-function AdminReports() {
-  // =========================================================
-  // ACTIVE TAB
-  // =========================================================
-
-  const [
-    activeTab,
-    setActiveTab,
-  ] = useState(
-    'attendance'
-  )
-
+function AdminReports({
+  activeTab = 'attendance',
+}) {
 
   // =========================================================
   // DATA
@@ -413,7 +392,6 @@ function AdminReports() {
     setBreakLogs,
   ] = useState([])
 
-
   // =========================================================
   // UI
   // =========================================================
@@ -432,7 +410,6 @@ function AdminReports() {
     errorMessage,
     setErrorMessage,
   ] = useState('')
-
 
   // =========================================================
   // ATTENDANCE FILTERS
@@ -463,7 +440,6 @@ function AdminReports() {
     setAttendanceStatus,
   ] = useState('all')
 
-
   // =========================================================
   // LEAVE FILTERS
   // =========================================================
@@ -492,7 +468,6 @@ function AdminReports() {
     leaveStatus,
     setLeaveStatus,
   ] = useState('all')
-
 
   // =========================================================
   // COM-OFF FILTERS
@@ -523,7 +498,6 @@ function AdminReports() {
     setComOffTo,
   ] = useState('')
 
-
   // =========================================================
   // BREAK LOG FILTERS
   // =========================================================
@@ -548,7 +522,6 @@ function AdminReports() {
     setLogStatus,
   ] = useState('all')
 
-
   // =========================================================
   // INITIAL LOAD
   // =========================================================
@@ -556,7 +529,6 @@ function AdminReports() {
   useEffect(() => {
     loadReports()
   }, [])
-
 
   // =========================================================
   // LOAD REPORTS
@@ -655,7 +627,6 @@ function AdminReports() {
     }
   }
 
-
   // =========================================================
   // ATTENDANCE OPTIONS
   // =========================================================
@@ -680,7 +651,6 @@ function AdminReports() {
       ]
     )
 
-
   const attendanceStatusOptions =
     useMemo(
       () =>
@@ -700,7 +670,6 @@ function AdminReports() {
         attendance,
       ]
     )
-
 
   // =========================================================
   // FILTERED ATTENDANCE
@@ -738,7 +707,6 @@ function AdminReports() {
             }
           }
 
-
           if (
             attendanceFrom &&
             item.duty_date <
@@ -747,7 +715,6 @@ function AdminReports() {
             return false
           }
 
-
           if (
             attendanceTo &&
             item.duty_date >
@@ -755,7 +722,6 @@ function AdminReports() {
           ) {
             return false
           }
-
 
           if (
             attendanceShift !==
@@ -766,7 +732,6 @@ function AdminReports() {
             return false
           }
 
-
           if (
             attendanceStatus !==
               'all' &&
@@ -775,7 +740,6 @@ function AdminReports() {
           ) {
             return false
           }
-
 
           return true
         }
@@ -788,7 +752,6 @@ function AdminReports() {
       attendanceShift,
       attendanceStatus,
     ])
-
 
   // =========================================================
   // LEAVE OPTIONS
@@ -814,7 +777,6 @@ function AdminReports() {
       ]
     )
 
-
   const leaveStatusOptions =
     useMemo(
       () =>
@@ -834,7 +796,6 @@ function AdminReports() {
         leave,
       ]
     )
-
 
   // =========================================================
   // FILTERED LEAVE
@@ -873,7 +834,6 @@ function AdminReports() {
             }
           }
 
-
           if (
             leaveFrom &&
             item.end_date <
@@ -882,7 +842,6 @@ function AdminReports() {
             return false
           }
 
-
           if (
             leaveTo &&
             item.start_date >
@@ -890,7 +849,6 @@ function AdminReports() {
           ) {
             return false
           }
-
 
           if (
             leaveType !==
@@ -901,7 +859,6 @@ function AdminReports() {
             return false
           }
 
-
           if (
             leaveStatus !==
               'all' &&
@@ -910,7 +867,6 @@ function AdminReports() {
           ) {
             return false
           }
-
 
           return true
         }
@@ -923,7 +879,6 @@ function AdminReports() {
       leaveType,
       leaveStatus,
     ])
-
 
   // =========================================================
   // LEAVE SUMMARY
@@ -959,7 +914,6 @@ function AdminReports() {
     }, [
       filteredLeave,
     ])
-
 
   // =========================================================
   // COM-OFF BALANCES
@@ -999,7 +953,6 @@ function AdminReports() {
       comOffSearch,
     ])
 
-
   // =========================================================
   // COM-OFF REQUEST OPTIONS
   // =========================================================
@@ -1023,7 +976,6 @@ function AdminReports() {
         comOffRequests,
       ]
     )
-
 
   // =========================================================
   // COM-OFF REQUESTS
@@ -1061,7 +1013,6 @@ function AdminReports() {
             }
           }
 
-
           if (
             comOffRequestStatus !==
               'all' &&
@@ -1071,7 +1022,6 @@ function AdminReports() {
             return false
           }
 
-
           if (
             comOffFrom &&
             item.end_date <
@@ -1080,7 +1030,6 @@ function AdminReports() {
             return false
           }
 
-
           if (
             comOffTo &&
             item.start_date >
@@ -1088,7 +1037,6 @@ function AdminReports() {
           ) {
             return false
           }
-
 
           return true
         }
@@ -1100,7 +1048,6 @@ function AdminReports() {
       comOffFrom,
       comOffTo,
     ])
-
 
   // =========================================================
   // BREAK LOGS
@@ -1139,7 +1086,6 @@ function AdminReports() {
               ? 'completed'
               : 'on_break'
 
-
           if (keyword) {
             const searchText =
               [
@@ -1164,7 +1110,6 @@ function AdminReports() {
             }
           }
 
-
           if (
             logFrom &&
             dutyDate <
@@ -1172,7 +1117,6 @@ function AdminReports() {
           ) {
             return false
           }
-
 
           if (
             logTo &&
@@ -1182,7 +1126,6 @@ function AdminReports() {
             return false
           }
 
-
           if (
             logStatus !==
               'all' &&
@@ -1191,7 +1134,6 @@ function AdminReports() {
           ) {
             return false
           }
-
 
           return true
         }
@@ -1203,7 +1145,6 @@ function AdminReports() {
       logTo,
       logStatus,
     ])
-
 
   // =========================================================
   // VIEW PDF
@@ -1233,11 +1174,9 @@ function AdminReports() {
             600
           )
 
-
       if (error) {
         throw error
       }
-
 
       if (
         !data?.signedUrl
@@ -1246,7 +1185,6 @@ function AdminReports() {
           'Unable to create PDF link.'
         )
       }
-
 
       window.open(
         data.signedUrl,
@@ -1264,7 +1202,6 @@ function AdminReports() {
       )
     }
   }
-
 
   // =========================================================
   // EXPORT ATTENDANCE
@@ -1320,13 +1257,11 @@ function AdminReports() {
         })
       )
 
-
     downloadCsv(
       'DTR_Attendance_Report.csv',
       rows
     )
   }
-
 
   // =========================================================
   // EXPORT LEAVE
@@ -1387,13 +1322,11 @@ function AdminReports() {
         })
       )
 
-
     downloadCsv(
       'DTR_Leave_Report.csv',
       rows
     )
   }
-
 
   // =========================================================
   // EXPORT COM-OFF BALANCES
@@ -1435,13 +1368,11 @@ function AdminReports() {
         })
       )
 
-
     downloadCsv(
       'DTR_Com_Off_Balance_Report.csv',
       rows
     )
   }
-
 
   // =========================================================
   // EXPORT COM-OFF REQUESTS
@@ -1492,13 +1423,11 @@ function AdminReports() {
         })
       )
 
-
     downloadCsv(
       'DTR_Com_Off_Request_Report.csv',
       rows
     )
   }
-
 
   // =========================================================
   // EXPORT BREAK LOGS
@@ -1578,13 +1507,11 @@ function AdminReports() {
         }
       )
 
-
     downloadCsv(
       'DTR_Break_Logs.csv',
       rows
     )
   }
-
 
   // =========================================================
   // CLEAR FILTERS
@@ -1598,7 +1525,6 @@ function AdminReports() {
     setAttendanceStatus('all')
   }
 
-
   function clearLeaveFilters() {
     setLeaveSearch('')
     setLeaveFrom('')
@@ -1607,11 +1533,9 @@ function AdminReports() {
     setLeaveStatus('all')
   }
 
-
   function clearComOffBalanceSearch() {
     setComOffSearch('')
   }
-
 
   function clearComOffRequestFilters() {
     setComOffRequestSearch('')
@@ -1620,14 +1544,12 @@ function AdminReports() {
     setComOffTo('')
   }
 
-
   function clearLogFilters() {
     setLogSearch('')
     setLogFrom('')
     setLogTo('')
     setLogStatus('all')
   }
-
 
   // =========================================================
   // UI
@@ -1637,86 +1559,397 @@ function AdminReports() {
     <div className="admin-reports-page">
 
       {/* =====================================================
-          FROZEN TOP TABS
+          FROZEN REPORT TOOLBAR
       ===================================================== */}
 
-      <div className="reports-tabs-row">
+      <div
+        className={`reports-fixed-toolbar reports-fixed-toolbar-${activeTab}`}
+      >
 
-        <div className="reports-tabs">
+        {activeTab ===
+          'attendance' && (
 
-          <button
-            type="button"
-            className={
-              activeTab ===
-              'attendance'
-                ? 'active'
-                : ''
-            }
-            onClick={() =>
-              setActiveTab(
-                'attendance'
-              )
-            }
-          >
-            Attendance
-          </button>
+          <div className="reports-toolbar-controls reports-toolbar-attendance">
 
+            <div className="reports-search">
+              <span>🔍</span>
+              <input
+                type="text"
+                value={attendanceSearch}
+                onChange={(event) =>
+                  setAttendanceSearch(
+                    event.target.value
+                  )
+                }
+                placeholder="Search employee, code, department or position..."
+              />
+            </div>
 
-          <button
-            type="button"
-            className={
-              activeTab ===
-              'leave'
-                ? 'active'
-                : ''
-            }
-            onClick={() =>
-              setActiveTab(
-                'leave'
-              )
-            }
-          >
-            Leave
-          </button>
+            <input
+              className="reports-date-picker"
+              type="date"
+              value={attendanceFrom}
+              onChange={(event) =>
+                setAttendanceFrom(
+                  event.target.value
+                )
+              }
+              title="From Date"
+            />
 
+            <input
+              className="reports-date-picker"
+              type="date"
+              value={attendanceTo}
+              min={
+                attendanceFrom ||
+                undefined
+              }
+              onChange={(event) =>
+                setAttendanceTo(
+                  event.target.value
+                )
+              }
+              title="To Date"
+            />
 
-          <button
-            type="button"
-            className={
-              activeTab ===
-              'comoff'
-                ? 'active'
-                : ''
-            }
-            onClick={() =>
-              setActiveTab(
-                'comoff'
-              )
-            }
-          >
-            Com-off
-          </button>
+            <select
+              value={attendanceShift}
+              onChange={(event) =>
+                setAttendanceShift(
+                  event.target.value
+                )
+              }
+            >
+              <option value="all">
+                All Shifts
+              </option>
 
+              {shiftOptions.map(
+                (shift) => (
+                  <option
+                    key={shift}
+                    value={shift}
+                  >
+                    {shift}
+                  </option>
+                )
+              )}
+            </select>
 
-          <button
-            type="button"
-            className={
-              activeTab ===
-              'logs'
-                ? 'active'
-                : ''
-            }
-            onClick={() =>
-              setActiveTab(
-                'logs'
-              )
-            }
-          >
-            Logs
-          </button>
+            <select
+              value={attendanceStatus}
+              onChange={(event) =>
+                setAttendanceStatus(
+                  event.target.value
+                )
+              }
+            >
+              <option value="all">
+                All Status
+              </option>
 
-        </div>
+              {attendanceStatusOptions.map(
+                (status) => (
+                  <option
+                    key={status}
+                    value={status}
+                  >
+                    {titleCase(status)}
+                  </option>
+                )
+              )}
+            </select>
 
+            <button
+              type="button"
+              className="reports-clear-button"
+              onClick={
+                clearAttendanceFilters
+              }
+            >
+              Clear
+            </button>
+
+            <button
+              type="button"
+              className="reports-export-button"
+              onClick={
+                exportAttendance
+              }
+            >
+              Export CSV
+            </button>
+
+          </div>
+
+        )}
+
+        {activeTab ===
+          'leave' && (
+
+          <div className="reports-toolbar-controls reports-toolbar-leave">
+
+            <div className="reports-search">
+              <span>🔍</span>
+              <input
+                type="text"
+                value={leaveSearch}
+                onChange={(event) =>
+                  setLeaveSearch(
+                    event.target.value
+                  )
+                }
+                placeholder="Search employee, leave type or reason..."
+              />
+            </div>
+
+            <input
+              className="reports-date-picker"
+              type="date"
+              value={leaveFrom}
+              onChange={(event) =>
+                setLeaveFrom(
+                  event.target.value
+                )
+              }
+              title="From Date"
+            />
+
+            <input
+              className="reports-date-picker"
+              type="date"
+              value={leaveTo}
+              min={
+                leaveFrom ||
+                undefined
+              }
+              onChange={(event) =>
+                setLeaveTo(
+                  event.target.value
+                )
+              }
+              title="To Date"
+            />
+
+            <select
+              value={leaveType}
+              onChange={(event) =>
+                setLeaveType(
+                  event.target.value
+                )
+              }
+            >
+              <option value="all">
+                All Types
+              </option>
+
+              {leaveTypeOptions.map(
+                (type) => (
+                  <option
+                    key={type}
+                    value={type}
+                  >
+                    {titleCase(type)}
+                  </option>
+                )
+              )}
+            </select>
+
+            <select
+              value={leaveStatus}
+              onChange={(event) =>
+                setLeaveStatus(
+                  event.target.value
+                )
+              }
+            >
+              <option value="all">
+                All Status
+              </option>
+
+              {leaveStatusOptions.map(
+                (status) => (
+                  <option
+                    key={status}
+                    value={status}
+                  >
+                    {titleCase(status)}
+                  </option>
+                )
+              )}
+            </select>
+
+            <button
+              type="button"
+              className="reports-clear-button"
+              onClick={
+                clearLeaveFilters
+              }
+            >
+              Clear
+            </button>
+
+            <button
+              type="button"
+              className="reports-export-button"
+              onClick={
+                exportLeave
+              }
+            >
+              Export CSV
+            </button>
+
+          </div>
+
+        )}
+
+        {activeTab ===
+          'comoff' && (
+
+          <div className="reports-toolbar-controls reports-toolbar-comoff">
+
+            <div className="reports-toolbar-title">
+              <h2>
+                Employee Com-off Balances
+              </h2>
+            </div>
+
+            <div className="reports-search">
+              <span>🔍</span>
+              <input
+                type="text"
+                value={comOffSearch}
+                onChange={(event) =>
+                  setComOffSearch(
+                    event.target.value
+                  )
+                }
+                placeholder="Search employee, code, department or position..."
+              />
+            </div>
+
+            {comOffSearch && (
+              <button
+                type="button"
+                className="reports-clear-button"
+                onClick={
+                  clearComOffBalanceSearch
+                }
+              >
+                Clear
+              </button>
+            )}
+
+            <button
+              type="button"
+              className="reports-export-button"
+              onClick={
+                exportComOffBalances
+              }
+            >
+              Export CSV
+            </button>
+
+          </div>
+
+        )}
+
+        {activeTab ===
+          'logs' && (
+
+          <div className="reports-toolbar-controls reports-toolbar-logs">
+
+            <div className="reports-toolbar-title">
+              <h2>
+                Break Logs
+              </h2>
+            </div>
+
+            <div className="reports-search">
+              <span>🔍</span>
+              <input
+                type="text"
+                value={logSearch}
+                onChange={(event) =>
+                  setLogSearch(
+                    event.target.value
+                  )
+                }
+                placeholder="Search employee, code, department, position or shift..."
+              />
+            </div>
+
+            <input
+              className="reports-date-picker"
+              type="date"
+              value={logFrom}
+              onChange={(event) =>
+                setLogFrom(
+                  event.target.value
+                )
+              }
+              title="From Date"
+            />
+
+            <input
+              className="reports-date-picker"
+              type="date"
+              value={logTo}
+              min={
+                logFrom ||
+                undefined
+              }
+              onChange={(event) =>
+                setLogTo(
+                  event.target.value
+                )
+              }
+              title="To Date"
+            />
+
+            <select
+              value={logStatus}
+              onChange={(event) =>
+                setLogStatus(
+                  event.target.value
+                )
+              }
+            >
+              <option value="all">
+                All Status
+              </option>
+              <option value="on_break">
+                On Break
+              </option>
+              <option value="completed">
+                Completed
+              </option>
+            </select>
+
+            <button
+              type="button"
+              className="reports-clear-button"
+              onClick={
+                clearLogFilters
+              }
+            >
+              Clear
+            </button>
+
+            <button
+              type="button"
+              className="reports-export-button"
+              onClick={
+                exportBreakLogs
+              }
+            >
+              Export CSV
+            </button>
+
+          </div>
+
+        )}
 
         <button
           type="button"
@@ -1735,7 +1968,6 @@ function AdminReports() {
 
       </div>
 
-
       {/* =====================================================
           SCROLLABLE CONTENT
       ===================================================== */}
@@ -1749,7 +1981,6 @@ function AdminReports() {
           </div>
 
         )}
-
 
         {loading ? (
 
@@ -1768,170 +1999,6 @@ function AdminReports() {
               'attendance' && (
 
               <section className="reports-tab-section">
-
-                <div className="reports-filter-card">
-
-                  <div className="reports-search">
-
-                    <span>
-                      🔍
-                    </span>
-
-                    <input
-                      type="text"
-                      value={
-                        attendanceSearch
-                      }
-                      onChange={(
-                        event
-                      ) =>
-                        setAttendanceSearch(
-                          event.target.value
-                        )
-                      }
-                      placeholder="Search employee, code, department or position..."
-                    />
-
-                  </div>
-
-
-                  <input
-                    className="reports-date-picker"
-                    type="date"
-                    value={
-                      attendanceFrom
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setAttendanceFrom(
-                        event.target.value
-                      )
-                    }
-                    title="From Date"
-                  />
-
-
-                  <input
-                    className="reports-date-picker"
-                    type="date"
-                    value={
-                      attendanceTo
-                    }
-                    min={
-                      attendanceFrom ||
-                      undefined
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setAttendanceTo(
-                        event.target.value
-                      )
-                    }
-                    title="To Date"
-                  />
-
-
-                  <select
-                    value={
-                      attendanceShift
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setAttendanceShift(
-                        event.target.value
-                      )
-                    }
-                  >
-
-                    <option value="all">
-                      All Shifts
-                    </option>
-
-                    {shiftOptions.map(
-                      (shift) => (
-
-                        <option
-                          key={
-                            shift
-                          }
-                          value={
-                            shift
-                          }
-                        >
-                          {shift}
-                        </option>
-
-                      )
-                    )}
-
-                  </select>
-
-
-                  <select
-                    value={
-                      attendanceStatus
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setAttendanceStatus(
-                        event.target.value
-                      )
-                    }
-                  >
-
-                    <option value="all">
-                      All Status
-                    </option>
-
-                    {attendanceStatusOptions.map(
-                      (status) => (
-
-                        <option
-                          key={
-                            status
-                          }
-                          value={
-                            status
-                          }
-                        >
-                          {titleCase(
-                            status
-                          )}
-                        </option>
-
-                      )
-                    )}
-
-                  </select>
-
-
-                  <button
-                    type="button"
-                    className="reports-clear-button"
-                    onClick={
-                      clearAttendanceFilters
-                    }
-                  >
-                    Clear
-                  </button>
-
-
-                  <button
-                    type="button"
-                    className="reports-export-button"
-                    onClick={
-                      exportAttendance
-                    }
-                  >
-                    Export CSV
-                  </button>
-
-                </div>
-
 
                 <div className="reports-table-card">
 
@@ -1964,7 +2031,6 @@ function AdminReports() {
 
                         </thead>
 
-
                         <tbody>
 
                           {filteredAttendance.map(
@@ -1992,13 +2058,11 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
                                   {formatDate(
                                     item.duty_date
                                   )}
                                 </td>
-
 
                                 <td>
 
@@ -2011,20 +2075,17 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
                                   {formatTime(
                                     item.time_in
                                   )}
                                 </td>
 
-
                                 <td>
                                   {formatTime(
                                     item.time_out
                                   )}
                                 </td>
-
 
                                 <td>
 
@@ -2037,13 +2098,11 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
                                   {formatMinutes(
                                     item.total_break_minutes
                                   )}
                                 </td>
-
 
                                 <td>
 
@@ -2056,7 +2115,6 @@ function AdminReports() {
                                   </strong>
 
                                 </td>
-
 
                                 <td>
 
@@ -2087,7 +2145,6 @@ function AdminReports() {
 
             )}
 
-
             {/* =================================================
                 LEAVE
             ================================================= */}
@@ -2106,7 +2163,6 @@ function AdminReports() {
                     }
                   />
 
-
                   <ReportStat
                     label="Pending"
                     value={
@@ -2115,7 +2171,6 @@ function AdminReports() {
                     type="orange"
                   />
 
-
                   <ReportStat
                     label="Approved"
                     value={
@@ -2123,7 +2178,6 @@ function AdminReports() {
                     }
                     type="green"
                   />
-
 
                   <ReportStat
                     label="Sick Leave"
@@ -2134,171 +2188,6 @@ function AdminReports() {
                   />
 
                 </div>
-
-
-                <div className="reports-filter-card">
-
-                  <div className="reports-search">
-
-                    <span>
-                      🔍
-                    </span>
-
-                    <input
-                      type="text"
-                      value={
-                        leaveSearch
-                      }
-                      onChange={(
-                        event
-                      ) =>
-                        setLeaveSearch(
-                          event.target.value
-                        )
-                      }
-                      placeholder="Search employee, leave type or reason..."
-                    />
-
-                  </div>
-
-
-                  <input
-                    className="reports-date-picker"
-                    type="date"
-                    value={
-                      leaveFrom
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setLeaveFrom(
-                        event.target.value
-                      )
-                    }
-                  />
-
-
-                  <input
-                    className="reports-date-picker"
-                    type="date"
-                    value={
-                      leaveTo
-                    }
-                    min={
-                      leaveFrom ||
-                      undefined
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setLeaveTo(
-                        event.target.value
-                      )
-                    }
-                  />
-
-
-                  <select
-                    value={
-                      leaveType
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setLeaveType(
-                        event.target.value
-                      )
-                    }
-                  >
-
-                    <option value="all">
-                      All Types
-                    </option>
-
-                    {leaveTypeOptions.map(
-                      (type) => (
-
-                        <option
-                          key={
-                            type
-                          }
-                          value={
-                            type
-                          }
-                        >
-                          {titleCase(
-                            type
-                          )}
-                        </option>
-
-                      )
-                    )}
-
-                  </select>
-
-
-                  <select
-                    value={
-                      leaveStatus
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setLeaveStatus(
-                        event.target.value
-                      )
-                    }
-                  >
-
-                    <option value="all">
-                      All Status
-                    </option>
-
-                    {leaveStatusOptions.map(
-                      (status) => (
-
-                        <option
-                          key={
-                            status
-                          }
-                          value={
-                            status
-                          }
-                        >
-                          {titleCase(
-                            status
-                          )}
-                        </option>
-
-                      )
-                    )}
-
-                  </select>
-
-
-                  <button
-                    type="button"
-                    className="reports-clear-button"
-                    onClick={
-                      clearLeaveFilters
-                    }
-                  >
-                    Clear
-                  </button>
-
-
-                  <button
-                    type="button"
-                    className="reports-export-button"
-                    onClick={
-                      exportLeave
-                    }
-                  >
-                    Export CSV
-                  </button>
-
-                </div>
-
 
                 <div className="reports-table-card">
 
@@ -2331,7 +2220,6 @@ function AdminReports() {
 
                         </thead>
 
-
                         <tbody>
 
                           {filteredLeave.map(
@@ -2359,7 +2247,6 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
 
                                   <span
@@ -2372,20 +2259,17 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
                                   {formatDate(
                                     item.start_date
                                   )}
                                 </td>
 
-
                                 <td>
                                   {formatDate(
                                     item.end_date
                                   )}
                                 </td>
-
 
                                 <td>
 
@@ -2401,13 +2285,11 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
                                   {titleCase(
                                     item.duration_type
                                   )}
                                 </td>
-
 
                                 <td>
 
@@ -2423,7 +2305,6 @@ function AdminReports() {
                                   </div>
 
                                 </td>
-
 
                                 <td>
 
@@ -2450,7 +2331,6 @@ function AdminReports() {
                                   )}
 
                                 </td>
-
 
                                 <td>
 
@@ -2481,7 +2361,6 @@ function AdminReports() {
 
             )}
 
-
             {/* =================================================
                 COM-OFF
             ================================================= */}
@@ -2490,77 +2369,6 @@ function AdminReports() {
               'comoff' && (
 
               <section className="reports-tab-section">
-
-                <div className="reports-section-title">
-
-                  <div>
-
-                    <h2>
-                      Employee Com-off Balances
-                    </h2>
-
-                    <p>
-                      Earned, used, pending and available Com-off balances.
-                    </p>
-
-                  </div>
-
-
-                  <button
-                    type="button"
-                    className="reports-export-button"
-                    onClick={
-                      exportComOffBalances
-                    }
-                  >
-                    Export CSV
-                  </button>
-
-                </div>
-
-
-                <div className="reports-single-filter">
-
-                  <div className="reports-search">
-
-                    <span>
-                      🔍
-                    </span>
-
-                    <input
-                      type="text"
-                      value={
-                        comOffSearch
-                      }
-                      onChange={(
-                        event
-                      ) =>
-                        setComOffSearch(
-                          event.target.value
-                        )
-                      }
-                      placeholder="Search employee, code, department or position..."
-                    />
-
-                  </div>
-
-
-                  {comOffSearch && (
-
-                    <button
-                      type="button"
-                      className="reports-clear-button"
-                      onClick={
-                        clearComOffBalanceSearch
-                      }
-                    >
-                      Clear
-                    </button>
-
-                  )}
-
-                </div>
-
 
                 <div className="reports-table-card">
 
@@ -2593,7 +2401,6 @@ function AdminReports() {
 
                         </thead>
 
-
                         <tbody>
 
                           {filteredComOffBalances.map(
@@ -2621,12 +2428,10 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
                                   {item.department ||
                                     '—'}
                                 </td>
-
 
                                 <td>
 
@@ -2639,12 +2444,10 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
                                   {item.eligible_holiday_count ||
                                     0}
                                 </td>
-
 
                                 <td>
 
@@ -2657,7 +2460,6 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
 
                                   <BalancePill
@@ -2668,7 +2470,6 @@ function AdminReports() {
                                   />
 
                                 </td>
-
 
                                 <td>
 
@@ -2681,7 +2482,6 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
 
                                   <BalancePill
@@ -2692,7 +2492,6 @@ function AdminReports() {
                                   />
 
                                 </td>
-
 
                                 <td>
                                   {formatDate(
@@ -2715,7 +2514,6 @@ function AdminReports() {
 
                 </div>
 
-
                 <div className="reports-section-title reports-second-section">
 
                   <div>
@@ -2730,7 +2528,6 @@ function AdminReports() {
 
                   </div>
 
-
                   <button
                     type="button"
                     className="reports-export-button"
@@ -2742,7 +2539,6 @@ function AdminReports() {
                   </button>
 
                 </div>
-
 
                 <div className="reports-filter-card reports-comoff-request-filter">
 
@@ -2769,7 +2565,6 @@ function AdminReports() {
 
                   </div>
 
-
                   <input
                     className="reports-date-picker"
                     type="date"
@@ -2784,7 +2579,6 @@ function AdminReports() {
                       )
                     }
                   />
-
 
                   <input
                     className="reports-date-picker"
@@ -2804,7 +2598,6 @@ function AdminReports() {
                       )
                     }
                   />
-
 
                   <select
                     value={
@@ -2844,7 +2637,6 @@ function AdminReports() {
 
                   </select>
 
-
                   <button
                     type="button"
                     className="reports-clear-button"
@@ -2856,7 +2648,6 @@ function AdminReports() {
                   </button>
 
                 </div>
-
 
                 <div className="reports-table-card">
 
@@ -2887,7 +2678,6 @@ function AdminReports() {
 
                         </thead>
 
-
                         <tbody>
 
                           {filteredComOffRequests.map(
@@ -2915,20 +2705,17 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
                                   {formatDate(
                                     item.start_date
                                   )}
                                 </td>
 
-
                                 <td>
                                   {formatDate(
                                     item.end_date
                                   )}
                                 </td>
-
 
                                 <td>
 
@@ -2941,7 +2728,6 @@ function AdminReports() {
                                   </strong>
 
                                 </td>
-
 
                                 <td>
 
@@ -2958,7 +2744,6 @@ function AdminReports() {
 
                                 </td>
 
-
                                 <td>
 
                                   <StatusBadge
@@ -2968,7 +2753,6 @@ function AdminReports() {
                                   />
 
                                 </td>
-
 
                                 <td>
                                   {formatDate(
@@ -2999,7 +2783,6 @@ function AdminReports() {
 
             )}
 
-
             {/* =================================================
                 LOGS
             ================================================= */}
@@ -3008,139 +2791,6 @@ function AdminReports() {
               'logs' && (
 
               <section className="reports-tab-section">
-
-                <div className="reports-section-title">
-
-                  <div>
-
-                    <h2>
-                      Break Logs
-                    </h2>
-
-                    <p>
-                      Employee Break Start and Break End history.
-                    </p>
-
-                  </div>
-
-
-                  <button
-                    type="button"
-                    className="reports-export-button"
-                    onClick={
-                      exportBreakLogs
-                    }
-                  >
-                    Export CSV
-                  </button>
-
-                </div>
-
-
-                <div className="reports-log-filter">
-
-                  <div className="reports-search">
-
-                    <span>
-                      🔍
-                    </span>
-
-                    <input
-                      type="text"
-                      value={
-                        logSearch
-                      }
-                      onChange={(
-                        event
-                      ) =>
-                        setLogSearch(
-                          event.target.value
-                        )
-                      }
-                      placeholder="Search employee, code, department, position or shift..."
-                    />
-
-                  </div>
-
-
-                  <input
-                    className="reports-date-picker"
-                    type="date"
-                    value={
-                      logFrom
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setLogFrom(
-                        event.target.value
-                      )
-                    }
-                    title="From Date"
-                  />
-
-
-                  <input
-                    className="reports-date-picker"
-                    type="date"
-                    value={
-                      logTo
-                    }
-                    min={
-                      logFrom ||
-                      undefined
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setLogTo(
-                        event.target.value
-                      )
-                    }
-                    title="To Date"
-                  />
-
-
-                  <select
-                    value={
-                      logStatus
-                    }
-                    onChange={(
-                      event
-                    ) =>
-                      setLogStatus(
-                        event.target.value
-                      )
-                    }
-                  >
-
-                    <option value="all">
-                      All Status
-                    </option>
-
-                    <option value="on_break">
-                      On Break
-                    </option>
-
-                    <option value="completed">
-                      Completed
-                    </option>
-
-                  </select>
-
-
-                  <button
-                    type="button"
-                    className="reports-clear-button"
-                    onClick={
-                      clearLogFilters
-                    }
-                  >
-                    Clear
-                  </button>
-
-                </div>
-
 
                 <div className="reports-table-card">
 
@@ -3170,7 +2820,6 @@ function AdminReports() {
                           </tr>
 
                         </thead>
-
 
                         <tbody>
 
@@ -3218,13 +2867,11 @@ function AdminReports() {
 
                                   </td>
 
-
                                   <td>
                                     {formatDate(
                                       attendanceRecord?.duty_date
                                     )}
                                   </td>
-
 
                                   <td>
 
@@ -3236,7 +2883,6 @@ function AdminReports() {
                                     </span>
 
                                   </td>
-
 
                                   <td>
 
@@ -3268,7 +2914,6 @@ function AdminReports() {
                                     </div>
 
                                   </td>
-
 
                                   <td>
 
@@ -3309,7 +2954,6 @@ function AdminReports() {
 
                                   </td>
 
-
                                   <td>
 
                                     {isActive ? (
@@ -3331,7 +2975,6 @@ function AdminReports() {
                                     )}
 
                                   </td>
-
 
                                   <td>
 
@@ -3380,7 +3023,6 @@ function AdminReports() {
   )
 }
 
-
 // ===========================================================
 // STAT
 // ===========================================================
@@ -3411,7 +3053,6 @@ function ReportStat({
   )
 }
 
-
 // ===========================================================
 // EMPLOYEE
 // ===========================================================
@@ -3433,7 +3074,6 @@ function EmployeeCell({
 
       </div>
 
-
       <div>
 
         <strong>
@@ -3450,7 +3090,6 @@ function EmployeeCell({
     </div>
   )
 }
-
 
 // ===========================================================
 // STATUS
@@ -3470,7 +3109,6 @@ function StatusBadge({
   )
 }
 
-
 // ===========================================================
 // BALANCE
 // ===========================================================
@@ -3489,7 +3127,6 @@ function BalancePill({
     </span>
   )
 }
-
 
 // ===========================================================
 // EMPTY
@@ -3516,6 +3153,5 @@ function ReportEmpty({
     </div>
   )
 }
-
 
 export default AdminReports

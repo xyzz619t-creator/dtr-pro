@@ -8,15 +8,11 @@ import {
 
 } from 'react'
 
-
-
 import {
 
   createPortal,
 
 } from 'react-dom'
-
-
 
 import {
 
@@ -24,21 +20,13 @@ import {
 
 } from '../lib/supabase'
 
-
-
 import './AdminComOff.css'
-
-
-
-
 
 // ===========================================================
 
 // FORMAT DATE
 
 // ===========================================================
-
-
 
 function formatDate(value) {
 
@@ -48,8 +36,6 @@ function formatDate(value) {
 
   }
 
-
-
   const date =
 
     new Date(
@@ -57,8 +43,6 @@ function formatDate(value) {
       `${value}T00:00:00`
 
     )
-
-
 
   if (
 
@@ -73,8 +57,6 @@ function formatDate(value) {
     return value
 
   }
-
-
 
   return date.toLocaleDateString(
 
@@ -94,17 +76,11 @@ function formatDate(value) {
 
 }
 
-
-
-
-
 // ===========================================================
 
 // FORMAT DATE TIME
 
 // ===========================================================
-
-
 
 function formatDateTime(value) {
 
@@ -114,13 +90,9 @@ function formatDateTime(value) {
 
   }
 
-
-
   const date =
 
     new Date(value)
-
-
 
   if (
 
@@ -135,8 +107,6 @@ function formatDateTime(value) {
     return value
 
   }
-
-
 
   return date.toLocaleDateString(
 
@@ -156,17 +126,11 @@ function formatDateTime(value) {
 
 }
 
-
-
-
-
 // ===========================================================
 
 // FORMAT DAYS
 
 // ===========================================================
-
-
 
 function formatDays(value) {
 
@@ -178,8 +142,6 @@ function formatDays(value) {
 
     )
 
-
-
   if (
 
     Number.isInteger(number)
@@ -190,23 +152,15 @@ function formatDays(value) {
 
   }
 
-
-
   return number.toFixed(1)
 
 }
-
-
-
-
 
 // ===========================================================
 
 // INITIALS
 
 // ===========================================================
-
-
 
 function getInitials(
 
@@ -228,8 +182,6 @@ function getInitials(
 
       .charAt(0)
 
-
-
   const last =
 
     String(
@@ -241,8 +193,6 @@ function getInitials(
       .trim()
 
       .charAt(0)
-
-
 
   return (
 
@@ -256,27 +206,21 @@ function getInitials(
 
 }
 
-
-
-
-
 // ===========================================================
 
 // ADMIN COM-OFF
 
 // ===========================================================
 
-
-
-function AdminComOff() {
+function AdminComOff({
+  activeTab = 'requests',
+}) {
 
   // =========================================================
 
   // DATA
 
   // =========================================================
-
-
 
   const [
 
@@ -286,8 +230,6 @@ function AdminComOff() {
 
   ] = useState([])
 
-
-
   const [
 
     requests,
@@ -296,17 +238,11 @@ function AdminComOff() {
 
   ] = useState([])
 
-
-
-
-
   // =========================================================
 
   // REQUEST FILTERS
 
   // =========================================================
-
-
 
   const [
 
@@ -316,8 +252,6 @@ function AdminComOff() {
 
   ] = useState('')
 
-
-
   const [
 
     requestStatus,
@@ -326,17 +260,11 @@ function AdminComOff() {
 
   ] = useState('pending')
 
-
-
-
-
   // =========================================================
 
   // EMPLOYEE BALANCE FILTER
 
   // =========================================================
-
-
 
   const [
 
@@ -346,17 +274,11 @@ function AdminComOff() {
 
   ] = useState('')
 
-
-
-
-
   // =========================================================
 
   // UI
 
   // =========================================================
-
-
 
   const [
 
@@ -366,8 +288,6 @@ function AdminComOff() {
 
   ] = useState(true)
 
-
-
   const [
 
     actionId,
@@ -375,8 +295,6 @@ function AdminComOff() {
     setActionId,
 
   ] = useState(null)
-
-
 
   const [
 
@@ -386,8 +304,6 @@ function AdminComOff() {
 
   ] = useState('')
 
-
-
   const [
 
     successMessage,
@@ -395,8 +311,6 @@ function AdminComOff() {
     setSuccessMessage,
 
   ] = useState('')
-
-
 
   const [
 
@@ -406,17 +320,11 @@ function AdminComOff() {
 
   ] = useState(null)
 
-
-
-
-
   // =========================================================
 
   // INITIAL LOAD
 
   // =========================================================
-
-
 
   useEffect(() => {
 
@@ -424,25 +332,17 @@ function AdminComOff() {
 
   }, [])
 
-
-
-
-
   // =========================================================
 
   // LOAD ALL DATA
 
   // =========================================================
 
-
-
   async function loadComOffData() {
 
     setLoading(true)
 
     setErrorMessage('')
-
-
 
     try {
 
@@ -460,15 +360,11 @@ function AdminComOff() {
 
         )
 
-
-
       if (error) {
 
         throw error
 
       }
-
-
 
       if (
 
@@ -488,8 +384,6 @@ function AdminComOff() {
 
       }
 
-
-
       setEntitlements(
 
         Array.isArray(
@@ -503,8 +397,6 @@ function AdminComOff() {
           : []
 
       )
-
-
 
       setRequests(
 
@@ -530,13 +422,9 @@ function AdminComOff() {
 
       )
 
-
-
       setEntitlements([])
 
       setRequests([])
-
-
 
       setErrorMessage(
 
@@ -552,15 +440,11 @@ function AdminComOff() {
 
   }
 
-
-
   // =========================================================
 
   // EMPLOYEE SUMMARY
 
   // =========================================================
-
-
 
   const employeeSummaries =
 
@@ -570,17 +454,11 @@ function AdminComOff() {
 
         new Map()
 
-
-
-
-
       // =====================================================
 
       // ENTITLEMENTS
 
       // =====================================================
-
-
 
       entitlements.forEach(
 
@@ -589,8 +467,6 @@ function AdminComOff() {
           const employee =
 
             item.employees
-
-
 
           if (
 
@@ -603,8 +479,6 @@ function AdminComOff() {
             return
 
           }
-
-
 
           if (
 
@@ -626,43 +500,29 @@ function AdminComOff() {
 
                   item.employee_id,
 
-
-
                 employee_code:
 
                   employee.employee_code,
-
-
 
                 first_name:
 
                   employee.first_name,
 
-
-
                 last_name:
 
                   employee.last_name,
-
-
 
                 department:
 
                   employee.department,
 
-
-
                 position:
 
                   employee.position,
 
-
-
                 employee_status:
 
                   employee.status,
-
-
 
                 earned_days: 0,
 
@@ -680,13 +540,9 @@ function AdminComOff() {
 
                 available_days: 0,
 
-
-
                 last_holiday_date:
 
                   null,
-
-
 
                 history: [],
 
@@ -698,8 +554,6 @@ function AdminComOff() {
 
           }
 
-
-
           const summary =
 
             map.get(
@@ -708,15 +562,11 @@ function AdminComOff() {
 
             )
 
-
-
           summary.history.push(
 
             item
 
           )
-
-
 
           if (
 
@@ -736,13 +586,9 @@ function AdminComOff() {
 
               )
 
-
-
             summary.earned_count +=
 
               1
-
-
 
             if (
 
@@ -762,8 +608,6 @@ function AdminComOff() {
 
           }
 
-
-
           if (
 
             item.status ===
@@ -782,8 +626,6 @@ function AdminComOff() {
 
               )
 
-
-
             summary.revoked_count +=
 
               1
@@ -794,17 +636,11 @@ function AdminComOff() {
 
       )
 
-
-
-
-
       // =====================================================
 
       // REQUESTS
 
       // =====================================================
-
-
 
       requests.forEach(
 
@@ -813,8 +649,6 @@ function AdminComOff() {
           const employee =
 
             request.employees
-
-
 
           if (
 
@@ -827,8 +661,6 @@ function AdminComOff() {
             return
 
           }
-
-
 
           if (
 
@@ -850,43 +682,29 @@ function AdminComOff() {
 
                   request.employee_id,
 
-
-
                 employee_code:
 
                   employee.employee_code,
-
-
 
                 first_name:
 
                   employee.first_name,
 
-
-
                 last_name:
 
                   employee.last_name,
-
-
 
                 department:
 
                   employee.department,
 
-
-
                 position:
 
                   employee.position,
 
-
-
                 employee_status:
 
                   employee.status,
-
-
 
                 earned_days: 0,
 
@@ -904,13 +722,9 @@ function AdminComOff() {
 
                 available_days: 0,
 
-
-
                 last_holiday_date:
 
                   null,
-
-
 
                 history: [],
 
@@ -922,8 +736,6 @@ function AdminComOff() {
 
           }
 
-
-
           const summary =
 
             map.get(
@@ -932,15 +744,11 @@ function AdminComOff() {
 
             )
 
-
-
           summary.requests.push(
 
             request
 
           )
-
-
 
           if (
 
@@ -962,8 +770,6 @@ function AdminComOff() {
 
           }
 
-
-
           if (
 
             request.status ===
@@ -982,8 +788,6 @@ function AdminComOff() {
 
               )
 
-
-
             summary.pending_requests +=
 
               1
@@ -994,10 +798,6 @@ function AdminComOff() {
 
       )
 
-
-
-
-
       // =====================================================
 
       // AVAILABLE BALANCE
@@ -1005,8 +805,6 @@ function AdminComOff() {
       // Pending does NOT deduct.
 
       // =====================================================
-
-
 
       map.forEach(
 
@@ -1027,10 +825,6 @@ function AdminComOff() {
         }
 
       )
-
-
-
-
 
       return Array
 
@@ -1072,13 +866,9 @@ function AdminComOff() {
 
               `${a.first_name || ''} ${a.last_name || ''}`
 
-
-
             const nameB =
 
               `${b.first_name || ''} ${b.last_name || ''}`
-
-
 
             return nameA.localeCompare(
 
@@ -1098,17 +888,11 @@ function AdminComOff() {
 
     ])
 
-
-
-
-
   // =========================================================
 
   // FILTER REQUESTS
 
   // =========================================================
-
-
 
   const filteredRequests =
 
@@ -1121,8 +905,6 @@ function AdminComOff() {
           .trim()
 
           .toLowerCase()
-
-
 
       return requests.filter(
 
@@ -1144,15 +926,11 @@ function AdminComOff() {
 
           }
 
-
-
           if (keyword) {
 
             const employee =
 
               request.employees
-
-
 
             const searchText =
 
@@ -1186,8 +964,6 @@ function AdminComOff() {
 
                 .toLowerCase()
 
-
-
             if (
 
               !searchText.includes(
@@ -1203,8 +979,6 @@ function AdminComOff() {
             }
 
           }
-
-
 
           return true
 
@@ -1222,17 +996,11 @@ function AdminComOff() {
 
     ])
 
-
-
-
-
   // =========================================================
 
   // FILTER EMPLOYEE BALANCES
 
   // =========================================================
-
-
 
   const filteredEmployees =
 
@@ -1246,15 +1014,11 @@ function AdminComOff() {
 
           .toLowerCase()
 
-
-
       if (!keyword) {
 
         return employeeSummaries
 
       }
-
-
 
       return employeeSummaries.filter(
 
@@ -1282,8 +1046,6 @@ function AdminComOff() {
 
               .toLowerCase()
 
-
-
           return searchText.includes(
 
             keyword
@@ -1302,17 +1064,11 @@ function AdminComOff() {
 
     ])
 
-
-
-
-
   // =========================================================
 
   // STATISTICS
 
   // =========================================================
-
-
 
   const statistics =
 
@@ -1329,8 +1085,6 @@ function AdminComOff() {
             0
 
         ).length
-
-
 
       const used =
 
@@ -1370,8 +1124,6 @@ function AdminComOff() {
 
           )
 
-
-
       const pending =
 
         requests.filter(
@@ -1383,8 +1135,6 @@ function AdminComOff() {
             'pending'
 
         ).length
-
-
 
       return {
 
@@ -1404,17 +1154,11 @@ function AdminComOff() {
 
     ])
 
-
-
-
-
   // =========================================================
 
   // APPROVE REQUEST
 
   // =========================================================
-
-
 
   async function approveRequest(
 
@@ -1425,8 +1169,6 @@ function AdminComOff() {
     const employee =
 
       request.employees
-
-
 
     const confirmed =
 
@@ -1440,15 +1182,11 @@ function AdminComOff() {
 
       )
 
-
-
     if (!confirmed) {
 
       return
 
     }
-
-
 
     setActionId(
 
@@ -1456,13 +1194,9 @@ function AdminComOff() {
 
     )
 
-
-
     setErrorMessage('')
 
     setSuccessMessage('')
-
-
 
     try {
 
@@ -1484,8 +1218,6 @@ function AdminComOff() {
 
               request.id,
 
-
-
             p_admin_notes:
 
               null,
@@ -1494,15 +1226,11 @@ function AdminComOff() {
 
         )
 
-
-
       if (error) {
 
         throw error
 
       }
-
-
 
       if (
 
@@ -1520,8 +1248,6 @@ function AdminComOff() {
 
       }
 
-
-
       setSuccessMessage(
 
         data.message ||
@@ -1529,8 +1255,6 @@ function AdminComOff() {
         'Com-off request approved successfully.'
 
       )
-
-
 
       await loadComOffData()
 
@@ -1543,8 +1267,6 @@ function AdminComOff() {
         error
 
       )
-
-
 
       setErrorMessage(
 
@@ -1562,17 +1284,11 @@ function AdminComOff() {
 
   }
 
-
-
-
-
   // =========================================================
 
   // REJECT REQUEST
 
   // =========================================================
-
-
 
   async function rejectRequest(
 
@@ -1590,15 +1306,11 @@ function AdminComOff() {
 
       )
 
-
-
     if (notes === null) {
 
       return
 
     }
-
-
 
     setActionId(
 
@@ -1606,13 +1318,9 @@ function AdminComOff() {
 
     )
 
-
-
     setErrorMessage('')
 
     setSuccessMessage('')
-
-
 
     try {
 
@@ -1634,8 +1342,6 @@ function AdminComOff() {
 
               request.id,
 
-
-
             p_admin_notes:
 
               notes.trim() ||
@@ -1646,15 +1352,11 @@ function AdminComOff() {
 
         )
 
-
-
       if (error) {
 
         throw error
 
       }
-
-
 
       if (
 
@@ -1672,8 +1374,6 @@ function AdminComOff() {
 
       }
 
-
-
       setSuccessMessage(
 
         data.message ||
@@ -1681,8 +1381,6 @@ function AdminComOff() {
         'Com-off request rejected.'
 
       )
-
-
 
       await loadComOffData()
 
@@ -1695,8 +1393,6 @@ function AdminComOff() {
         error
 
       )
-
-
 
       setErrorMessage(
 
@@ -1714,17 +1410,11 @@ function AdminComOff() {
 
   }
 
-
-
-
-
   // =========================================================
 
   // CANCEL REQUEST
 
   // =========================================================
-
-
 
   async function cancelRequest(
 
@@ -1744,15 +1434,11 @@ function AdminComOff() {
 
       )
 
-
-
     if (notes === null) {
 
       return
 
     }
-
-
 
     const confirmed =
 
@@ -1762,15 +1448,11 @@ function AdminComOff() {
 
       )
 
-
-
     if (!confirmed) {
 
       return
 
     }
-
-
 
     setActionId(
 
@@ -1778,13 +1460,9 @@ function AdminComOff() {
 
     )
 
-
-
     setErrorMessage('')
 
     setSuccessMessage('')
-
-
 
     try {
 
@@ -1806,8 +1484,6 @@ function AdminComOff() {
 
               request.id,
 
-
-
             p_admin_notes:
 
               notes.trim() ||
@@ -1818,15 +1494,11 @@ function AdminComOff() {
 
         )
 
-
-
       if (error) {
 
         throw error
 
       }
-
-
 
       if (
 
@@ -1844,8 +1516,6 @@ function AdminComOff() {
 
       }
 
-
-
       setSuccessMessage(
 
         data.message ||
@@ -1853,8 +1523,6 @@ function AdminComOff() {
         'Com-off request cancelled.'
 
       )
-
-
 
       await loadComOffData()
 
@@ -1867,8 +1535,6 @@ function AdminComOff() {
         error
 
       )
-
-
 
       setErrorMessage(
 
@@ -1886,17 +1552,11 @@ function AdminComOff() {
 
   }
 
-
-
-
-
   // =========================================================
 
   // HISTORY
 
   // =========================================================
-
-
 
   function openHistory(
 
@@ -1912,10 +1572,6 @@ function AdminComOff() {
 
   }
 
-
-
-
-
   function closeHistory() {
 
     setSelectedEmployee(
@@ -1926,383 +1582,153 @@ function AdminComOff() {
 
   }
 
-
-
-
-
   // =========================================================
 
   // UI
 
   // =========================================================
 
-
-
   return (
 
-    <div className="admin-comoff-page">
-
-
-
-      {/* =====================================================
-
-          STATISTICS
-
-      ===================================================== */}
-
-
-
-      <div className="comoff-stat-grid">
-
-
-
-        <ComOffStatistic
-
-          label="Eligible Employees"
-
-
-
-          value={
-
-            statistics.eligibleEmployees
-
-          }
-
-        />
-
-
-
-
-
-        <ComOffStatistic
-
-          label="Used"
-
-
-
-          value={
-
-            formatDays(
-
-              statistics.used
-
-            )
-
-          }
-
-
-
-          type="used"
-
-        />
-
-
-
-
-
-        <ComOffStatistic
-
-          label="Pending Requests"
-
-
-
-          value={
-
-            statistics.pending
-
-          }
-
-
-
-          type="pending"
-
-        />
-
-
-
-      </div>
-
-
-
-
+    <div
+      className={
+        activeTab === 'balances'
+          ? 'admin-comoff-page admin-comoff-page-balances'
+          : 'admin-comoff-page'
+      }
+    >
 
       {/* =====================================================
-
           MESSAGES
-
       ===================================================== */}
-
-
 
       {errorMessage && (
-
-
-
         <div className="comoff-message comoff-error">
-
           {errorMessage}
-
         </div>
-
-
-
       )}
-
-
-
-
 
       {successMessage && (
-
-
-
         <div className="comoff-message comoff-success">
-
           {successMessage}
-
         </div>
-
-
-
       )}
 
+      {activeTab === 'requests' && (
+        <>
+          <div className="comoff-request-overview-row">
 
+            <div className="comoff-stat-grid comoff-stat-grid-inline">
 
+              <ComOffStatistic
+                label="Eligible Employees"
+                value={
+                  statistics.eligibleEmployees
+                }
+              />
 
+              <ComOffStatistic
+                label="Used"
+                value={
+                  formatDays(
+                    statistics.used
+                  )
+                }
+                type="used"
+              />
 
-      {/* =====================================================
+              <ComOffStatistic
+                label="Pending Requests"
+                value={
+                  statistics.pending
+                }
+                type="pending"
+              />
 
-          COM-OFF REQUESTS
+            </div>
 
-      ===================================================== */}
+            <div className="comoff-request-toolbar">
 
+              <div className="comoff-request-toolbar-title">
+                <h2>
+                  Com-off Requests
+                </h2>
+                <p>
+                  Review employee requests and approve or reject them.
+                </p>
+              </div>
 
+              <div className="comoff-request-search-box">
+                <span>
+                  🔍
+                </span>
 
-      <section className="comoff-request-section">
+                <input
+                  type="text"
+                  value={
+                    requestSearchTerm
+                  }
+                  onChange={(
+                    event
+                  ) =>
+                    setRequestSearchTerm(
+                      event.target.value
+                    )
+                  }
+                  placeholder="Search request by employee name, code, department, position or reason..."
+                />
+              </div>
 
+              <select
+                className="comoff-request-status-select"
+                value={
+                  requestStatus
+                }
+                onChange={(
+                  event
+                ) =>
+                  setRequestStatus(
+                    event.target.value
+                  )
+                }
+              >
+                <option value="pending">
+                  Pending
+                </option>
+                <option value="approved">
+                  Approved
+                </option>
+                <option value="rejected">
+                  Rejected
+                </option>
+                <option value="cancelled">
+                  Cancelled
+                </option>
+                <option value="all">
+                  All Requests
+                </option>
+              </select>
 
+              {requestSearchTerm && (
+                <button
+                  type="button"
+                  className="comoff-request-clear"
+                  onClick={() =>
+                    setRequestSearchTerm('')
+                  }
+                >
+                  Clear
+                </button>
+              )}
 
-        <div className="comoff-section-header">
-
-
-
-          <div>
-
-
-
-            <h2>
-
-              Com-off Requests
-
-            </h2>
-
-
-
-            <p>
-
-              Review employee requests and approve or reject them.
-
-            </p>
-
-
+            </div>
 
           </div>
 
-
-
-
-
-          <select
-
-            value={
-
-              requestStatus
-
-            }
-
-
-
-            onChange={(
-
-              event
-
-            ) =>
-
-              setRequestStatus(
-
-                event.target.value
-
-              )
-
-            }
-
-          >
-
-
-
-            <option value="pending">
-
-              Pending
-
-            </option>
-
-
-
-            <option value="approved">
-
-              Approved
-
-            </option>
-
-
-
-            <option value="rejected">
-
-              Rejected
-
-            </option>
-
-
-
-            <option value="cancelled">
-
-              Cancelled
-
-            </option>
-
-
-
-            <option value="all">
-
-              All Requests
-
-            </option>
-
-
-
-          </select>
-
-
-
-        </div>
-
-
-
-
-
-        {/* REQUEST SEARCH */}
-
-
-
-        <div className="comoff-request-filter-bar">
-
-
-
-          <div className="comoff-request-search-box">
-
-
-
-            <span>
-
-              🔍
-
-            </span>
-
-
-
-
-
-            <input
-
-              type="text"
-
-
-
-              value={
-
-                requestSearchTerm
-
-              }
-
-
-
-              onChange={(
-
-                event
-
-              ) =>
-
-                setRequestSearchTerm(
-
-                  event.target.value
-
-                )
-
-              }
-
-
-
-              placeholder="Search request by employee name, code, department, position or reason..."
-
-            />
-
-
-
-          </div>
-
-
-
-
-
-          {requestSearchTerm && (
-
-
-
-            <button
-
-              type="button"
-
-
-
-              className="comoff-request-clear"
-
-
-
-              onClick={() =>
-
-                setRequestSearchTerm('')
-
-              }
-
-            >
-
-              Clear
-
-            </button>
-
-
-
-          )}
-
-
-
-        </div>
-
-
-
-
-
-        {/* REQUEST TABLE */}
-
-
-
+          <section className="comoff-request-section">
         <div className="comoff-request-card">
 
-
-
           {loading ? (
-
-
 
             <div className="comoff-request-empty">
 
@@ -2310,21 +1736,13 @@ function AdminComOff() {
 
             </div>
 
-
-
           ) : filteredRequests.length ===
 
             0 ? (
 
-
-
             <div className="comoff-request-empty">
 
-
-
               <strong>
-
-
 
                 {requestSearchTerm
 
@@ -2338,17 +1756,9 @@ function AdminComOff() {
 
                   : `No ${requestStatus} Com-off requests`}
 
-
-
               </strong>
 
-
-
-
-
               <span>
-
-
 
                 {requestSearchTerm
 
@@ -2356,35 +1766,19 @@ function AdminComOff() {
 
                   : 'Employee requests will appear here automatically.'}
 
-
-
               </span>
-
-
 
             </div>
 
-
-
           ) : (
-
-
 
             <div className="comoff-request-table-wrap">
 
-
-
               <table className="comoff-request-table">
-
-
 
                 <thead>
 
-
-
                   <tr>
-
-
 
                     <th>
 
@@ -2392,15 +1786,11 @@ function AdminComOff() {
 
                     </th>
 
-
-
                     <th>
 
                       From
 
                     </th>
-
-
 
                     <th>
 
@@ -2408,15 +1798,11 @@ function AdminComOff() {
 
                     </th>
 
-
-
                     <th>
 
                       Days
 
                     </th>
-
-
 
                     <th>
 
@@ -2424,15 +1810,11 @@ function AdminComOff() {
 
                     </th>
 
-
-
                     <th>
 
                       Status
 
                     </th>
-
-
 
                     <th>
 
@@ -2440,29 +1822,17 @@ function AdminComOff() {
 
                     </th>
 
-
-
                     <th className="request-actions-heading">
 
                       Actions
 
                     </th>
 
-
-
                   </tr>
-
-
 
                 </thead>
 
-
-
-
-
                 <tbody>
-
-
 
                   {filteredRequests.map(
 
@@ -2471,8 +1841,6 @@ function AdminComOff() {
                       const employee =
 
                         request.employees
-
-
 
                       return (
 
@@ -2486,19 +1854,11 @@ function AdminComOff() {
 
                         >
 
-
-
                           <td>
-
-
 
                             <div className="request-employee">
 
-
-
                               <div className="request-avatar">
-
-
 
                                 {getInitials(
 
@@ -2508,75 +1868,39 @@ function AdminComOff() {
 
                                 )}
 
-
-
                               </div>
-
-
-
-
 
                               <div>
 
-
-
                                 <strong>
-
-
 
                                   {employee?.first_name ||
 
                                     'Unknown'}{' '}
 
-
-
                                   {employee?.last_name ||
 
                                     ''}
 
-
-
                                 </strong>
-
-
-
-
 
                                 <small>
 
-
-
                                   Code:{' '}
-
-
 
                                   {employee?.employee_code ||
 
                                     '—'}
 
-
-
                                 </small>
-
-
 
                               </div>
 
-
-
                             </div>
-
-
 
                           </td>
 
-
-
-
-
                           <td>
-
-
 
                             {formatDate(
 
@@ -2586,17 +1910,9 @@ function AdminComOff() {
 
                             )}
 
-
-
                           </td>
 
-
-
-
-
                           <td>
-
-
 
                             {formatDate(
 
@@ -2606,21 +1922,11 @@ function AdminComOff() {
 
                             )}
 
-
-
                           </td>
-
-
-
-
 
                           <td>
 
-
-
                             <strong className="request-days">
-
-
 
                               {formatDays(
 
@@ -2628,27 +1934,15 @@ function AdminComOff() {
 
                               )}
 
-
-
                             </strong>
-
-
 
                           </td>
 
-
-
-
-
                           <td>
-
-
 
                             <div
 
                               className="request-reason"
-
-
 
                               title={
 
@@ -2660,27 +1954,15 @@ function AdminComOff() {
 
                             >
 
-
-
                               {request.reason ||
 
                                 '—'}
 
-
-
                             </div>
-
-
 
                           </td>
 
-
-
-
-
                           <td>
-
-
 
                             <span
 
@@ -2692,17 +1974,9 @@ function AdminComOff() {
 
                             </span>
 
-
-
                           </td>
 
-
-
-
-
                           <td>
-
-
 
                             {formatDateTime(
 
@@ -2710,21 +1984,11 @@ function AdminComOff() {
 
                             )}
 
-
-
                           </td>
-
-
-
-
 
                           <td>
 
-
-
                             <div className="request-actions">
-
-
 
                               {request.status ===
 
@@ -2732,17 +1996,11 @@ function AdminComOff() {
 
                                 <>
 
-
-
                                   <button
 
                                     type="button"
 
-
-
                                     className="request-approve"
-
-
 
                                     disabled={
 
@@ -2751,8 +2009,6 @@ function AdminComOff() {
                                       request.id
 
                                     }
-
-
 
                                     onClick={() =>
 
@@ -2766,8 +2022,6 @@ function AdminComOff() {
 
                                   >
 
-
-
                                     {actionId ===
 
                                     request.id
@@ -2776,23 +2030,13 @@ function AdminComOff() {
 
                                       : 'Approve'}
 
-
-
                                   </button>
-
-
-
-
 
                                   <button
 
                                     type="button"
 
-
-
                                     className="request-reject"
-
-
 
                                     disabled={
 
@@ -2801,8 +2045,6 @@ function AdminComOff() {
                                       request.id
 
                                     }
-
-
 
                                     onClick={() =>
 
@@ -2820,31 +2062,19 @@ function AdminComOff() {
 
                                   </button>
 
-
-
                                 </>
 
                               )}
-
-
-
-
 
                               {request.status ===
 
                                 'approved' && (
 
-
-
                                 <button
 
                                   type="button"
 
-
-
                                   className="request-cancel"
-
-
 
                                   disabled={
 
@@ -2853,8 +2083,6 @@ function AdminComOff() {
                                     request.id
 
                                   }
-
-
 
                                   onClick={() =>
 
@@ -2872,13 +2100,7 @@ function AdminComOff() {
 
                                 </button>
 
-
-
                               )}
-
-
-
-
 
                               {(request.status ===
 
@@ -2888,27 +2110,17 @@ function AdminComOff() {
 
                                 'cancelled') && (
 
-
-
                                 <span className="request-no-action">
 
                                   —
 
                                 </span>
 
-
-
                               )}
-
-
 
                             </div>
 
-
-
                           </td>
-
-
 
                         </tr>
 
@@ -2918,193 +2130,85 @@ function AdminComOff() {
 
                   )}
 
-
-
                 </tbody>
-
-
 
               </table>
 
+            </div>
 
+          )}
+
+        </div>
+
+          </section>
+        </>
+      )}
+
+      {activeTab === 'balances' && (
+      <section className="comoff-balance-section">
+
+        <div className="comoff-balance-toolbar">
+
+          <div className="comoff-balance-toolbar-title">
+
+            <h2>
+              Employee Balances
+            </h2>
+
+            <p>
+              Current earned, used, pending and available Com-off.
+            </p>
+
+          </div>
+
+          <div className="comoff-balance-toolbar-search">
+
+            <div className="comoff-search-box">
+
+              <span className="comoff-search-icon">
+                🔍
+              </span>
+
+              <input
+                type="text"
+                value={
+                  employeeSearchTerm
+                }
+                onChange={(
+                  event
+                ) =>
+                  setEmployeeSearchTerm(
+                    event.target.value
+                  )
+                }
+                placeholder="Search employee code, name, department or position..."
+              />
 
             </div>
 
+            {employeeSearchTerm && (
 
+              <button
+                type="button"
+                className="comoff-clear-button"
+                onClick={() =>
+                  setEmployeeSearchTerm('')
+                }
+              >
+                Clear
+              </button>
 
-          )}
-
-
-
-        </div>
-
-
-
-      </section>
-
-
-
-
-
-      {/* =====================================================
-
-          EMPLOYEE BALANCES
-
-      ===================================================== */}
-
-
-
-      <section className="comoff-balance-section">
-
-
-
-        <div className="comoff-section-header balance-heading">
-
-
-
-          <div>
-
-
-
-            <h2>
-
-              Employee Balances
-
-            </h2>
-
-
-
-            <p>
-
-              Current earned, used, pending and available Com-off.
-
-            </p>
-
-
+            )}
 
           </div>
 
-
-
         </div>
-
-
-
-
-
-        {/* EMPLOYEE SEARCH */}
-
-
-
-        <div className="comoff-filter-bar">
-
-
-
-          <div className="comoff-search-box">
-
-
-
-            <span className="comoff-search-icon">
-
-              🔍
-
-            </span>
-
-
-
-
-
-            <input
-
-              type="text"
-
-
-
-              value={
-
-                employeeSearchTerm
-
-              }
-
-
-
-              onChange={(
-
-                event
-
-              ) =>
-
-                setEmployeeSearchTerm(
-
-                  event.target.value
-
-                )
-
-              }
-
-
-
-              placeholder="Search employee code, name, department or position..."
-
-            />
-
-
-
-          </div>
-
-
-
-
-
-          {employeeSearchTerm && (
-
-
-
-            <button
-
-              type="button"
-
-
-
-              className="comoff-clear-button"
-
-
-
-              onClick={() =>
-
-                setEmployeeSearchTerm('')
-
-              }
-
-            >
-
-              Clear
-
-            </button>
-
-
-
-          )}
-
-
-
-        </div>
-
-
-
-
 
         {/* EMPLOYEE BALANCE TABLE */}
 
-
-
         <div className="comoff-table-card">
 
-
-
           {loading ? (
-
-
 
             <div className="comoff-empty-state">
 
@@ -3112,17 +2216,11 @@ function AdminComOff() {
 
             </div>
 
-
-
           ) : filteredEmployees.length ===
 
             0 ? (
 
-
-
             <div className="comoff-empty-state">
-
-
 
               <div className="comoff-empty-icon">
 
@@ -3130,39 +2228,23 @@ function AdminComOff() {
 
               </div>
 
-
-
               <strong>
 
                 No employees found
 
               </strong>
 
-
-
             </div>
-
-
 
           ) : (
 
-
-
             <div className="comoff-table-scroll">
-
-
 
               <table className="comoff-table">
 
-
-
                 <thead>
 
-
-
                   <tr>
-
-
 
                     <th>
 
@@ -3170,15 +2252,11 @@ function AdminComOff() {
 
                     </th>
 
-
-
                     <th>
 
                       Department
 
                     </th>
-
-
 
                     <th>
 
@@ -3186,15 +2264,11 @@ function AdminComOff() {
 
                     </th>
 
-
-
                     <th>
 
                       Eligible Holidays
 
                     </th>
-
-
 
                     <th>
 
@@ -3202,15 +2276,11 @@ function AdminComOff() {
 
                     </th>
 
-
-
                     <th>
 
                       Used
 
                     </th>
-
-
 
                     <th>
 
@@ -3218,15 +2288,11 @@ function AdminComOff() {
 
                     </th>
 
-
-
                     <th>
 
                       Available
 
                     </th>
-
-
 
                     <th>
 
@@ -3234,35 +2300,21 @@ function AdminComOff() {
 
                     </th>
 
-
-
                     <th className="comoff-actions-heading">
 
                       Actions
 
                     </th>
 
-
-
                   </tr>
-
-
 
                 </thead>
 
-
-
-
-
                 <tbody>
-
-
 
                   {filteredEmployees.map(
 
                     (employee) => (
-
-
 
                       <tr
 
@@ -3274,19 +2326,11 @@ function AdminComOff() {
 
                       >
 
-
-
                         <td>
-
-
 
                           <div className="comoff-employee-cell">
 
-
-
                             <div className="comoff-avatar">
-
-
 
                               {getInitials(
 
@@ -3296,67 +2340,33 @@ function AdminComOff() {
 
                               )}
 
-
-
                             </div>
-
-
-
-
 
                             <div className="comoff-employee-info">
 
-
-
                               <strong>
-
-
 
                                 {employee.first_name}{' '}
 
                                 {employee.last_name}
 
-
-
                               </strong>
-
-
-
-
 
                               <small>
 
-
-
                                 Code:{' '}
-
-
 
                                 {employee.employee_code}
 
-
-
                               </small>
-
-
 
                             </div>
 
-
-
                           </div>
-
-
 
                         </td>
 
-
-
-
-
                         <td>
-
-
 
                           <div className="comoff-cell-text">
 
@@ -3366,17 +2376,9 @@ function AdminComOff() {
 
                           </div>
 
-
-
                         </td>
 
-
-
-
-
                         <td>
-
-
 
                           <div className="comoff-cell-text">
 
@@ -3386,21 +2388,11 @@ function AdminComOff() {
 
                           </div>
 
-
-
                         </td>
-
-
-
-
 
                         <td>
 
-
-
                           <div className="comoff-holiday-count">
-
-
 
                             <strong>
 
@@ -3408,11 +2400,7 @@ function AdminComOff() {
 
                             </strong>
 
-
-
                             <span>
-
-
 
                               {employee.earned_count ===
 
@@ -3422,29 +2410,15 @@ function AdminComOff() {
 
                                 : 'holidays'}
 
-
-
                             </span>
-
-
 
                           </div>
 
-
-
                         </td>
-
-
-
-
 
                         <td>
 
-
-
                           <span className="comoff-balance earned">
-
-
 
                             {formatDays(
 
@@ -3452,25 +2426,13 @@ function AdminComOff() {
 
                             )}
 
-
-
                           </span>
-
-
 
                         </td>
 
-
-
-
-
                         <td>
 
-
-
                           <span className="comoff-balance used">
-
-
 
                             {formatDays(
 
@@ -3478,25 +2440,13 @@ function AdminComOff() {
 
                             )}
 
-
-
                           </span>
-
-
 
                         </td>
 
-
-
-
-
                         <td>
 
-
-
                           <span className="comoff-balance pending">
-
-
 
                             {formatDays(
 
@@ -3504,25 +2454,13 @@ function AdminComOff() {
 
                             )}
 
-
-
                           </span>
-
-
 
                         </td>
 
-
-
-
-
                         <td>
 
-
-
                           <span className="comoff-balance available">
-
-
 
                             {formatDays(
 
@@ -3530,25 +2468,13 @@ function AdminComOff() {
 
                             )}
 
-
-
                           </span>
-
-
 
                         </td>
 
-
-
-
-
                         <td>
 
-
-
                           <div className="comoff-latest-date">
-
-
 
                             {formatDate(
 
@@ -3556,35 +2482,19 @@ function AdminComOff() {
 
                             )}
 
-
-
                           </div>
-
-
 
                         </td>
 
-
-
-
-
                         <td>
 
-
-
                           <div className="comoff-actions">
-
-
 
                             <button
 
                               type="button"
 
-
-
                               className="comoff-history-button"
-
-
 
                               onClick={() =>
 
@@ -3602,51 +2512,28 @@ function AdminComOff() {
 
                             </button>
 
-
-
                           </div>
-
-
 
                         </td>
 
-
-
                       </tr>
-
-
 
                     )
 
                   )}
 
-
-
                 </tbody>
-
-
 
               </table>
 
-
-
             </div>
-
-
 
           )}
 
-
-
         </div>
 
-
-
       </section>
-
-
-
-
+      )}
 
       {/* =====================================================
 
@@ -3654,13 +2541,9 @@ function AdminComOff() {
 
       ===================================================== */}
 
-
-
       {selectedEmployee &&
 
         createPortal(
-
-
 
           <ComOffHistoryModal
 
@@ -3670,8 +2553,6 @@ function AdminComOff() {
 
             }
 
-
-
             onClose={
 
               closeHistory
@@ -3680,15 +2561,11 @@ function AdminComOff() {
 
           />,
 
-
-
           document.body
 
         )
 
       }
-
-
 
     </div>
 
@@ -3696,17 +2573,11 @@ function AdminComOff() {
 
 }
 
-
-
-
-
 // ===========================================================
 
 // STATISTIC CARD
 
 // ===========================================================
-
-
 
 function ComOffStatistic({
 
@@ -3734,15 +2605,11 @@ function ComOffStatistic({
 
     >
 
-
-
       <span>
 
         {label}
 
       </span>
-
-
 
       <strong>
 
@@ -3750,25 +2617,17 @@ function ComOffStatistic({
 
       </strong>
 
-
-
     </div>
 
   )
 
 }
 
-
-
-
-
 // ===========================================================
 
 // HISTORY MODAL
 
 // ===========================================================
-
-
 
 function ComOffHistoryModal({
 
@@ -3808,10 +2667,6 @@ function ComOffHistoryModal({
 
       )
 
-
-
-
-
   const requestHistory =
 
     [...employee.requests]
@@ -3842,27 +2697,15 @@ function ComOffHistoryModal({
 
       )
 
-
-
-
-
   return (
 
     <div className="comoff-modal-overlay">
 
-
-
       <div className="comoff-modal">
-
-
 
         <div className="comoff-modal-header">
 
-
-
           <div>
-
-
 
             <h2>
 
@@ -3870,49 +2713,27 @@ function ComOffHistoryModal({
 
             </h2>
 
-
-
             <p>
-
-
 
               {employee.first_name}{' '}
 
               {employee.last_name}
 
-
-
               {' • '}
-
-
 
               Employee Code:{' '}
 
-
-
               {employee.employee_code}
-
-
 
             </p>
 
-
-
           </div>
-
-
-
-
 
           <button
 
             type="button"
 
-
-
             className="comoff-modal-close"
-
-
 
             onClick={
 
@@ -3926,33 +2747,19 @@ function ComOffHistoryModal({
 
           </button>
 
-
-
         </div>
-
-
-
-
 
         {/* BALANCE */}
 
-
-
         <div className="comoff-history-balance">
 
-
-
           <div>
-
-
 
             <span>
 
               Earned
 
             </span>
-
-
 
             <strong>
 
@@ -3964,25 +2771,15 @@ function ComOffHistoryModal({
 
             </strong>
 
-
-
           </div>
 
-
-
-
-
           <div>
-
-
 
             <span>
 
               Used
 
             </span>
-
-
 
             <strong>
 
@@ -3994,25 +2791,15 @@ function ComOffHistoryModal({
 
             </strong>
 
-
-
           </div>
 
-
-
-
-
           <div>
-
-
 
             <span>
 
               Pending
 
             </span>
-
-
 
             <strong>
 
@@ -4024,25 +2811,15 @@ function ComOffHistoryModal({
 
             </strong>
 
-
-
           </div>
 
-
-
-
-
           <div>
-
-
 
             <span>
 
               Available
 
             </span>
-
-
 
             <strong className="available">
 
@@ -4054,33 +2831,17 @@ function ComOffHistoryModal({
 
             </strong>
 
-
-
           </div>
-
-
 
         </div>
 
-
-
-
-
         {/* CONTENT */}
-
-
 
         <div className="comoff-modal-content">
 
-
-
           {/* REQUEST HISTORY */}
 
-
-
           <div className="comoff-history-section">
-
-
 
             <h3>
 
@@ -4088,15 +2849,9 @@ function ComOffHistoryModal({
 
             </h3>
 
-
-
-
-
             {requestHistory.length ===
 
             0 ? (
-
-
 
               <div className="history-empty">
 
@@ -4104,17 +2859,11 @@ function ComOffHistoryModal({
 
               </div>
 
-
-
             ) : (
-
-
 
               requestHistory.map(
 
                 (request) => (
-
-
 
                   <div
 
@@ -4124,21 +2873,13 @@ function ComOffHistoryModal({
 
                     }
 
-
-
                     className="comoff-request-history-item"
 
                   >
 
-
-
                     <div>
 
-
-
                       <strong>
-
-
 
                         {formatDate(
 
@@ -4147,10 +2888,6 @@ function ComOffHistoryModal({
                           request.requested_date
 
                         )}
-
-
-
-
 
                         {(
 
@@ -4166,8 +2903,6 @@ function ComOffHistoryModal({
 
                             {' → '}
 
-
-
                             {formatDate(
 
                               request.end_date
@@ -4178,17 +2913,9 @@ function ComOffHistoryModal({
 
                         )}
 
-
-
                       </strong>
 
-
-
-
-
                       <small>
-
-
 
                         {formatDays(
 
@@ -4196,21 +2923,11 @@ function ComOffHistoryModal({
 
                         )}{' '}
 
-
-
                         day(s)
-
-
 
                       </small>
 
-
-
                     </div>
-
-
-
-
 
                     <span
 
@@ -4222,35 +2939,19 @@ function ComOffHistoryModal({
 
                     </span>
 
-
-
                   </div>
-
-
 
                 )
 
               )
 
-
-
             )}
-
-
 
           </div>
 
-
-
-
-
           {/* ENTITLEMENT HISTORY */}
 
-
-
           <div className="comoff-history-section">
-
-
 
             <h3>
 
@@ -4258,15 +2959,9 @@ function ComOffHistoryModal({
 
             </h3>
 
-
-
-
-
             {entitlementHistory.length ===
 
             0 ? (
-
-
 
               <div className="history-empty">
 
@@ -4274,11 +2969,7 @@ function ComOffHistoryModal({
 
               </div>
 
-
-
             ) : (
-
-
 
               entitlementHistory.map(
 
@@ -4288,13 +2979,9 @@ function ComOffHistoryModal({
 
                     item.holidays
 
-
-
                   const shift =
 
                     item.shifts
-
-
 
                   return (
 
@@ -4306,37 +2993,21 @@ function ComOffHistoryModal({
 
                       }
 
-
-
                       className="comoff-history-item"
 
                     >
 
-
-
                       <div className="comoff-history-main">
 
-
-
                         <strong>
-
-
 
                           {holiday?.name ||
 
                             'Public Holiday'}
 
-
-
                         </strong>
 
-
-
-
-
                         <span>
-
-
 
                           {formatDate(
 
@@ -4344,21 +3015,11 @@ function ComOffHistoryModal({
 
                           )}
 
-
-
                         </span>
-
-
 
                       </div>
 
-
-
-
-
                       <div className="comoff-history-shift">
-
-
 
                         <span>
 
@@ -4366,31 +3027,17 @@ function ComOffHistoryModal({
 
                         </span>
 
-
-
                         <strong>
-
-
 
                           {shift?.name ||
 
                             'Scheduled'}
 
-
-
                         </strong>
-
-
 
                       </div>
 
-
-
-
-
                       <div className="comoff-history-credit">
-
-
 
                         <span>
 
@@ -4398,11 +3045,7 @@ function ComOffHistoryModal({
 
                         </span>
 
-
-
                         <strong>
-
-
 
                           {item.status ===
 
@@ -4412,25 +3055,15 @@ function ComOffHistoryModal({
 
                             : ''}
 
-
-
                           {formatDays(
 
                             item.entitlement_days
 
                           )}
 
-
-
                         </strong>
 
-
-
                       </div>
-
-
-
-
 
                       <span
 
@@ -4442,8 +3075,6 @@ function ComOffHistoryModal({
 
                       </span>
 
-
-
                     </div>
 
                   )
@@ -4452,35 +3083,19 @@ function ComOffHistoryModal({
 
               )
 
-
-
             )}
-
-
 
           </div>
 
-
-
         </div>
-
-
-
-
 
         {/* FOOTER */}
 
-
-
         <div className="comoff-modal-footer">
-
-
 
           <button
 
             type="button"
-
-
 
             onClick={
 
@@ -4494,24 +3109,14 @@ function ComOffHistoryModal({
 
           </button>
 
-
-
         </div>
 
-
-
       </div>
-
-
 
     </div>
 
   )
 
 }
-
-
-
-
 
 export default AdminComOff

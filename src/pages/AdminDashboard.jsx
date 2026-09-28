@@ -10,15 +10,11 @@ import {
 
 } from 'react'
 
-
-
 import {
 
   supabase,
 
 } from '../lib/supabase'
-
-
 
 import AdminEmployees from './AdminEmployees'
 
@@ -31,15 +27,10 @@ import AdminHolidays from './AdminHolidays'
 import AdminComOff from './AdminComOff'
 
 import AdminReports from './AdminReports'
+
 import AdminDevices from './AdminDevices'
 
-
-
 import './AdminDashboard.css'
-
-
-
-
 
 // ===========================================================
 
@@ -47,29 +38,19 @@ import './AdminDashboard.css'
 
 // ===========================================================
 
-
-
 const THEME_STORAGE_KEY =
 
   'dtr-admin-theme'
 
-
-
 const SIDEBAR_STORAGE_KEY =
 
   'dtr-admin-sidebar-collapsed'
-
-
-
-
 
 // ===========================================================
 
 // ADMIN PAGE ROUTES
 
 // ===========================================================
-
-
 
 const ADMIN_PAGE_ROUTES = {
 
@@ -89,10 +70,6 @@ const ADMIN_PAGE_ROUTES = {
 
 }
 
-
-
-
-
 const ADMIN_ROUTE_PAGES = {
 
   '/admin/employees': 'employees',
@@ -111,17 +88,11 @@ const ADMIN_ROUTE_PAGES = {
 
 }
 
-
-
-
-
 // ===========================================================
 
 // ADMIN DASHBOARD
 
 // ===========================================================
-
-
 
 function AdminDashboard({
 
@@ -143,8 +114,6 @@ function AdminDashboard({
 
   // =========================================================
 
-
-
   const activePage =
 
     ADMIN_ROUTE_PAGES[
@@ -156,16 +125,81 @@ function AdminDashboard({
     'employees'
 
 
+  // =========================================================
+  // REPORT TAB
+  // =========================================================
+
+  const [
+    reportTab,
+    setReportTab,
+  ] = useState(
+    'attendance'
+  )
+
+  const [
+    reportMenuOpen,
+    setReportMenuOpen,
+  ] = useState(false)
+
+  function selectReportTab(
+    tab
+  ) {
+    setReportTab(tab)
+    setReportMenuOpen(false)
+
+    if (
+      activePage !==
+      'reports'
+    ) {
+      onNavigate(
+        ADMIN_PAGE_ROUTES.reports
+      )
+    }
+  }
 
 
+  // =========================================================
+  // COM-OFF TAB
+  // =========================================================
+
+  const [
+    comOffTab,
+    setComOffTab,
+  ] = useState(
+    'requests'
+  )
+
+  const [
+    comOffMenuOpen,
+    setComOffMenuOpen,
+  ] = useState(false)
+
+  function selectComOffTab(
+    tab
+  ) {
+    setComOffTab(tab)
+    setComOffMenuOpen(false)
+
+    window.scrollTo(
+      0,
+      0
+    )
+
+    if (
+      activePage !==
+      'comoff'
+    ) {
+      onNavigate(
+        ADMIN_PAGE_ROUTES.comoff
+      )
+    }
+  }
 
   // =========================================================
 
   // SIDEBAR
 
   // =========================================================
-
-
 
   const [
 
@@ -187,17 +221,11 @@ function AdminDashboard({
 
   })
 
-
-
-
-
   // =========================================================
 
   // PROFILE
 
   // =========================================================
-
-
 
   const [
 
@@ -207,10 +235,6 @@ function AdminDashboard({
 
   ] = useState(null)
 
-
-
-
-
   const [
 
     profileOpen,
@@ -219,17 +243,9 @@ function AdminDashboard({
 
   ] = useState(false)
 
-
-
-
-
   const profileMenuRef =
 
     useRef(null)
-
-
-
-
 
   // =========================================================
 
@@ -242,8 +258,6 @@ function AdminDashboard({
   // SYSTEM
 
   // =========================================================
-
-
 
   const [
 
@@ -261,8 +275,6 @@ function AdminDashboard({
 
       )
 
-
-
     if (
 
       saved === 'light' ||
@@ -274,8 +286,6 @@ function AdminDashboard({
       return saved
 
     }
-
-
 
     if (
 
@@ -289,15 +299,9 @@ function AdminDashboard({
 
     }
 
-
-
     return 'system'
 
   })
-
-
-
-
 
   const [
 
@@ -319,17 +323,11 @@ function AdminDashboard({
 
   })
 
-
-
-
-
   // =========================================================
 
   // LOAD ADMIN PROFILE
 
   // =========================================================
-
-
 
   useEffect(() => {
 
@@ -340,8 +338,6 @@ function AdminDashboard({
         return
 
       }
-
-
 
       try {
 
@@ -385,8 +381,6 @@ function AdminDashboard({
 
             .maybeSingle()
 
-
-
         if (error) {
 
           console.error(
@@ -397,13 +391,9 @@ function AdminDashboard({
 
           )
 
-
-
           return
 
         }
-
-
 
         setAdminProfile(
 
@@ -425,8 +415,6 @@ function AdminDashboard({
 
     }
 
-
-
     loadAdminProfile()
 
   }, [
@@ -435,17 +423,11 @@ function AdminDashboard({
 
   ])
 
-
-
-
-
   // =========================================================
 
   // WATCH SYSTEM THEME
 
   // =========================================================
-
-
 
   useEffect(() => {
 
@@ -456,10 +438,6 @@ function AdminDashboard({
         '(prefers-color-scheme: dark)'
 
       )
-
-
-
-
 
     function handleSystemTheme(
 
@@ -474,10 +452,6 @@ function AdminDashboard({
       )
 
     }
-
-
-
-
 
     if (
 
@@ -502,10 +476,6 @@ function AdminDashboard({
       )
 
     }
-
-
-
-
 
     return () => {
 
@@ -537,17 +507,11 @@ function AdminDashboard({
 
   }, [])
 
-
-
-
-
   // =========================================================
 
   // CLOSE PROFILE WHEN CLICKING OUTSIDE
 
   // =========================================================
-
-
 
   useEffect(() => {
 
@@ -575,10 +539,6 @@ function AdminDashboard({
 
     }
 
-
-
-
-
     document.addEventListener(
 
       'mousedown',
@@ -586,10 +546,6 @@ function AdminDashboard({
       handleOutsideClick
 
     )
-
-
-
-
 
     return () => {
 
@@ -605,17 +561,11 @@ function AdminDashboard({
 
   }, [])
 
-
-
-
-
   // =========================================================
 
   // RESOLVED THEME
 
   // =========================================================
-
-
 
   const resolvedTheme =
 
@@ -631,17 +581,11 @@ function AdminDashboard({
 
       : themePreference
 
-
-
-
-
   // =========================================================
 
   // CHANGE THEME
 
   // =========================================================
-
-
 
   function changeTheme(
 
@@ -655,8 +599,6 @@ function AdminDashboard({
 
     )
 
-
-
     localStorage.setItem(
 
       THEME_STORAGE_KEY,
@@ -667,17 +609,11 @@ function AdminDashboard({
 
   }
 
-
-
-
-
   // =========================================================
 
   // LIGHT / DARK SWITCH
 
   // =========================================================
-
-
 
   function toggleLightDarkTheme() {
 
@@ -689,8 +625,6 @@ function AdminDashboard({
 
         : 'dark'
 
-
-
     changeTheme(
 
       next
@@ -699,17 +633,11 @@ function AdminDashboard({
 
   }
 
-
-
-
-
   // =========================================================
 
   // SIDEBAR
 
   // =========================================================
-
-
 
   function toggleSidebar() {
 
@@ -721,8 +649,6 @@ function AdminDashboard({
 
           !previous
 
-
-
         localStorage.setItem(
 
           SIDEBAR_STORAGE_KEY,
@@ -731,31 +657,21 @@ function AdminDashboard({
 
         )
 
-
-
         return next
 
       }
 
     )
 
-
-
     setProfileOpen(false)
 
   }
-
-
-
-
 
   // =========================================================
 
   // OPEN PAGE
 
   // =========================================================
-
-
 
   function openPage(
 
@@ -771,19 +687,15 @@ function AdminDashboard({
 
       ]
 
-
-
     if (!path) {
 
       return
 
     }
 
-
-
     setProfileOpen(false)
-
-
+    setReportMenuOpen(false)
+    setComOffMenuOpen(false)
 
     onNavigate(
 
@@ -793,17 +705,11 @@ function AdminDashboard({
 
   }
 
-
-
-
-
   // =========================================================
 
   // ADMIN DETAILS
 
   // =========================================================
-
-
 
   const firstName =
 
@@ -823,10 +729,6 @@ function AdminDashboard({
 
     'Administrator'
 
-
-
-
-
   const lastName =
 
     adminProfile?.last_name ||
@@ -839,19 +741,11 @@ function AdminDashboard({
 
     ''
 
-
-
-
-
   const role =
 
     adminProfile?.role ||
 
     'Administrator'
-
-
-
-
 
   const email =
 
@@ -859,17 +753,11 @@ function AdminDashboard({
 
     ''
 
-
-
-
-
   // =========================================================
 
   // INITIALS
 
   // =========================================================
-
-
 
   const initials =
 
@@ -885,8 +773,6 @@ function AdminDashboard({
 
           'A'
 
-
-
         const last =
 
           lastName
@@ -894,8 +780,6 @@ function AdminDashboard({
             ?.charAt(0) ||
 
           ''
-
-
 
         return (
 
@@ -917,17 +801,11 @@ function AdminDashboard({
 
     )
 
-
-
-
-
   // =========================================================
 
   // NAV CLASS
 
   // =========================================================
-
-
 
   function getNavClass(
 
@@ -947,17 +825,11 @@ function AdminDashboard({
 
   }
 
-
-
-
-
   // =========================================================
 
   // PAGE CONTENT
 
   // =========================================================
-
-
 
   function renderPage() {
 
@@ -975,8 +847,6 @@ function AdminDashboard({
 
         )
 
-
-
       case 'schedules':
 
         return (
@@ -984,8 +854,6 @@ function AdminDashboard({
           <AdminSchedule />
 
         )
-
-
 
       case 'leave':
 
@@ -995,8 +863,6 @@ function AdminDashboard({
 
         )
 
-
-
       case 'holidays':
 
         return (
@@ -1005,27 +871,29 @@ function AdminDashboard({
 
         )
 
-
-
       case 'comoff':
 
         return (
 
-          <AdminComOff />
+          <AdminComOff
+            activeTab={
+              comOffTab
+            }
+          />
 
         )
-
-
 
       case 'reports':
 
         return (
 
-          <AdminReports />
+          <AdminReports
+            activeTab={
+              reportTab
+            }
+          />
 
         )
-
-
 
       case 'devices':
 
@@ -1034,8 +902,6 @@ function AdminDashboard({
           <AdminDevices />
 
         )
-
-
 
       default:
 
@@ -1049,17 +915,11 @@ function AdminDashboard({
 
   }
 
-
-
-
-
   // =========================================================
 
   // NAVIGATION
 
   // =========================================================
-
-
 
   const navigationItems = [
 
@@ -1135,17 +995,43 @@ function AdminDashboard({
 
   ]
 
+  const reportNavigationItems = [
+    {
+      id: 'attendance',
+      label: 'Attendance',
+    },
+    {
+      id: 'leave',
+      label: 'Leave',
+    },
+    {
+      id: 'comoff',
+      label: 'Com-Off',
+    },
+    {
+      id: 'logs',
+      label: 'Logs',
+    },
+  ]
+
+  
+  const comOffNavigationItems = [
+    {
+      id: 'requests',
+      label: 'Request ComOff',
+    },
+    {
+      id: 'balances',
+      label: 'ComOff Balance',
+    },
+  ]
 
 
-
-
-  // =========================================================
+// =========================================================
 
   // UI
 
   // =========================================================
-
-
 
   return (
 
@@ -1161,15 +1047,11 @@ function AdminDashboard({
 
       }
 
-
-
       data-admin-theme={
 
         resolvedTheme
 
       }
-
-
 
       data-theme-preference={
 
@@ -1179,19 +1061,13 @@ function AdminDashboard({
 
     >
 
-
-
       {/* =====================================================
 
           HEADER
 
       ===================================================== */}
 
-
-
       <header className="admin-dashboard-header">
-
-
 
         <img
 
@@ -1202,10 +1078,6 @@ function AdminDashboard({
           className="admin-dashboard-logo"
 
         />
-
-
-
-
 
         <button
 
@@ -1225,13 +1097,7 @@ function AdminDashboard({
 
         </button>
 
-
-
       </header>
-
-
-
-
 
       {/* =====================================================
 
@@ -1239,19 +1105,20 @@ function AdminDashboard({
 
       ===================================================== */}
 
-
-
-      <div className="admin-dashboard-body">
-
-
+      <div
+        className={
+          activePage === 'comoff' &&
+          comOffTab === 'balances'
+            ? 'admin-dashboard-body admin-dashboard-body-scroll-locked'
+            : 'admin-dashboard-body'
+        }
+      >
 
         {/* ===================================================
 
             SIDEBAR
 
         =================================================== */}
-
-
 
         <aside
 
@@ -1267,33 +1134,23 @@ function AdminDashboard({
 
         >
 
-
-
           {/* =================================================
 
               COLLAPSE BUTTON
 
           ================================================= */}
 
-
-
           <button
 
             type="button"
 
-
-
             className="admin-sidebar-toggle"
-
-
 
             onClick={
 
               toggleSidebar
 
             }
-
-
 
             aria-label={
 
@@ -1304,8 +1161,6 @@ function AdminDashboard({
                 : 'Collapse sidebar'
 
             }
-
-
 
             title={
 
@@ -1327,129 +1182,178 @@ function AdminDashboard({
 
           </button>
 
-
-
-
-
           {/* =================================================
 
               NAVIGATION
 
           ================================================= */}
 
-
-
           <div className="admin-sidebar-main">
-
-
 
             <nav className="admin-sidebar-nav">
 
-
-
               {navigationItems.map(
+                (item) => {
+                  const isReports =
+                    item.id ===
+                    'reports'
 
-                (item) => (
+                  const isComOff =
+                    item.id ===
+                    'comoff'
 
-
-
-                  <button
-
-                    key={
-
-                      item.id
-
-                    }
-
-
-
-                    type="button"
-
-
-
-                    className={
-
-                      getNavClass(
-
+                  return (
+                    <div
+                      key={
                         item.id
+                      }
+                      className={
+                        isReports
+                          ? 'admin-reports-nav-wrap'
+                          : isComOff
+                          ? 'admin-comoff-nav-wrap'
+                          : 'admin-nav-wrap'
+                      }
+                      onMouseEnter={
+                        isReports
+                          ? () =>
+                              setReportMenuOpen(
+                                true
+                              )
+                          : isComOff
+                          ? () =>
+                              setComOffMenuOpen(
+                                true
+                              )
+                          : undefined
+                      }
+                      onMouseLeave={
+                        isReports
+                          ? () =>
+                              setReportMenuOpen(
+                                false
+                              )
+                          : isComOff
+                          ? () =>
+                              setComOffMenuOpen(
+                                false
+                              )
+                          : undefined
+                      }
+                    >
+                      <button
+                        type="button"
+                        className={
+                          getNavClass(
+                            item.id
+                          )
+                        }
+                        onClick={() =>
+                          openPage(
+                            item.id
+                          )
+                        }
+                        title={
+                          sidebarCollapsed
+                            ? item.label
+                            : undefined
+                        }
+                      >
+                        <span className="admin-nav-icon">
+                          {item.icon}
+                        </span>
 
-                      )
+                        <span className="admin-nav-label">
+                          {item.label}
+                        </span>
+                      </button>
 
-                    }
+                      {isReports &&
+                        reportMenuOpen && (
+                          <div
+                            className="admin-reports-subnav"
+                            aria-label="Report sections"
+                          >
+                            {reportNavigationItems.map(
+                              (
+                                reportItem
+                              ) => (
+                                <button
+                                  key={
+                                    reportItem.id
+                                  }
+                                  type="button"
+                                  className={
+                                    reportTab ===
+                                    reportItem.id
+                                      ? 'admin-report-subnav-button active'
+                                      : 'admin-report-subnav-button'
+                                  }
+                                  onClick={() =>
+                                    selectReportTab(
+                                      reportItem.id
+                                    )
+                                  }
+                                >
+                                  {
+                                    reportItem.label
+                                  }
+                                </button>
+                              )
+                            )}
+                          </div>
+                        )}
 
+                      {isComOff &&
+                        comOffMenuOpen && (
+                          <div
+                            className="admin-comoff-subnav"
+                            aria-label="Com-off sections"
+                          >
+                            {comOffNavigationItems.map(
+                              (
+                                comOffItem
+                              ) => (
+                                <button
+                                  key={
+                                    comOffItem.id
+                                  }
+                                  type="button"
+                                  className={
+                                    comOffTab ===
+                                    comOffItem.id
+                                      ? 'admin-comoff-subnav-button active'
+                                      : 'admin-comoff-subnav-button'
+                                  }
+                                  onClick={() =>
+                                    selectComOffTab(
+                                      comOffItem.id
+                                    )
+                                  }
+                                >
+                                  {
+                                    comOffItem.label
+                                  }
+                                </button>
+                              )
+                            )}
+                          </div>
+                        )}
 
-
-                    onClick={() =>
-
-                      openPage(
-
-                        item.id
-
-                      )
-
-                    }
-
-
-
-                    title={
-
-                      sidebarCollapsed
-
-                        ? item.label
-
-                        : undefined
-
-                    }
-
-                  >
-
-
-
-                    <span className="admin-nav-icon">
-
-                      {item.icon}
-
-                    </span>
-
-
-
-
-
-                    <span className="admin-nav-label">
-
-                      {item.label}
-
-                    </span>
-
-
-
-                  </button>
-
-
-
-                )
-
+                    </div>
+                  )
+                }
               )}
-
-
 
             </nav>
 
-
-
           </div>
-
-
-
-
 
           {/* =================================================
 
               ACCOUNT / PROFILE
 
           ================================================= */}
-
-
 
           <div
 
@@ -1463,23 +1367,15 @@ function AdminDashboard({
 
           >
 
-
-
             {/* ===============================================
 
                 ACCOUNT POPOVER
 
             =============================================== */}
 
-
-
             {profileOpen && (
 
-
-
               <div className="admin-profile-popover">
-
-
 
                 {/* ===========================================
 
@@ -1487,11 +1383,7 @@ function AdminDashboard({
 
                 =========================================== */}
 
-
-
                 <div className="admin-profile-popover-header">
-
-
 
                   <div className="admin-profile-avatar large">
 
@@ -1499,21 +1391,11 @@ function AdminDashboard({
 
                   </div>
 
-
-
-
-
                   <div className="admin-profile-info">
-
-
 
                     <strong>
 
-
-
                       {firstName}
-
-
 
                       {lastName
 
@@ -1521,17 +1403,9 @@ function AdminDashboard({
 
                         : ''}
 
-
-
                     </strong>
 
-
-
-
-
                     {email && (
-
-
 
                       <span>
 
@@ -1539,13 +1413,7 @@ function AdminDashboard({
 
                       </span>
 
-
-
                     )}
-
-
-
-
 
                     <small>
 
@@ -1553,17 +1421,9 @@ function AdminDashboard({
 
                     </small>
 
-
-
                   </div>
 
-
-
                 </div>
-
-
-
-
 
                 {/* ===========================================
 
@@ -1571,15 +1431,9 @@ function AdminDashboard({
 
                 =========================================== */}
 
-
-
                 <div className="admin-account-theme">
 
-
-
                   <div className="admin-account-theme-text">
-
-
 
                     <strong>
 
@@ -1587,27 +1441,17 @@ function AdminDashboard({
 
                     </strong>
 
-
-
                     <span>
 
                       Appearance
 
                     </span>
 
-
-
                   </div>
-
-
-
-
 
                   <button
 
                     type="button"
-
-
 
                     className={
 
@@ -1621,19 +1465,13 @@ function AdminDashboard({
 
                     }
 
-
-
                     onClick={
 
                       toggleLightDarkTheme
 
                     }
 
-
-
                     aria-label="Toggle light or dark appearance"
-
-
 
                     title={
 
@@ -1649,17 +1487,9 @@ function AdminDashboard({
 
                   >
 
-
-
                     <span className="admin-appearance-thumb" />
 
-
-
-
-
                     <span className="admin-appearance-label">
-
-
 
                       {resolvedTheme ===
 
@@ -1669,21 +1499,11 @@ function AdminDashboard({
 
                         : 'LIGHT'}
 
-
-
                     </span>
-
-
 
                   </button>
 
-
-
                 </div>
-
-
-
-
 
                 {/* ===========================================
 
@@ -1691,17 +1511,11 @@ function AdminDashboard({
 
                 =========================================== */}
 
-
-
                 <button
 
                   type="button"
 
-
-
                   className="admin-profile-logout"
-
-
 
                   onClick={
 
@@ -1711,15 +1525,11 @@ function AdminDashboard({
 
                 >
 
-
-
                   <span className="admin-logout-icon">
 
                     ↪
 
                   </span>
-
-
 
                   <span>
 
@@ -1727,21 +1537,11 @@ function AdminDashboard({
 
                   </span>
 
-
-
                 </button>
-
-
 
               </div>
 
-
-
             )}
-
-
-
-
 
             {/* ===============================================
 
@@ -1749,17 +1549,11 @@ function AdminDashboard({
 
             =============================================== */}
 
-
-
             <button
 
               type="button"
 
-
-
               className="admin-profile-button"
-
-
 
               onClick={() =>
 
@@ -1773,8 +1567,6 @@ function AdminDashboard({
 
               }
 
-
-
               title={
 
                 sidebarCollapsed
@@ -1787,21 +1579,13 @@ function AdminDashboard({
 
             >
 
-
-
               <div className="admin-profile-avatar">
 
                 {initials}
 
               </div>
 
-
-
-
-
               <div className="admin-profile-button-text">
-
-
 
                 <strong>
 
@@ -1809,21 +1593,13 @@ function AdminDashboard({
 
                 </strong>
 
-
-
                 <span>
 
                   {role}
 
                 </span>
 
-
-
               </div>
-
-
-
-
 
               <span className="admin-profile-more">
 
@@ -1831,21 +1607,11 @@ function AdminDashboard({
 
               </span>
 
-
-
             </button>
-
-
 
           </div>
 
-
-
         </aside>
-
-
-
-
 
         {/* ===================================================
 
@@ -1853,28 +1619,25 @@ function AdminDashboard({
 
         =================================================== */}
 
-
-
-        <main className="admin-main-content">
+        <main
+          className={
+            activePage === 'comoff' &&
+            comOffTab === 'balances'
+              ? 'admin-main-content admin-main-content-scroll-locked'
+              : 'admin-main-content'
+          }
+        >
 
           {renderPage()}
 
         </main>
 
-
-
       </div>
-
-
 
     </div>
 
   )
 
 }
-
-
-
-
 
 export default AdminDashboard

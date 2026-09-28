@@ -1,51 +1,73 @@
 /* =========================================================
+
    ADMIN COM-OFF
+
 ========================================================= */
 
 .admin-comoff-page {
+
   width: 100%;
+
   min-width: 0;
+
   min-height: 100%;
 
   padding:
+
     28px 30px
+
     22px;
 
   box-sizing: border-box;
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   overflow-x: hidden;
+
 }
 
-
 /* =========================================================
+
    STATISTICS
+
 ========================================================= */
 
 .comoff-stat-grid {
+
   display: grid;
 
   grid-template-columns:
+
     repeat(
+
       3,
+
       minmax(
+
         0,
+
         1fr
+
       )
+
     );
 
   gap: 14px;
 
   margin-bottom: 24px;
+
 }
 
-
 .comoff-stat-card {
+
   min-height: 96px;
 
   display: flex;
@@ -53,32 +75,47 @@
   flex-direction: column;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 7px;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #e5e7eb
+
     );
 
   border-radius: 13px;
 
   background:
+
     var(
+
       --admin-card,
+
       #ffffff
+
     );
+
 }
 
-
 .comoff-stat-card span {
+
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     );
 
   font-size: 12px;
@@ -86,40 +123,51 @@
   font-weight: 700;
 
   text-align: center;
+
 }
 
-
 .comoff-stat-card strong {
+
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-size: 26px;
 
   font-weight: 800;
-}
 
+}
 
 .comoff-stat-used strong {
-  color: #2563eb;
-}
 
+  color: #2563eb;
+
+}
 
 .comoff-stat-pending strong {
+
   color: #d97706;
+
 }
 
-
 /* =========================================================
+
    MESSAGES
+
 ========================================================= */
 
 .comoff-message {
+
   margin-bottom: 14px;
 
   padding:
+
     12px 14px;
 
   border-radius: 9px;
@@ -127,102 +175,137 @@
   font-size: 12px;
 
   font-weight: 700;
+
 }
 
-
 .comoff-error {
+
   border:
+
     1px solid
+
     #fecaca;
 
   background:
+
     #fef2f2;
 
   color:
+
     #b91c1c;
+
 }
 
-
 .comoff-success {
+
   border:
+
     1px solid
+
     #a7f3d0;
 
   background:
+
     #ecfdf5;
 
   color:
+
     #047857;
+
 }
 
-
 /* =========================================================
+
    SECTIONS
+
 ========================================================= */
 
 .comoff-request-section,
+
 .comoff-balance-section {
+
   margin-bottom: 28px;
+
 }
 
-
 .comoff-section-header {
+
   display: flex;
 
   align-items:
+
     flex-end;
 
   justify-content:
+
     space-between;
 
   gap: 20px;
 
   margin-bottom: 12px;
+
 }
 
-
 .comoff-section-header h2 {
+
   margin: 0;
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     ) !important;
 
   font-size: 18px;
 
   font-weight: 800;
+
 }
 
-
 .comoff-section-header p {
+
   margin:
+
     4px 0 0;
 
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     );
 
   font-size: 11px;
+
 }
 
-
 .comoff-section-header select {
+
   min-width: 170px;
 
   height: 42px;
 
   padding:
+
     0 11px;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #d1d5db
+
     );
 
   border-radius: 8px;
@@ -230,31 +313,43 @@
   outline: none;
 
   background:
+
     var(
+
       --admin-input,
+
       #ffffff
+
     );
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-family: inherit;
-}
 
+}
 
 .balance-heading {
+
   margin-bottom: 14px;
+
 }
 
-
 /* =========================================================
+
    REQUEST SEARCH
+
 ========================================================= */
 
 .comoff-request-filter-bar {
+
   display: flex;
 
   align-items: center;
@@ -264,45 +359,57 @@
   width: 100%;
 
   margin-bottom: 12px;
+
 }
 
-
 .comoff-request-search-box {
+
   position: relative;
 
   flex: 1;
 
   min-width: 0;
+
 }
 
-
 .comoff-request-search-box span {
+
   position: absolute;
 
   left: 14px;
+
   top: 50%;
 
   transform:
+
     translateY(-50%);
 
   pointer-events: none;
+
 }
 
-
 .comoff-request-search-box input {
+
   width: 100%;
 
   height: 44px;
 
   padding:
+
     0 14px
+
     0 42px;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #d1d5db
+
     );
 
   border-radius: 9px;
@@ -310,15 +417,23 @@
   outline: none;
 
   background:
+
     var(
+
       --admin-input,
+
       #ffffff
+
     );
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-family: inherit;
@@ -326,51 +441,75 @@
   font-size: 12px;
 
   box-sizing: border-box;
+
 }
 
-
 .comoff-request-search-box input:focus {
+
   border-color:
+
     #ec4899;
 
   box-shadow:
+
     0 0 0 3px
+
     rgba(
+
       236,
+
       72,
+
       153,
+
       0.10
+
     );
+
 }
 
-
 .comoff-request-clear {
+
   height: 44px;
 
   flex-shrink: 0;
 
   padding:
+
     0 15px;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #d1d5db
+
     );
 
   border-radius: 9px;
 
   background:
+
     var(
+
       --admin-card,
+
       #ffffff
+
     );
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-size: 11px;
@@ -378,73 +517,103 @@
   font-weight: 700;
 
   cursor: pointer;
+
 }
 
-
 /* =========================================================
+
    REQUEST CARD
+
 ========================================================= */
 
 .comoff-request-card {
+
   width: 100%;
 
   overflow: hidden;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #e5e7eb
+
     );
 
   border-radius: 13px;
 
   background:
+
     var(
+
       --admin-card,
+
       #ffffff
+
     );
+
 }
 
-
 .comoff-request-table-wrap {
+
   width: 100%;
 
   overflow-x: hidden;
+
 }
 
-
 .comoff-request-table {
+
   width: 100%;
 
   table-layout: fixed;
 
   border-collapse:
+
     collapse;
+
 }
 
-
 .comoff-request-table th {
+
   padding:
+
     12px 9px;
 
   border-bottom:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #e5e7eb
+
     );
 
   background:
+
     var(
+
       --admin-table-header,
+
       #f9fafb
+
     );
 
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     );
 
   font-size: 10px;
@@ -458,24 +627,35 @@
   overflow: hidden;
 
   text-overflow: ellipsis;
+
 }
 
-
 .comoff-request-table td {
+
   padding:
+
     12px 9px;
 
   border-bottom:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #edf0f3
+
     );
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-size: 10px;
@@ -485,84 +665,111 @@
   text-align: center;
 
   overflow: hidden;
-}
 
+}
 
 .comoff-request-table
+
 tbody tr:last-child td {
+
   border-bottom: none;
+
 }
 
-
 /* =========================================================
+
    REQUEST COLUMN WIDTHS
+
 ========================================================= */
 
 .comoff-request-table th:nth-child(1),
-.comoff-request-table td:nth-child(1) {
-  width: 18%;
-}
 
+.comoff-request-table td:nth-child(1) {
+
+  width: 18%;
+
+}
 
 .comoff-request-table th:nth-child(2),
-.comoff-request-table td:nth-child(2) {
-  width: 10%;
-}
 
+.comoff-request-table td:nth-child(2) {
+
+  width: 10%;
+
+}
 
 .comoff-request-table th:nth-child(3),
-.comoff-request-table td:nth-child(3) {
-  width: 10%;
-}
 
+.comoff-request-table td:nth-child(3) {
+
+  width: 10%;
+
+}
 
 .comoff-request-table th:nth-child(4),
-.comoff-request-table td:nth-child(4) {
-  width: 6%;
-}
 
+.comoff-request-table td:nth-child(4) {
+
+  width: 6%;
+
+}
 
 .comoff-request-table th:nth-child(5),
-.comoff-request-table td:nth-child(5) {
-  width: 17%;
-}
 
+.comoff-request-table td:nth-child(5) {
+
+  width: 17%;
+
+}
 
 .comoff-request-table th:nth-child(6),
-.comoff-request-table td:nth-child(6) {
-  width: 9%;
-}
 
+.comoff-request-table td:nth-child(6) {
+
+  width: 9%;
+
+}
 
 .comoff-request-table th:nth-child(7),
-.comoff-request-table td:nth-child(7) {
-  width: 10%;
-}
 
+.comoff-request-table td:nth-child(7) {
+
+  width: 10%;
+
+}
 
 .comoff-request-table th:nth-child(8),
+
 .comoff-request-table td:nth-child(8) {
+
   width: 20%;
+
 }
 
-
 /* =========================================================
+
    REQUEST EMPLOYEE
+
 ========================================================= */
 
 .comoff-request-table
-th:nth-child(1) {
-  text-align: left;
-}
 
+th:nth-child(1) {
+
+  text-align: left;
+
+}
 
 .comoff-request-table
+
 td:nth-child(1) {
+
   text-align: left;
+
 }
 
-
 .request-employee {
+
   min-width: 0;
 
   display: flex;
@@ -570,16 +777,19 @@ td:nth-child(1) {
   align-items: center;
 
   gap: 8px;
+
 }
 
-
 .request-avatar {
+
   width: 32px;
+
   height: 32px;
 
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   flex-shrink: 0;
@@ -587,10 +797,15 @@ td:nth-child(1) {
   border-radius: 50%;
 
   background:
+
     linear-gradient(
+
       135deg,
+
       #ec4899,
+
       #8b5cf6
+
     );
 
   color: #ffffff;
@@ -598,11 +813,13 @@ td:nth-child(1) {
   font-size: 8px;
 
   font-weight: 900;
+
 }
 
-
 .request-employee >
+
 div:last-child {
+
   min-width: 0;
 
   display: flex;
@@ -610,16 +827,21 @@ div:last-child {
   flex-direction: column;
 
   gap: 2px;
+
 }
 
-
 .request-employee strong {
+
   overflow: hidden;
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-size: 10px;
@@ -627,45 +849,59 @@ div:last-child {
   white-space: nowrap;
 
   text-overflow: ellipsis;
+
 }
 
-
 .request-employee small {
+
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     );
 
   font-size: 8px;
+
 }
 
-
 /* =========================================================
+
    REQUEST DETAILS
+
 ========================================================= */
 
 .request-days {
+
   color:
+
     #7c3aed;
+
 }
 
-
 .request-reason {
+
   overflow: hidden;
 
   white-space: nowrap;
 
   text-overflow:
+
     ellipsis;
+
 }
 
-
 /* =========================================================
+
    REQUEST STATUS
+
 ========================================================= */
 
 .request-status {
+
   display: inline-flex;
 
   min-width: 64px;
@@ -677,9 +913,11 @@ div:last-child {
   justify-content: center;
 
   padding:
+
     0 8px;
 
   border-radius:
+
     999px;
 
   font-size: 8px;
@@ -687,74 +925,95 @@ div:last-child {
   font-weight: 800;
 
   text-transform:
+
     capitalize;
+
 }
 
-
 .request-status-pending {
+
   background:
+
     #ffedd5;
 
   color:
+
     #c2410c;
+
 }
 
-
 .request-status-approved {
+
   background:
+
     #dcfce7;
 
   color:
+
     #15803d;
+
 }
 
-
 .request-status-rejected {
+
   background:
+
     #fee2e2;
 
   color:
+
     #b91c1c;
+
 }
 
-
 .request-status-cancelled {
+
   background:
+
     #f3f4f6;
 
   color:
+
     #6b7280;
+
 }
 
-
 /* =========================================================
+
    REQUEST ACTIONS
+
 ========================================================= */
 
 .request-actions-heading {
+
   text-align:
+
     center !important;
+
 }
 
-
 .request-actions {
+
   display: flex;
 
   justify-content: center;
 
   gap: 5px;
+
 }
 
-
 .request-actions button {
+
   min-height: 30px;
 
   padding:
+
     0 8px;
 
   border-radius: 6px;
 
   background:
+
     transparent;
 
   font-size: 8px;
@@ -764,67 +1023,95 @@ div:last-child {
   white-space: nowrap;
 
   cursor: pointer;
+
 }
 
-
 .request-approve {
+
   border:
+
     1px solid
+
     #a7f3d0;
 
   color:
+
     #047857;
+
 }
 
-
 .request-reject {
+
   border:
+
     1px solid
+
     #fecaca;
 
   color:
+
     #dc2626;
+
 }
 
-
 .request-cancel {
+
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #d1d5db
+
     );
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
+
 }
 
-
 .request-actions
+
 button:disabled {
+
   opacity: 0.5;
 
   cursor: not-allowed;
-}
 
+}
 
 .request-no-action {
+
   color:
+
     var(
+
       --admin-muted,
+
       #9ca3af
+
     );
+
 }
 
-
 /* =========================================================
+
    REQUEST EMPTY
+
 ========================================================= */
 
 .comoff-request-empty {
+
   min-height: 120px;
 
   display: flex;
@@ -840,34 +1127,47 @@ button:disabled {
   padding: 20px;
 
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     );
 
   text-align: center;
-}
 
+}
 
 .comoff-request-empty strong {
-  color:
-    var(
-      --admin-text,
-      #111827
-    );
-}
 
+  color:
+
+    var(
+
+      --admin-text,
+
+      #111827
+
+    );
+
+}
 
 .comoff-request-empty span {
+
   font-size: 10px;
+
 }
 
-
 /* =========================================================
+
    EMPLOYEE BALANCE SEARCH
+
 ========================================================= */
 
 .comoff-filter-bar {
+
   display: flex;
 
   align-items: center;
@@ -877,10 +1177,11 @@ button:disabled {
   width: 100%;
 
   margin-bottom: 14px;
+
 }
 
-
 .comoff-search-box {
+
   position: relative;
 
   flex: 1;
@@ -888,36 +1189,47 @@ button:disabled {
   min-width: 0;
 
   max-width: 720px;
+
 }
 
-
 .comoff-search-icon {
+
   position: absolute;
 
   left: 14px;
+
   top: 50%;
 
   transform:
+
     translateY(-50%);
 
   pointer-events: none;
+
 }
 
-
 .comoff-search-box input {
+
   width: 100%;
 
   height: 44px;
 
   padding:
+
     0 14px
+
     0 42px;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #d1d5db
+
     );
 
   border-radius: 9px;
@@ -925,15 +1237,23 @@ button:disabled {
   outline: none;
 
   background:
+
     var(
+
       --admin-input,
+
       #ffffff
+
     );
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-family: inherit;
@@ -941,51 +1261,75 @@ button:disabled {
   font-size: 12px;
 
   box-sizing: border-box;
+
 }
 
-
 .comoff-search-box input:focus {
+
   border-color:
+
     #ec4899;
 
   box-shadow:
+
     0 0 0 3px
+
     rgba(
+
       236,
+
       72,
+
       153,
+
       0.10
+
     );
+
 }
 
-
 .comoff-clear-button {
+
   height: 44px;
 
   flex-shrink: 0;
 
   padding:
+
     0 14px;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #d1d5db
+
     );
 
   border-radius: 9px;
 
   background:
+
     var(
+
       --admin-card,
+
       #ffffff
+
     );
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-size: 11px;
@@ -993,81 +1337,113 @@ button:disabled {
   font-weight: 700;
 
   cursor: pointer;
+
 }
 
-
 /* =========================================================
+
    EMPLOYEE BALANCE TABLE CARD
+
 ========================================================= */
 
 .comoff-table-card {
+
   width: 100%;
 
   overflow: hidden;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #e5e7eb
+
     );
 
   border-radius: 13px;
 
   background:
+
     var(
+
       --admin-card,
+
       #ffffff
+
     );
+
 }
 
-
 .comoff-table-scroll {
+
   width: 100%;
 
   overflow-x: hidden;
+
 }
 
-
 /* =========================================================
+
    EMPLOYEE BALANCE TABLE
+
 ========================================================= */
 
 .comoff-table {
+
   width: 100%;
 
   table-layout: fixed;
 
   border-collapse:
+
     collapse;
+
 }
 
-
 .comoff-table th {
+
   height: 52px;
 
   padding:
+
     12px 7px;
 
   vertical-align: middle;
 
   border-bottom:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #e5e7eb
+
     );
 
   background:
+
     var(
+
       --admin-table-header,
+
       #f9fafb
+
     );
 
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     );
 
   font-size: 9px;
@@ -1081,31 +1457,43 @@ button:disabled {
   overflow: hidden;
 
   text-overflow:
+
     ellipsis;
 
   box-sizing: border-box;
+
 }
 
-
 .comoff-table td {
+
   height: 68px;
 
   padding:
+
     11px 7px;
 
   vertical-align: middle;
 
   border-bottom:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #edf0f3
+
     );
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-size: 10px;
@@ -1115,107 +1503,143 @@ button:disabled {
   overflow: hidden;
 
   box-sizing: border-box;
-}
 
+}
 
 .comoff-table
+
 tbody tr:last-child td {
+
   border-bottom: none;
+
 }
 
-
 /* =========================================================
+
    COLUMN WIDTHS
+
 ========================================================= */
 
 .comoff-table th:nth-child(1),
-.comoff-table td:nth-child(1) {
-  width: 18%;
-}
 
+.comoff-table td:nth-child(1) {
+
+  width: 18%;
+
+}
 
 .comoff-table th:nth-child(2),
-.comoff-table td:nth-child(2) {
-  width: 11%;
-}
 
+.comoff-table td:nth-child(2) {
+
+  width: 11%;
+
+}
 
 .comoff-table th:nth-child(3),
-.comoff-table td:nth-child(3) {
-  width: 14%;
-}
 
+.comoff-table td:nth-child(3) {
+
+  width: 14%;
+
+}
 
 .comoff-table th:nth-child(4),
-.comoff-table td:nth-child(4) {
-  width: 11%;
-}
 
+.comoff-table td:nth-child(4) {
+
+  width: 11%;
+
+}
 
 .comoff-table th:nth-child(5),
-.comoff-table td:nth-child(5) {
-  width: 6%;
-}
 
+.comoff-table td:nth-child(5) {
+
+  width: 6%;
+
+}
 
 .comoff-table th:nth-child(6),
-.comoff-table td:nth-child(6) {
-  width: 6%;
-}
 
+.comoff-table td:nth-child(6) {
+
+  width: 6%;
+
+}
 
 .comoff-table th:nth-child(7),
-.comoff-table td:nth-child(7) {
-  width: 7%;
-}
 
+.comoff-table td:nth-child(7) {
+
+  width: 7%;
+
+}
 
 .comoff-table th:nth-child(8),
-.comoff-table td:nth-child(8) {
-  width: 7%;
-}
 
+.comoff-table td:nth-child(8) {
+
+  width: 7%;
+
+}
 
 .comoff-table th:nth-child(9),
-.comoff-table td:nth-child(9) {
-  width: 10%;
-}
 
+.comoff-table td:nth-child(9) {
+
+  width: 10%;
+
+}
 
 .comoff-table th:nth-child(10),
+
 .comoff-table td:nth-child(10) {
+
   width: 10%;
+
 }
 
-
 /* =========================================================
+
    EMPLOYEE COLUMN
+
    ONLY EMPLOYEE IS LEFT ALIGNED
+
 ========================================================= */
 
 .comoff-table
+
 th:nth-child(1) {
+
   padding-left: 18px;
 
   text-align:
-    left !important;
-}
 
+    left !important;
+
+}
 
 .comoff-table
+
 td:nth-child(1) {
+
   padding-left: 18px;
 
   text-align:
+
     left !important;
+
 }
 
-
 /* =========================================================
+
    EMPLOYEE CELL
+
 ========================================================= */
 
 .comoff-employee-cell {
+
   width: 100%;
 
   min-width: 0;
@@ -1225,16 +1649,19 @@ td:nth-child(1) {
   align-items: center;
 
   justify-content:
+
     flex-start;
 
   gap: 10px;
 
   text-align: left;
+
 }
 
-
 .comoff-avatar {
+
   width: 34px;
+
   height: 34px;
 
   display: flex;
@@ -1248,22 +1675,29 @@ td:nth-child(1) {
   border-radius: 50%;
 
   background:
+
     linear-gradient(
+
       135deg,
+
       #ec4899,
+
       #8b5cf6
+
     );
 
   color:
+
     #ffffff;
 
   font-size: 8px;
 
   font-weight: 900;
+
 }
 
-
 .comoff-employee-info {
+
   min-width: 0;
 
   display: flex;
@@ -1271,6 +1705,7 @@ td:nth-child(1) {
   flex-direction: column;
 
   align-items:
+
     flex-start;
 
   justify-content: center;
@@ -1278,10 +1713,11 @@ td:nth-child(1) {
   gap: 3px;
 
   text-align: left;
+
 }
 
-
 .comoff-employee-info strong {
+
   width: 100%;
 
   max-width: 145px;
@@ -1289,9 +1725,13 @@ td:nth-child(1) {
   overflow: hidden;
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-size: 10px;
@@ -1301,28 +1741,37 @@ td:nth-child(1) {
   white-space: nowrap;
 
   text-overflow:
+
     ellipsis;
+
 }
 
-
 .comoff-employee-info small {
+
   width: 100%;
 
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     );
 
   font-size: 8px;
+
 }
 
-
 /* =========================================================
+
    DEPARTMENT + POSITION
+
 ========================================================= */
 
 .comoff-cell-text {
+
   width: 100%;
 
   overflow: hidden;
@@ -1332,15 +1781,19 @@ td:nth-child(1) {
   white-space: nowrap;
 
   text-overflow:
+
     ellipsis;
+
 }
 
-
 /* =========================================================
+
    ELIGIBLE HOLIDAYS
+
 ========================================================= */
 
 .comoff-holiday-count {
+
   width: 100%;
 
   display: flex;
@@ -1354,36 +1807,49 @@ td:nth-child(1) {
   text-align: center;
 
   white-space: nowrap;
+
 }
 
-
 .comoff-holiday-count strong {
+
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-size: 10px;
+
 }
 
-
 .comoff-holiday-count span {
+
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     );
 
   font-size: 8px;
+
 }
 
-
 /* =========================================================
+
    BALANCE PILLS
+
 ========================================================= */
 
 .comoff-balance {
+
   min-width: 30px;
 
   height: 27px;
@@ -1395,69 +1861,91 @@ td:nth-child(1) {
   justify-content: center;
 
   margin:
+
     0 auto;
 
   padding:
+
     0 6px;
 
   border-radius:
+
     999px;
 
   font-size: 9px;
 
   font-weight: 900;
+
 }
 
-
 .comoff-balance.earned {
+
   background:
+
     #dcfce7;
 
   color:
+
     #15803d;
+
 }
 
-
 .comoff-balance.used {
+
   background:
+
     #dbeafe;
 
   color:
+
     #1d4ed8;
+
 }
 
-
 .comoff-balance.pending {
+
   background:
+
     #ffedd5;
 
   color:
+
     #c2410c;
+
 }
 
-
 .comoff-balance.available {
+
   background:
+
     #f3e8ff;
 
   color:
+
     #7e22ce;
+
 }
 
-
 /* =========================================================
+
    LATEST HOLIDAY
+
 ========================================================= */
 
 .comoff-latest-date {
+
   width: 100%;
 
   overflow: hidden;
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-size: 9px;
@@ -1467,21 +1955,27 @@ td:nth-child(1) {
   white-space: nowrap;
 
   text-overflow:
+
     ellipsis;
+
 }
 
-
 /* =========================================================
+
    ACTIONS
+
 ========================================================= */
 
 .comoff-actions-heading {
+
   text-align:
+
     center !important;
+
 }
 
-
 .comoff-actions {
+
   width: 100%;
 
   display: flex;
@@ -1489,31 +1983,43 @@ td:nth-child(1) {
   align-items: center;
 
   justify-content: center;
+
 }
 
-
 .comoff-history-button {
+
   min-height: 30px;
 
   padding:
+
     0 8px;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #d1d5db
+
     );
 
   border-radius: 6px;
 
   background:
+
     transparent;
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   font-size: 8px;
@@ -1523,23 +2029,29 @@ td:nth-child(1) {
   white-space: nowrap;
 
   cursor: pointer;
+
 }
 
-
 .comoff-history-button:hover {
+
   border-color:
+
     #ec4899;
 
   color:
+
     #ec4899;
+
 }
 
-
 /* =========================================================
+
    EMPTY EMPLOYEE STATE
+
 ========================================================= */
 
 .comoff-empty-state {
+
   min-height: 220px;
 
   display: flex;
@@ -1553,23 +2065,31 @@ td:nth-child(1) {
   gap: 7px;
 
   color:
-    var(
-      --admin-muted,
-      #6b7280
-    );
-}
 
+    var(
+
+      --admin-muted,
+
+      #6b7280
+
+    );
+
+}
 
 .comoff-empty-icon {
+
   font-size: 26px;
+
 }
 
-
 /* =========================================================
+
    MODAL OVERLAY
+
 ========================================================= */
 
 .comoff-modal-overlay {
+
   position: fixed;
 
   inset: 0;
@@ -1585,39 +2105,59 @@ td:nth-child(1) {
   padding: 24px;
 
   background:
+
     rgba(
+
       0,
+
       0,
+
       0,
+
       0.62
+
     );
 
   backdrop-filter:
+
     blur(5px);
 
   -webkit-backdrop-filter:
+
     blur(5px);
 
   box-sizing: border-box;
+
 }
 
-
 /* =========================================================
+
    MODAL
+
 ========================================================= */
 
 .comoff-modal {
+
   width:
+
     min(
+
       820px,
+
       calc(
+
         100vw - 48px
+
       )
+
     );
 
   max-height:
+
     calc(
+
       100dvh - 48px
+
     );
 
   display: flex;
@@ -1627,145 +2167,213 @@ td:nth-child(1) {
   overflow: hidden;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #d1d5db
+
     );
 
   border-radius: 16px;
 
   background:
+
     var(
+
       --admin-card,
+
       #ffffff
+
     );
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     );
 
   box-shadow:
+
     0 25px 75px
+
     rgba(
+
       0,
+
       0,
+
       0,
+
       0.35
+
     );
 
   box-sizing:
+
     border-box;
+
 }
 
-
 /* =========================================================
+
    MODAL HEADER
+
 ========================================================= */
 
 .comoff-modal-header {
+
   flex-shrink: 0;
 
   display: flex;
 
   align-items:
+
     flex-start;
 
   justify-content:
+
     space-between;
 
   gap: 20px;
 
   padding:
+
     20px 24px;
 
   border-bottom:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #e5e7eb
+
     );
 
   background:
+
     var(
+
       --admin-card,
+
       #ffffff
+
     );
+
 }
 
-
 .comoff-modal-header h2 {
+
   display:
+
     block !important;
 
   margin:
+
     0 !important;
 
   padding:
+
     0 !important;
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     ) !important;
 
   -webkit-text-fill-color:
+
     var(
+
       --admin-text,
+
       #111827
+
     ) !important;
 
   opacity:
+
     1 !important;
 
   visibility:
+
     visible !important;
 
   font-size:
+
     21px !important;
 
   font-weight:
+
     800 !important;
 
   line-height: 1.3;
 
   text-shadow:
+
     none !important;
+
 }
 
-
 .comoff-modal-header p {
+
   margin:
+
     5px 0 0;
 
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     ) !important;
 
   -webkit-text-fill-color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     ) !important;
 
   opacity:
+
     1 !important;
 
   font-size: 11px;
+
 }
 
-
 /* =========================================================
+
    MODAL CLOSE
+
 ========================================================= */
 
 .comoff-modal-close {
+
   width: 34px;
+
   height: 34px;
 
   flex-shrink: 0;
@@ -1783,56 +2391,79 @@ td:nth-child(1) {
   border-radius: 7px;
 
   background:
+
     transparent;
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     ) !important;
 
   font-size: 25px;
 
   cursor: pointer;
-}
 
+}
 
 .comoff-modal-close:hover {
+
   background:
+
     var(
+
       --admin-table-header,
+
       #f3f4f6
+
     );
+
 }
 
-
 /* =========================================================
+
    HISTORY BALANCE
+
 ========================================================= */
 
 .comoff-history-balance {
+
   flex-shrink: 0;
 
   display: grid;
 
   grid-template-columns:
+
     repeat(
+
       4,
+
       minmax(
+
         0,
+
         1fr
+
       )
+
     );
 
   gap: 10px;
 
   padding:
+
     18px 24px;
+
 }
 
-
 .comoff-history-balance >
+
 div {
+
   min-height: 72px;
 
   display: flex;
@@ -1846,60 +2477,85 @@ div {
   gap: 4px;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #e5e7eb
+
     );
 
   border-radius: 9px;
 
   background:
+
     var(
+
       --admin-table-header,
+
       #f9fafb
+
     );
+
 }
 
-
 .comoff-history-balance span {
+
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     ) !important;
 
   font-size: 9px;
 
   font-weight: 700;
+
 }
 
-
 .comoff-history-balance strong {
+
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     ) !important;
 
   font-size: 20px;
 
   font-weight: 800;
-}
 
+}
 
 .comoff-history-balance
+
 strong.available {
+
   color:
+
     #7c3aed !important;
+
 }
 
-
 /* =========================================================
+
    MODAL CONTENT
+
 ========================================================= */
 
 .comoff-modal-content {
+
   min-height: 0;
 
   flex: 1;
@@ -1909,61 +2565,81 @@ strong.available {
   overflow-x: hidden;
 
   padding:
+
     0 24px
+
     20px;
 
   scrollbar-width:
-    none;
-}
 
+    none;
+
+}
 
 .comoff-modal-content::-webkit-scrollbar {
+
   display: none;
+
 }
 
-
 /* =========================================================
+
    HISTORY SECTIONS
+
 ========================================================= */
 
 .comoff-history-section {
-  margin-bottom: 20px;
-}
 
+  margin-bottom: 20px;
+
+}
 
 .comoff-history-section:last-child {
+
   margin-bottom: 0;
+
 }
 
-
 .comoff-history-section h3 {
+
   margin:
+
     0 0 10px !important;
 
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     ) !important;
 
   font-size:
+
     13px !important;
 
   font-weight:
+
     800 !important;
+
 }
 
-
 /* =========================================================
+
    REQUEST HISTORY
+
 ========================================================= */
 
 .comoff-request-history-item {
+
   display: flex;
 
   align-items: center;
 
   justify-content:
+
     space-between;
 
   gap: 12px;
@@ -1971,64 +2647,89 @@ strong.available {
   margin-bottom: 7px;
 
   padding:
+
     11px 12px;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #e5e7eb
+
     );
 
   border-radius: 9px;
 
   background:
+
     var(
+
       --admin-table-header,
+
       #f9fafb
+
     );
+
 }
 
-
 .comoff-request-history-item >
+
 div {
+
   display: flex;
 
   flex-direction: column;
 
   gap: 3px;
+
 }
 
-
 .comoff-request-history-item strong {
+
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     ) !important;
 
   font-size: 10px;
 
   font-weight: 800;
+
 }
 
-
 .comoff-request-history-item small {
+
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     ) !important;
 
   font-size: 8px;
+
 }
 
-
 /* =========================================================
+
    EMPTY HISTORY
+
 ========================================================= */
 
 .history-empty {
+
   min-height: 62px;
 
   display: flex;
@@ -2040,46 +2741,69 @@ div {
   padding: 16px;
 
   border:
+
     1px dashed
+
     var(
+
       --admin-border,
+
       #d1d5db
+
     );
 
   border-radius: 8px;
 
   background:
+
     var(
+
       --admin-card,
+
       #ffffff
+
     );
 
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     ) !important;
 
   font-size: 10px;
 
   text-align: center;
+
 }
 
-
 /* =========================================================
+
    ENTITLEMENT HISTORY
+
 ========================================================= */
 
 .comoff-history-item {
+
   display: grid;
 
   grid-template-columns:
+
     minmax(
+
       180px,
+
       1fr
+
     )
+
     110px
+
     80px
+
     90px;
 
   align-items: center;
@@ -2089,28 +2813,41 @@ div {
   margin-bottom: 7px;
 
   padding:
+
     11px 12px;
 
   border:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #e5e7eb
+
     );
 
   border-radius: 9px;
 
   background:
+
     var(
+
       --admin-table-header,
+
       #f9fafb
+
     );
+
 }
 
-
 .comoff-history-main,
+
 .comoff-history-shift,
+
 .comoff-history-credit {
+
   min-width: 0;
 
   display: flex;
@@ -2118,45 +2855,61 @@ div {
   flex-direction: column;
 
   gap: 3px;
+
 }
 
-
 .comoff-history-main strong,
+
 .comoff-history-shift strong,
+
 .comoff-history-credit strong {
+
   color:
+
     var(
+
       --admin-text,
+
       #111827
+
     ) !important;
 
   font-size: 10px;
 
   font-weight: 800;
+
 }
 
-
 .comoff-history-item span {
+
   color:
+
     var(
+
       --admin-muted,
+
       #6b7280
+
     ) !important;
 
   font-size: 8px;
+
 }
 
-
 /* =========================================================
+
    HISTORY STATUS
+
 ========================================================= */
 
 .comoff-history-status {
+
   min-width: 72px;
 
   height: 26px;
 
   display:
+
     inline-flex;
 
   align-items: center;
@@ -2166,44 +2919,57 @@ div {
   justify-self: center;
 
   padding:
+
     0 8px;
 
   border-radius:
+
     999px;
 
   font-size:
+
     8px !important;
 
   font-weight: 800;
 
   text-transform:
+
     capitalize;
+
 }
 
-
 .comoff-history-status.earned {
+
   background:
+
     #dcfce7;
 
   color:
+
     #15803d !important;
+
 }
 
-
 .comoff-history-status.revoked {
+
   background:
+
     #fee2e2;
 
   color:
+
     #b91c1c !important;
+
 }
 
-
 /* =========================================================
+
    MODAL FOOTER
+
 ========================================================= */
 
 .comoff-modal-footer {
+
   flex-shrink: 0;
 
   display: flex;
@@ -2211,30 +2977,43 @@ div {
   align-items: center;
 
   justify-content:
+
     flex-end;
 
   padding:
+
     16px 24px;
 
   border-top:
+
     1px solid
+
     var(
+
       --admin-border,
+
       #e5e7eb
+
     );
 
   background:
+
     var(
+
       --admin-card,
+
       #ffffff
+
     );
+
 }
 
-
 .comoff-modal-footer button {
+
   min-height: 40px;
 
   padding:
+
     0 18px;
 
   border: none;
@@ -2242,9 +3021,11 @@ div {
   border-radius: 8px;
 
   background:
+
     #111827;
 
   color:
+
     #ffffff !important;
 
   font-size: 11px;
@@ -2252,209 +3033,851 @@ div {
   font-weight: 800;
 
   cursor: pointer;
+
 }
 
-
 /* =========================================================
+
    DARK MODE
+
 ========================================================= */
 
 html[data-theme='dark'],
+
 html[data-theme='classic-dark'],
+
 .theme-dark,
+
 .theme-classic-dark {
+
   --admin-text: #f9fafb;
+
   --admin-muted: #9ca3af;
+
   --admin-card: #20242c;
+
   --admin-input: #292e37;
+
   --admin-border: #3b414c;
+
   --admin-table-header: #252a32;
+
+}
+
+/* =========================================================
+
+   RESPONSIVE
+
+========================================================= */
+
+@media (
+
+  max-width: 1200px
+
+) {
+
+  .admin-comoff-page {
+
+    padding:
+
+      20px 18px;
+
+  }
+
+}
+
+@media (
+
+  max-width: 1000px
+
+) {
+
+  .comoff-request-table
+
+  th:nth-child(5),
+
+  .comoff-request-table
+
+  td:nth-child(5),
+
+  .comoff-request-table
+
+  th:nth-child(7),
+
+  .comoff-request-table
+
+  td:nth-child(7) {
+
+    display: none;
+
+  }
+
+  .comoff-table
+
+  th:nth-child(3),
+
+  .comoff-table
+
+  td:nth-child(3),
+
+  .comoff-table
+
+  th:nth-child(9),
+
+  .comoff-table
+
+  td:nth-child(9) {
+
+    display: none;
+
+  }
+
+}
+
+@media (
+
+  max-width: 760px
+
+) {
+
+  .admin-comoff-page {
+
+    padding:
+
+      16px 12px;
+
+  }
+
+  .comoff-stat-grid {
+
+    grid-template-columns:
+
+      1fr;
+
+  }
+
+  .comoff-section-header {
+
+    align-items: stretch;
+
+    flex-direction:
+
+      column;
+
+  }
+
+  .comoff-section-header select {
+
+    width: 100%;
+
+  }
+
+  .comoff-request-filter-bar {
+
+    flex-direction:
+
+      column;
+
+    align-items: stretch;
+
+  }
+
+  .comoff-request-clear {
+
+    width: 100%;
+
+  }
+
+  .comoff-filter-bar {
+
+    flex-direction:
+
+      column;
+
+    align-items: stretch;
+
+  }
+
+  .comoff-search-box {
+
+    max-width: none;
+
+  }
+
+  .comoff-clear-button {
+
+    width: 100%;
+
+  }
+
+  .comoff-history-balance {
+
+    grid-template-columns:
+
+      1fr 1fr;
+
+  }
+
+  .comoff-history-item {
+
+    grid-template-columns:
+
+      1fr 1fr;
+
+  }
+
+}
+
+@media (
+
+  max-width: 520px
+
+) {
+
+  .comoff-modal-overlay {
+
+    padding: 10px;
+
+  }
+
+  .comoff-modal {
+
+    width:
+
+      calc(
+
+        100vw - 20px
+
+      );
+
+    max-height:
+
+      calc(
+
+        100dvh - 20px
+
+      );
+
+  }
+
+  .comoff-modal-header {
+
+    padding:
+
+      17px 18px;
+
+  }
+
+  .comoff-history-balance {
+
+    padding:
+
+      16px 18px;
+
+  }
+
+  .comoff-modal-content {
+
+    padding:
+
+      0 18px
+
+      18px;
+
+  }
+
+  .comoff-history-item {
+
+    grid-template-columns:
+
+      1fr;
+
+  }
+
+  .comoff-history-status {
+
+    justify-self:
+
+      start;
+
+  }
+
+  .comoff-modal-footer {
+
+    padding:
+
+      14px 18px;
+
+  }
+
+  .comoff-modal-footer button {
+
+    width: 100%;
+
+  }
+
+}
+
+/* =========================================================
+   REQUEST / BALANCE VIEW SWITCH
+========================================================= */
+
+.comoff-request-overview-row {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(500px, 0.9fr)
+    minmax(650px, 1.35fr);
+
+  align-items: stretch;
+
+  gap: 14px;
+
+  margin-bottom: 18px;
+}
+
+.comoff-stat-grid-inline {
+  min-width: 0;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(
+        0,
+        1fr
+      )
+    );
+
+  gap: 12px;
+
+  margin-bottom: 0;
+}
+
+.comoff-stat-grid-inline .comoff-stat-card {
+  min-height: 96px;
+}
+
+.comoff-request-toolbar {
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(
+      240px,
+      1fr
+    )
+    150px
+    auto;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding:
+    12px 14px;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #e5e7eb
+    );
+
+  border-radius: 13px;
+
+  background:
+    var(
+      --admin-card,
+      #ffffff
+    );
+
+  box-sizing: border-box;
+}
+
+.comoff-request-toolbar-title {
+  min-width: 190px;
+}
+
+.comoff-request-toolbar-title h2 {
+  margin: 0;
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    ) !important;
+
+  font-size: 17px;
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.comoff-request-toolbar-title p {
+  margin:
+    4px 0 0;
+
+  max-width: 225px;
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.comoff-request-toolbar .comoff-request-search-box {
+  min-width: 0;
+}
+
+.comoff-request-toolbar .comoff-request-search-box input {
+  height: 44px;
+}
+
+.comoff-request-status-select {
+  width: 100%;
+  height: 44px;
+
+  padding:
+    0 11px;
+
+  border:
+    1px solid
+    var(
+      --admin-border,
+      #d1d5db
+    );
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background:
+    var(
+      --admin-input,
+      #ffffff
+    );
+
+  color:
+    var(
+      --admin-text,
+      #111827
+    );
+
+  font-family: inherit;
+
+  box-sizing: border-box;
+}
+
+.comoff-request-section {
+  margin-bottom: 28px;
+}
+
+.comoff-balance-section {
+  margin-top: 0;
+}
+
+@media (max-width: 1450px) {
+  .comoff-request-overview-row {
+    grid-template-columns:
+      1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .comoff-request-toolbar {
+    grid-template-columns:
+      1fr;
+  }
+
+  .comoff-request-toolbar-title {
+    min-width: 0;
+  }
+
+  .comoff-request-toolbar-title p {
+    max-width: none;
+  }
+
+  .comoff-request-status-select,
+  .comoff-request-toolbar .comoff-request-clear {
+    width: 100%;
+  }
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   FROZEN EMPLOYEE BALANCE TOOLBAR
 ========================================================= */
 
-@media (
-  max-width: 1200px
-) {
+.comoff-balance-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
 
-  .admin-comoff-page {
-    padding:
-      20px 18px;
-  }
+  width: 100%;
 
+  display: grid;
+  grid-template-columns:
+    auto
+    minmax(
+      340px,
+      1fr
+    );
+
+  align-items: center;
+
+  gap: 18px;
+
+  margin-bottom: 14px;
+
+  padding:
+    12px 0;
+
+  background:
+    var(
+      --admin-page-bg,
+      #f5f7fa
+    );
+
+  box-sizing: border-box;
 }
 
-
-@media (
-  max-width: 1000px
-) {
-
-  .comoff-request-table
-  th:nth-child(5),
-  .comoff-request-table
-  td:nth-child(5),
-
-  .comoff-request-table
-  th:nth-child(7),
-  .comoff-request-table
-  td:nth-child(7) {
-    display: none;
-  }
-
-
-  .comoff-table
-  th:nth-child(3),
-  .comoff-table
-  td:nth-child(3),
-
-  .comoff-table
-  th:nth-child(9),
-  .comoff-table
-  td:nth-child(9) {
-    display: none;
-  }
-
+.comoff-balance-toolbar-title {
+  min-width: 265px;
 }
 
+.comoff-balance-toolbar-title h2 {
+  margin: 0;
 
-@media (
-  max-width: 760px
-) {
+  color:
+    var(
+      --admin-text,
+      #111827
+    ) !important;
 
-  .admin-comoff-page {
-    padding:
-      16px 12px;
-  }
+  font-size: 18px;
+  font-weight: 800;
 
+  white-space: nowrap;
+}
 
-  .comoff-stat-grid {
+.comoff-balance-toolbar-title p {
+  margin:
+    4px 0 0;
+
+  color:
+    var(
+      --admin-muted,
+      #6b7280
+    );
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+.comoff-balance-toolbar-search {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+}
+
+.comoff-balance-toolbar-search
+.comoff-search-box {
+  width: 100%;
+  max-width: none;
+}
+
+.comoff-balance-toolbar-search
+.comoff-clear-button {
+  flex-shrink: 0;
+}
+
+html[data-theme='dark']
+.comoff-balance-toolbar,
+html[data-theme='classic-dark']
+.comoff-balance-toolbar,
+.theme-dark
+.comoff-balance-toolbar,
+.theme-classic-dark
+.comoff-balance-toolbar {
+  background:
+    #171a20;
+}
+
+@media (max-width: 1000px) {
+  .comoff-balance-toolbar {
     grid-template-columns:
       1fr;
   }
 
-
-  .comoff-section-header {
-    align-items: stretch;
-
-    flex-direction:
-      column;
+  .comoff-balance-toolbar-title {
+    min-width: 0;
   }
 
-
-  .comoff-section-header select {
-    width: 100%;
+  .comoff-balance-toolbar-title p {
+    white-space: normal;
   }
+}
 
-
-  .comoff-request-filter-bar {
-    flex-direction:
-      column;
-
+@media (max-width: 760px) {
+  .comoff-balance-toolbar-search {
+    flex-direction: column;
     align-items: stretch;
   }
 
-
-  .comoff-request-clear {
-    width: 100%;
-  }
-
-
-  .comoff-filter-bar {
-    flex-direction:
-      column;
-
-    align-items: stretch;
-  }
-
-
-  .comoff-search-box {
-    max-width: none;
-  }
-
-
+  .comoff-balance-toolbar-search
   .comoff-clear-button {
     width: 100%;
   }
-
-
-  .comoff-history-balance {
-    grid-template-columns:
-      1fr 1fr;
-  }
-
-
-  .comoff-history-item {
-    grid-template-columns:
-      1fr 1fr;
-  }
-
 }
 
 
-@media (
-  max-width: 520px
-) {
+/* =========================================================
+   COM-OFF BALANCE: FROZEN TITLE/SEARCH + SCROLLING EMPLOYEES
+========================================================= */
 
-  .comoff-modal-overlay {
-    padding: 10px;
-  }
+/* The dashboard header is 68px tall.
+   Constrain the balance page to the remaining viewport so the
+   employee rows scroll inside the table instead of the whole page. */
+.admin-comoff-page-balances {
+  height:
+    calc(
+      100vh - 68px
+    );
 
+  min-height: 0;
 
-  .comoff-modal {
-    width:
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+/* Employee Balances view fills the available page height. */
+.admin-comoff-page-balances
+.comoff-balance-section {
+  min-height: 0;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 0;
+
+  overflow: hidden;
+}
+
+/* Title/subtitle/search never move. */
+.admin-comoff-page-balances
+.comoff-balance-toolbar {
+  position: relative;
+  top: auto;
+  z-index: 20;
+
+  flex: 0 0 auto;
+
+  margin-bottom: 14px;
+}
+
+/* The table card uses all remaining height. */
+.admin-comoff-page-balances
+.comoff-table-card {
+  min-height: 0;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+/* Only the employees/table body area scrolls. */
+.admin-comoff-page-balances
+.comoff-table-scroll {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  flex: 1;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-gutter: stable;
+}
+
+/* Keep the table headings visible while employee rows scroll. */
+.admin-comoff-page-balances
+.comoff-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+/* Optional smoother scrollbar behavior without changing the UI. */
+.admin-comoff-page-balances
+.comoff-table-scroll {
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 760px) {
+  .admin-comoff-page-balances {
+    height:
       calc(
-        100vw - 20px
-      );
-
-    max-height:
-      calc(
-        100dvh - 20px
+        100dvh - 68px
       );
   }
+}
 
 
-  .comoff-modal-header {
+/* =========================================================
+   FINAL COM-OFF BALANCE FREEZE
+========================================================= */
+
+.admin-main-content-scroll-locked
+.admin-comoff-page-balances {
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding:
+    20px 30px
+    16px;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+.admin-main-content-scroll-locked
+.admin-comoff-page-balances
+.comoff-balance-section {
+  width: 100%;
+  height: 100%;
+
+  min-height: 0;
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  margin: 0;
+}
+
+/* This entire title/subtitle/search line never scrolls. */
+.admin-main-content-scroll-locked
+.admin-comoff-page-balances
+.comoff-balance-toolbar {
+  position: relative;
+
+  flex: 0 0 auto;
+
+  width: 100%;
+
+  margin:
+    0 0 14px;
+
+  padding:
+    0;
+
+  background:
+    var(
+      --page-bg,
+      #f5f7fa
+    );
+
+  z-index: 20;
+}
+
+/* Table card consumes the rest of the viewport. */
+.admin-main-content-scroll-locked
+.admin-comoff-page-balances
+.comoff-table-card {
+  min-height: 0;
+  height: 0;
+
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+/* This is the only vertical scrollbar. */
+.admin-main-content-scroll-locked
+.admin-comoff-page-balances
+.comoff-table-scroll {
+  min-height: 0;
+  height: 100%;
+
+  flex: 1 1 auto;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  overscroll-behavior: contain;
+
+  scrollbar-gutter: stable;
+}
+
+/* Column titles stay visible while employee rows move. */
+.admin-main-content-scroll-locked
+.admin-comoff-page-balances
+.comoff-table thead {
+  position: sticky;
+  top: 0;
+
+  z-index: 10;
+}
+
+.admin-main-content-scroll-locked
+.admin-comoff-page-balances
+.comoff-table thead th {
+  position: sticky;
+  top: 0;
+
+  z-index: 10;
+
+  background:
+    var(
+      --admin-table-header,
+      #f9fafb
+    );
+}
+
+@media (max-width: 1200px) {
+  .admin-main-content-scroll-locked
+  .admin-comoff-page-balances {
     padding:
-      17px 18px;
+      18px 18px
+      14px;
   }
+}
 
-
-  .comoff-history-balance {
+@media (max-width: 760px) {
+  .admin-main-content-scroll-locked
+  .admin-comoff-page-balances {
     padding:
-      16px 18px;
+      14px 12px
+      12px;
   }
-
-
-  .comoff-modal-content {
-    padding:
-      0 18px
-      18px;
-  }
-
-
-  .comoff-history-item {
-    grid-template-columns:
-      1fr;
-  }
-
-
-  .comoff-history-status {
-    justify-self:
-      start;
-  }
-
-
-  .comoff-modal-footer {
-    padding:
-      14px 18px;
-  }
-
-
-  .comoff-modal-footer button {
-    width: 100%;
-  }
-
 }
