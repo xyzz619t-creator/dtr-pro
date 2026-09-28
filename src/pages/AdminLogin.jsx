@@ -217,9 +217,12 @@ function AdminLogin({ onLogin }) {
         .toLowerCase()
 
     const allowedRoles = [
+      'administrator',
       'admin',
       'supervisor',
       'manager',
+      
+
     ]
 
     if (
