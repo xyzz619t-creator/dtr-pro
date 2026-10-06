@@ -1910,6 +1910,136 @@ function DtrApp({
 
   // =========================================================
 
+  // ENTER KEY DTR ACTION
+
+  // =========================================================
+
+  function handleEmployeeCodeKeyDown(
+
+    event
+
+  ) {
+
+    if (
+
+      event.key !== 'Enter' ||
+
+      event.repeat
+
+    ) {
+
+      return
+
+    }
+
+    event.preventDefault()
+
+    if (
+
+      loading ||
+
+      actionLoading ||
+
+      faceRecognizing
+
+    ) {
+
+      return
+
+    }
+
+    const code =
+
+      employeeCode.trim()
+
+    if (!code) {
+
+      return
+
+    }
+
+    // If the employee has not finished loading yet,
+    // Enter performs an immediate lookup instead of a DTR action.
+    if (!employee) {
+
+      if (
+
+        lookupTimer.current
+
+      ) {
+
+        window.clearTimeout(
+
+          lookupTimer.current
+
+        )
+
+        lookupTimer.current =
+
+          null
+
+      }
+
+      loadEmployeeDashboard(
+
+        code
+
+      )
+
+      return
+
+    }
+
+    // When the employee is currently on break,
+    // Enter performs BREAK END.
+    if (
+
+      dashboardStatus ===
+
+        'on_break' &&
+
+      ENABLE_BREAK_END
+
+    ) {
+
+      handleBreakEnd()
+
+      return
+
+    }
+
+    // When BREAK START is the available break action,
+    // Enter performs BREAK START.
+    if (
+
+      ENABLE_BREAK_START &&
+
+      !dutyEnded &&
+
+      (
+
+        dashboardStatus ===
+
+          'ready' ||
+
+        dashboardStatus ===
+
+          'working'
+
+      )
+
+    ) {
+
+      handleBreakStart()
+
+    }
+
+  }
+
+
+
+  // =========================================================
+
   // FACE SCANNER ACTIVE
 
 
@@ -2347,6 +2477,12 @@ function DtrApp({
               onChange={
 
                 handleEmployeeCodeChange
+
+              }
+
+              onKeyDown={
+
+                handleEmployeeCodeKeyDown
 
               }
 
