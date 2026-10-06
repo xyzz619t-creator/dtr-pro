@@ -24,7 +24,7 @@ import './KioskActivityPanels.css'
 
 const REFRESH_INTERVAL_MS =
 
-  3000
+  30000
 
 
 const DEVICE_TOKEN_STORAGE_KEY =
