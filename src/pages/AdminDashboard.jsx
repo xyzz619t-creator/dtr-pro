@@ -29,6 +29,7 @@ import AdminComOff from './AdminComOff'
 import AdminReports from './AdminReports'
 
 import AdminDevices from './AdminDevices'
+import AdminSettings from './AdminSettings'
 
 import './AdminDashboard.css'
 
@@ -67,6 +68,7 @@ const ADMIN_PAGE_ROUTES = {
   reports: '/admin/reports',
 
   devices: '/admin/devices',
+  settings: '/admin/settings',
 
 }
 
@@ -85,6 +87,7 @@ const ADMIN_ROUTE_PAGES = {
   '/admin/reports': 'reports',
 
   '/admin/devices': 'devices',
+  '/admin/settings': 'settings',
 
 }
 
@@ -124,75 +127,120 @@ function AdminDashboard({
 
     'employees'
 
-
   // =========================================================
+
   // REPORT TAB
+
   // =========================================================
 
   const [
+
     reportTab,
+
     setReportTab,
+
   ] = useState(
+
     'attendance'
+
   )
 
   const [
+
     reportMenuOpen,
+
     setReportMenuOpen,
+
   ] = useState(false)
 
   function selectReportTab(
+
     tab
+
   ) {
+
     setReportTab(tab)
+
     setReportMenuOpen(false)
 
     if (
+
       activePage !==
+
       'reports'
+
     ) {
+
       onNavigate(
+
         ADMIN_PAGE_ROUTES.reports
+
       )
+
     }
+
   }
 
-
   // =========================================================
+
   // COM-OFF TAB
+
   // =========================================================
 
   const [
+
     comOffTab,
+
     setComOffTab,
+
   ] = useState(
+
     'requests'
+
   )
 
   const [
+
     comOffMenuOpen,
+
     setComOffMenuOpen,
+
   ] = useState(false)
 
   function selectComOffTab(
+
     tab
+
   ) {
+
     setComOffTab(tab)
+
     setComOffMenuOpen(false)
 
     window.scrollTo(
+
       0,
+
       0
+
     )
 
     if (
+
       activePage !==
+
       'comoff'
+
     ) {
+
       onNavigate(
+
         ADMIN_PAGE_ROUTES.comoff
+
       )
+
     }
+
   }
 
   // =========================================================
@@ -358,25 +406,17 @@ function AdminDashboard({
             )
 
             .select(`
-
               id,
-
+              auth_user_id,
               first_name,
-
               last_name,
-
               role,
-
-              status
-
+              status,
+              department
             `)
-
             .eq(
-
-              'id',
-
+              'auth_user_id',
               adminUser.id
-
             )
 
             .maybeSingle()
@@ -694,7 +734,9 @@ function AdminDashboard({
     }
 
     setProfileOpen(false)
+
     setReportMenuOpen(false)
+
     setComOffMenuOpen(false)
 
     onNavigate(
@@ -740,12 +782,20 @@ function AdminDashboard({
       ?.last_name ||
 
     ''
-
   const role =
-
     adminProfile?.role ||
-
     'Administrator'
+
+  const normalizedRole =
+    String(role || '')
+      .trim()
+      .toLowerCase()
+
+  const canViewSettings = [
+    'administrator',
+    'manager',
+    'supervisor',
+  ].includes(normalizedRole)
 
   const email =
 
@@ -876,9 +926,13 @@ function AdminDashboard({
         return (
 
           <AdminComOff
+
             activeTab={
+
               comOffTab
+
             }
+
           />
 
         )
@@ -888,9 +942,13 @@ function AdminDashboard({
         return (
 
           <AdminReports
+
             activeTab={
+
               reportTab
+
             }
+
           />
 
         )
@@ -900,6 +958,15 @@ function AdminDashboard({
         return (
 
           <AdminDevices />
+
+        )
+
+      
+      case 'settings':
+
+        return (
+
+          <AdminSettings />
 
         )
 
@@ -993,39 +1060,73 @@ function AdminDashboard({
 
     },
 
+  
+    ...(canViewSettings
+      ? [
+          {
+            id: 'settings',
+            label: 'Settings',
+            icon: '⚙',
+          },
+        ]
+      : []),
   ]
 
   const reportNavigationItems = [
+
     {
+
       id: 'attendance',
+
       label: 'Attendance',
+
     },
+
     {
+
       id: 'leave',
+
       label: 'Leave',
+
     },
+
     {
+
       id: 'comoff',
+
       label: 'Com-Off',
+
     },
+
     {
+
       id: 'logs',
+
       label: 'Logs',
+
     },
+
   ]
 
-  
   const comOffNavigationItems = [
-    {
-      id: 'requests',
-      label: 'Request ComOff',
-    },
-    {
-      id: 'balances',
-      label: 'ComOff Balance',
-    },
-  ]
 
+    {
+
+      id: 'requests',
+
+      label: 'Request ComOff',
+
+    },
+
+    {
+
+      id: 'balances',
+
+      label: 'ComOff Balance',
+
+    },
+
+  ]
 
 // =========================================================
 
@@ -1106,12 +1207,19 @@ function AdminDashboard({
       ===================================================== */}
 
       <div
+
         className={
+
           activePage === 'comoff' &&
+
           comOffTab === 'balances'
+
             ? 'admin-dashboard-body admin-dashboard-body-scroll-locked'
+
             : 'admin-dashboard-body'
+
         }
+
       >
 
         {/* ===================================================
@@ -1193,156 +1301,295 @@ function AdminDashboard({
             <nav className="admin-sidebar-nav">
 
               {navigationItems.map(
+
                 (item) => {
+
                   const isReports =
+
                     item.id ===
+
                     'reports'
 
                   const isComOff =
+
                     item.id ===
+
                     'comoff'
 
                   return (
+
                     <div
+
                       key={
+
                         item.id
+
                       }
+
                       className={
+
                         isReports
+
                           ? 'admin-reports-nav-wrap'
+
                           : isComOff
+
                           ? 'admin-comoff-nav-wrap'
+
                           : 'admin-nav-wrap'
+
                       }
+
                       onMouseEnter={
+
                         isReports
+
                           ? () =>
+
                               setReportMenuOpen(
+
                                 true
+
                               )
+
                           : isComOff
+
                           ? () =>
+
                               setComOffMenuOpen(
+
                                 true
+
                               )
+
                           : undefined
+
                       }
+
                       onMouseLeave={
+
                         isReports
+
                           ? () =>
+
                               setReportMenuOpen(
+
                                 false
+
                               )
+
                           : isComOff
+
                           ? () =>
+
                               setComOffMenuOpen(
+
                                 false
+
                               )
+
                           : undefined
+
                       }
+
                     >
+
                       <button
+
                         type="button"
+
                         className={
+
                           getNavClass(
+
                             item.id
+
                           )
+
                         }
+
                         onClick={() =>
+
                           openPage(
+
                             item.id
+
                           )
+
                         }
+
                         title={
+
                           sidebarCollapsed
+
                             ? item.label
+
                             : undefined
+
                         }
+
                       >
+
                         <span className="admin-nav-icon">
+
                           {item.icon}
+
                         </span>
 
                         <span className="admin-nav-label">
+
                           {item.label}
+
                         </span>
+
                       </button>
 
                       {isReports &&
+
                         reportMenuOpen && (
+
                           <div
+
                             className="admin-reports-subnav"
+
                             aria-label="Report sections"
+
                           >
+
                             {reportNavigationItems.map(
+
                               (
+
                                 reportItem
+
                               ) => (
+
                                 <button
+
                                   key={
+
                                     reportItem.id
+
                                   }
+
                                   type="button"
+
                                   className={
+
                                     reportTab ===
+
                                     reportItem.id
+
                                       ? 'admin-report-subnav-button active'
+
                                       : 'admin-report-subnav-button'
+
                                   }
+
                                   onClick={() =>
+
                                     selectReportTab(
+
                                       reportItem.id
+
                                     )
+
                                   }
+
                                 >
+
                                   {
+
                                     reportItem.label
+
                                   }
+
                                 </button>
+
                               )
+
                             )}
+
                           </div>
+
                         )}
 
                       {isComOff &&
+
                         comOffMenuOpen && (
+
                           <div
+
                             className="admin-comoff-subnav"
+
                             aria-label="Com-off sections"
+
                           >
+
                             {comOffNavigationItems.map(
+
                               (
+
                                 comOffItem
+
                               ) => (
+
                                 <button
+
                                   key={
+
                                     comOffItem.id
+
                                   }
+
                                   type="button"
+
                                   className={
+
                                     comOffTab ===
+
                                     comOffItem.id
+
                                       ? 'admin-comoff-subnav-button active'
+
                                       : 'admin-comoff-subnav-button'
+
                                   }
+
                                   onClick={() =>
+
                                     selectComOffTab(
+
                                       comOffItem.id
+
                                     )
+
                                   }
+
                                 >
+
                                   {
+
                                     comOffItem.label
+
                                   }
+
                                 </button>
+
                               )
+
                             )}
+
                           </div>
+
                         )}
 
                     </div>
+
                   )
+
                 }
+
               )}
 
             </nav>
@@ -1620,12 +1867,19 @@ function AdminDashboard({
         =================================================== */}
 
         <main
+
           className={
+
             activePage === 'comoff' &&
+
             comOffTab === 'balances'
+
               ? 'admin-main-content admin-main-content-scroll-locked'
+
               : 'admin-main-content'
+
           }
+
         >
 
           {renderPage()}

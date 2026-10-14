@@ -1,32 +1,64 @@
 import {
 
+
+
   useEffect,
+
+
 
   useMemo,
 
+
+
   useState,
+
+
 
 } from 'react'
 
 
 
+
+
+
+
 import {
 
+
+
   createPortal,
+
+
 
 } from 'react-dom'
 
 
 
+
+
+
+
 import {
 
+
+
   supabase,
+
+
 
 } from '../lib/supabase'
 
 
 
+
+
+
+
 import FaceEnrollment from './FaceEnrollment'
+
+
+
+
 
 
 
@@ -36,21 +68,43 @@ import './AdminEmployees.css'
 
 
 
+
+
+
+
+
+
 function AdminEmployees() {
 
+
+
   // =========================================================
+
+
 
   // DATA
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   const [
 
+
+
     employees,
 
+
+
     setEmployees,
+
+
 
   ] = useState([])
 
@@ -58,79 +112,159 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // UI STATE
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   const [
 
+
+
     loading,
 
+
+
     setLoading,
+
+
 
   ] = useState(true)
 
 
 
+
+
+
+
   const [
+
+
 
     saving,
 
+
+
     setSaving,
+
+
 
   ] = useState(false)
 
 
 
+
+
+
+
   const [
+
+
 
     search,
 
+
+
     setSearch,
+
+
 
   ] = useState('')
 
 
 
+
+
+
+
   const [
+
+
 
     showForm,
 
+
+
     setShowForm,
+
+
 
   ] = useState(false)
 
 
 
+
+
+
+
   const [
+
+
 
     editingEmployee,
 
+
+
     setEditingEmployee,
+
+
 
   ] = useState(null)
 
 
 
+
+
+
+
   const [
+
+
 
     message,
 
+
+
     setMessage,
+
+
 
   ] = useState('')
 
 
 
+
+
+
+
   const [
+
+
 
     errorMessage,
 
+
+
     setErrorMessage,
+
+
 
   ] = useState('')
 
@@ -138,39 +272,79 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // FACE RECOGNITION
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   const [
 
+
+
     faceEnrollmentEmployee,
 
+
+
     setFaceEnrollmentEmployee,
+
+
 
   ] = useState(null)
 
 
 
+
+
+
+
   const [
+
+
 
     faceProfilesByEmployee,
 
+
+
     setFaceProfilesByEmployee,
+
+
 
   ] = useState({})
 
 
 
+
+
+
+
   const [
+
+
 
     loadingFaceProfiles,
 
+
+
     setLoadingFaceProfiles,
+
+
 
   ] = useState(false)
 
@@ -178,33 +352,67 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // EMPTY FORM
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   const emptyForm = {
 
+
+
     employee_code: '',
+
+
 
     first_name: '',
 
+
+
     last_name: '',
+
+
 
     department: '',
 
+
+
     position: '',
+
+
 
     email: '',
 
+
+
     phone: '',
+
+
 
     date_joined: '',
 
+
+
     status: 'active',
+
+
 
   }
 
@@ -212,15 +420,31 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   const [
+
+
 
     form,
 
+
+
     setForm,
+
+
 
   ] = useState(
 
+
+
     emptyForm
+
+
 
   )
 
@@ -228,19 +452,39 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // INITIAL LOAD
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   useEffect(() => {
 
+
+
     loadEmployees()
 
+
+
     loadFaceProfileStatus()
+
+
 
   }, [])
 
@@ -248,27 +492,59 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // LOCK PAGE SCROLL WHILE MODAL OPEN
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   useEffect(() => {
 
+
+
     if (
+
+
 
       !showForm &&
 
+
+
       !faceEnrollmentEmployee
+
+
 
     ) {
 
+
+
       return
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -276,7 +552,15 @@ function AdminEmployees() {
 
     const previousOverflow =
 
+
+
       document.body.style.overflow
+
+
+
+
+
+
 
 
 
@@ -284,7 +568,15 @@ function AdminEmployees() {
 
     document.body.style.overflow =
 
+
+
       'hidden'
+
+
+
+
+
+
 
 
 
@@ -292,17 +584,31 @@ function AdminEmployees() {
 
     return () => {
 
+
+
       document.body.style.overflow =
+
+
 
         previousOverflow
 
+
+
     }
+
+
 
   }, [
 
+
+
     showForm,
 
+
+
     faceEnrollmentEmployee,
+
+
 
   ])
 
@@ -310,89 +616,181 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // LOAD EMPLOYEES
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   async function loadEmployees() {
 
+
+
     setLoading(true)
+
+
+
+
 
 
 
     try {
 
+
+
       const {
+
+
 
         data,
 
+
+
         error,
+
+
 
       } =
 
+
+
         await supabase.rpc(
+
+
 
           'admin_list_employees_scoped'
 
+
+
         )
+
+
+
+
 
 
 
       if (error) {
 
+
+
         throw error
 
+
+
       }
+
+
+
+
 
 
 
       if (
 
+
+
         data?.success !==
+
+
 
         true
 
+
+
       ) {
+
+
 
         throw new Error(
 
+
+
           data?.message ||
+
+
 
           'Unable to load employees.'
 
+
+
         )
+
+
 
       }
 
 
 
+
+
+
+
       setEmployees(
+
+
 
         Array.isArray(
 
+
+
           data?.employees
+
+
 
         )
 
+
+
           ? data.employees
+
+
 
           : []
 
+
+
       )
+
+
 
     } catch (error) {
 
+
+
       console.error(
+
+
 
         'Load employees error:',
 
+
+
         error
 
+
+
       )
+
+
+
+
 
 
 
@@ -400,21 +798,41 @@ function AdminEmployees() {
 
 
 
+
+
+
+
       setErrorMessage(
+
+
 
         `Unable to load employees: ${
 
+
+
           error.message
+
+
 
         }`
 
+
+
       )
+
+
 
     } finally {
 
+
+
       setLoading(false)
 
+
+
     }
+
+
 
   }
 
@@ -422,15 +840,31 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // LOAD FACE PROFILE STATUS
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   async function loadFaceProfileStatus() {
+
+
 
     setLoadingFaceProfiles(true)
 
@@ -438,41 +872,87 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     try {
+
+
 
       const {
 
+
+
         data,
+
+
 
         error,
 
+
+
       } =
+
+
 
         await supabase
 
+
+
           .from(
+
+
 
             'employee_face_profiles'
 
+
+
           )
+
+
 
           .select(`
 
+
+
             employee_id,
+
+
 
             sample_type,
 
+
+
             status
+
+
 
           `)
 
+
+
           .eq(
+
+
 
             'status',
 
+
+
             'active'
 
+
+
           )
+
+
+
+
+
+
 
 
 
@@ -480,9 +960,19 @@ function AdminEmployees() {
 
       if (error) {
 
+
+
         throw error
 
+
+
       }
+
+
+
+
+
+
 
 
 
@@ -494,31 +984,63 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
       for (
+
+
 
         const row of
 
+
+
         data || []
+
+
 
       ) {
 
+
+
         if (
+
+
 
           !employeeSamples[
 
+
+
             row.employee_id
+
+
 
           ]
 
+
+
         ) {
+
+
 
           employeeSamples[
 
+
+
             row.employee_id
+
+
 
           ] =
 
+
+
             new Set()
+
+
 
         }
 
@@ -526,17 +1048,39 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
         employeeSamples[
+
+
 
           row.employee_id
 
+
+
         ].add(
+
+
 
           row.sample_type
 
+
+
         )
 
+
+
       }
+
+
+
+
+
+
 
 
 
@@ -548,87 +1092,179 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
       Object.entries(
+
+
 
         employeeSamples
 
+
+
       ).forEach(
+
+
 
         ([
 
+
+
           employeeId,
+
+
 
           samples,
 
+
+
         ]) => {
+
+
 
           normalized[
 
+
+
             employeeId
+
+
 
           ] = {
 
+
+
             count:
+
+
 
               samples.size,
 
 
 
+
+
+
+
             front:
+
+
 
               samples.has(
 
+
+
                 'front'
 
+
+
               ),
+
+
+
+
 
 
 
             left:
 
+
+
               samples.has(
+
+
 
                 'left'
 
+
+
               ),
+
+
+
+
 
 
 
             right:
 
+
+
               samples.has(
+
+
 
                 'right'
 
+
+
               ),
+
+
+
+
 
 
 
             complete:
 
+
+
               samples.has(
+
+
 
                 'front'
 
+
+
               ) &&
 
+
+
               samples.has(
+
+
 
                 'left'
 
+
+
               ) &&
+
+
 
               samples.has(
 
+
+
                 'right'
+
+
 
               ),
 
+
+
           }
+
+
 
         }
 
+
+
       )
+
+
+
+
+
+
 
 
 
@@ -636,29 +1272,55 @@ function AdminEmployees() {
 
       setFaceProfilesByEmployee(
 
+
+
         normalized
 
+
+
       )
+
+
 
     } catch (error) {
 
+
+
       console.error(
+
+
 
         'Face profile status error:',
 
+
+
         error
 
+
+
       )
+
+
 
     } finally {
 
+
+
       setLoadingFaceProfiles(
+
+
 
         false
 
+
+
       )
 
+
+
     }
+
+
 
   }
 
@@ -666,23 +1328,47 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // SEARCH
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   const filteredEmployees =
 
+
+
     useMemo(() => {
+
+
 
       const keyword =
 
+
+
         search
 
+
+
           .trim()
+
+
 
           .toLowerCase()
 
@@ -690,9 +1376,19 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
       if (!keyword) {
 
+
+
         return employees
+
+
 
       }
 
@@ -700,33 +1396,67 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
       return employees.filter(
+
+
 
         (employee) => {
 
+
+
           const searchableText =
+
+
 
             [
 
+
+
               employee.employee_code,
+
+
 
               employee.first_name,
 
+
+
               employee.last_name,
+
+
 
               employee.department,
 
+
+
               employee.position,
+
+
 
               employee.email,
 
+
+
               employee.phone,
+
+
 
             ]
 
+
+
               .filter(Boolean)
 
+
+
               .join(' ')
+
+
 
               .toLowerCase()
 
@@ -734,21 +1464,43 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
           return searchableText.includes(
+
+
 
             keyword
 
+
+
           )
+
+
 
         }
 
+
+
       )
+
+
 
     }, [
 
+
+
       employees,
 
+
+
       search,
+
+
 
     ])
 
@@ -756,27 +1508,55 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // FORM CHANGE
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   function handleFormChange(
 
+
+
     event
+
+
 
   ) {
 
+
+
     const {
+
+
 
       name,
 
+
+
       value,
 
+
+
     } =
+
+
 
       event.target
 
@@ -784,19 +1564,39 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setForm(
 
+
+
       (previous) => ({
+
+
 
         ...previous,
 
 
 
+
+
+
+
         [name]:
+
+
 
           value,
 
+
+
       })
+
+
 
     )
 
@@ -804,9 +1604,19 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setMessage('')
 
+
+
     setErrorMessage('')
+
+
 
   }
 
@@ -814,19 +1624,39 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // OPEN ADD EMPLOYEE
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   function openAddEmployee() {
 
+
+
     setEditingEmployee(
 
+
+
       null
+
+
 
     )
 
@@ -834,9 +1664,19 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setForm({
 
+
+
       ...emptyForm,
+
+
 
     })
 
@@ -844,7 +1684,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setMessage('')
+
+
 
     setErrorMessage('')
 
@@ -852,7 +1700,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setShowForm(true)
+
+
 
   }
 
@@ -860,23 +1716,47 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // OPEN EDIT EMPLOYEE
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   function openEditEmployee(
 
+
+
     employee
+
+
 
   ) {
 
+
+
     setEditingEmployee(
 
+
+
       employee
+
+
 
     )
 
@@ -884,77 +1764,155 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setForm({
+
+
 
       employee_code:
 
+
+
         employee.employee_code ||
 
+
+
         '',
+
+
+
+
 
 
 
       first_name:
 
+
+
         employee.first_name ||
 
+
+
         '',
+
+
+
+
 
 
 
       last_name:
 
+
+
         employee.last_name ||
 
+
+
         '',
+
+
+
+
 
 
 
       department:
 
+
+
         employee.department ||
 
+
+
         '',
+
+
+
+
 
 
 
       position:
 
+
+
         employee.position ||
 
+
+
         '',
+
+
+
+
 
 
 
       email:
 
+
+
         employee.email ||
 
+
+
         '',
+
+
+
+
 
 
 
       phone:
 
+
+
         employee.phone ||
 
+
+
         '',
+
+
+
+
 
 
 
       date_joined:
 
+
+
         employee.date_joined ||
+
+
 
         '',
 
 
 
+
+
+
+
       status:
+
+
 
         employee.status ||
 
+
+
         'active',
+
+
 
     })
 
@@ -962,7 +1920,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setMessage('')
+
+
 
     setErrorMessage('')
 
@@ -970,7 +1936,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setShowForm(true)
+
+
 
   }
 
@@ -978,27 +1952,59 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // CLOSE FORM
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   function closeForm() {
 
+
+
     if (
+
+
 
       saving ||
 
+
+
       faceEnrollmentEmployee
+
+
 
     ) {
 
+
+
       return
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -1008,11 +2014,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
     setEditingEmployee(
+
+
 
       null
 
+
+
     )
+
+
+
+
+
+
 
 
 
@@ -1020,7 +2040,11 @@ function AdminEmployees() {
 
     setForm({
 
+
+
       ...emptyForm,
+
+
 
     })
 
@@ -1028,7 +2052,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setErrorMessage('')
+
+
 
   }
 
@@ -1036,59 +2068,123 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // VALIDATION
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   function validateForm() {
 
+
+
     if (
+
+
 
       !form.employee_code
 
+
+
         .trim()
 
+
+
     ) {
+
+
 
       return 'Employee Code is required.'
 
+
+
     }
 
 
 
 
 
+
+
+
+
+
+
     if (
+
+
 
       !form.first_name
 
+
+
         .trim()
 
+
+
     ) {
+
+
 
       return 'First Name is required.'
 
+
+
     }
 
 
 
 
 
+
+
+
+
+
+
     if (
+
+
 
       !form.last_name
 
+
+
         .trim()
+
+
 
     ) {
 
+
+
       return 'Last Name is required.'
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -1096,19 +2192,39 @@ function AdminEmployees() {
 
     if (
 
+
+
       form.email.trim() &&
+
+
 
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
 
+
+
         form.email.trim()
+
+
 
       )
 
+
+
     ) {
+
+
 
       return 'Please enter a valid email address.'
 
+
+
     }
+
+
+
+
+
+
 
 
 
@@ -1116,553 +2232,325 @@ function AdminEmployees() {
 
     return null
 
+
+
   }
 
 
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // SAVE EMPLOYEE
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   async function saveEmployee(
-
     event
-
   ) {
-
     event.preventDefault()
 
-
-
-
-
     const validationError =
-
       validateForm()
 
-
-
-
-
-    if (
-
-      validationError
-
-    ) {
-
+    if (validationError) {
       setErrorMessage(
-
         validationError
-
       )
-
-
-
       return
-
     }
-
-
-
-
 
     setSaving(true)
-
-
-
     setMessage('')
-
     setErrorMessage('')
 
-
-
-
-
     const employeeData = {
-
       employee_code:
-
-        form.employee_code
-
-          .trim(),
-
-
+        form.employee_code.trim(),
 
       first_name:
-
-        form.first_name
-
-          .trim(),
-
-
+        form.first_name.trim(),
 
       last_name:
-
-        form.last_name
-
-          .trim(),
-
-
+        form.last_name.trim(),
 
       department:
-
-        form.department
-
-          .trim() ||
-
+        form.department.trim() ||
         null,
-
-
 
       position:
-
-        form.position
-
-          .trim() ||
-
+        form.position.trim() ||
         null,
-
-
 
       email:
-
-        form.email
-
-          .trim() ||
-
+        form.email.trim() ||
         null,
-
-
 
       phone:
-
-        form.phone
-
-          .trim() ||
-
+        form.phone.trim() ||
         null,
-
-
 
       date_joined:
-
         form.date_joined ||
-
         null,
 
-
-
       status:
-
         form.status,
-
     }
 
-
-
-
-
     try {
-
       // =====================================================
-
       // UPDATE
-
       // =====================================================
 
-
-
-      if (
-
-        editingEmployee
-
-      ) {
-
+      if (editingEmployee) {
         const {
-
+          data,
           error,
-
         } =
+          await supabase.rpc(
+            'admin_update_employee_scoped',
+            {
+              p_employee_id:
+                editingEmployee.id,
 
-          await supabase
-
-            .from(
-
-              'employees'
-
-            )
-
-            .update(
-
-              employeeData
-
-            )
-
-            .eq(
-
-              'id',
-
-              editingEmployee.id
-
-            )
-
-
-
-
+              p_employee:
+                employeeData,
+            }
+          )
 
         if (error) {
-
           throw error
-
         }
 
-
-
-
+        if (
+          data?.success !==
+          true
+        ) {
+          throw new Error(
+            data?.message ||
+            'Unable to update employee.'
+          )
+        }
 
         setMessage(
-
+          data?.message ||
           'Employee updated successfully.'
-
         )
-
       }
 
-
-
       // =====================================================
-
       // ADD
-
       // =====================================================
-
-
 
       else {
-
         const {
-
+          data,
           error,
-
         } =
-
-          await supabase
-
-            .from(
-
-              'employees'
-
-            )
-
-            .insert(
-
-              employeeData
-
-            )
-
-
-
-
+          await supabase.rpc(
+            'admin_create_employee_scoped',
+            {
+              p_employee:
+                employeeData,
+            }
+          )
 
         if (error) {
-
           throw error
-
         }
 
-
-
-
+        if (
+          data?.success !==
+          true
+        ) {
+          throw new Error(
+            data?.message ||
+            'Unable to add employee.'
+          )
+        }
 
         setMessage(
-
+          data?.message ||
           'Employee added successfully.'
-
         )
-
       }
-
-
-
-
 
       setShowForm(false)
 
-
-
       setEditingEmployee(
-
         null
-
       )
-
-
-
-
 
       setForm({
-
         ...emptyForm,
-
       })
 
-
-
-
-
       await loadEmployees()
-
     } catch (error) {
-
       console.error(
-
         'Save employee error:',
-
         error
-
       )
 
-
-
-
-
-      if (
-
-        error.code ===
-
-        '23505'
-
-      ) {
-
-        setErrorMessage(
-
-          'This Employee Code already exists.'
-
-        )
-
-      } else if (
-
-        error.code ===
-
-        '23514'
-
-      ) {
-
-        setErrorMessage(
-
-          'One of the employee values does not match the database requirements.'
-
-        )
-
-      } else {
-
-        setErrorMessage(
-
-          `Unable to save employee: ${error.message}`
-
-        )
-
-      }
-
+      setErrorMessage(
+        `Unable to save employee: ${
+          error?.message ||
+          'Unknown error'
+        }`
+      )
     } finally {
-
       setSaving(false)
-
     }
-
   }
 
 
 
-
-
-  // =========================================================
-
   // ACTIVATE / DEACTIVATE
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   async function toggleEmployeeStatus(
-
     employee
-
   ) {
-
     const newStatus =
-
       employee.status ===
-
       'active'
-
         ? 'inactive'
-
         : 'active'
 
-
-
-
-
     const actionText =
-
       newStatus ===
-
       'active'
-
         ? 'activate'
-
         : 'deactivate'
 
-
-
-
-
     const confirmed =
-
       window.confirm(
-
         `Are you sure you want to ${actionText} ${employee.first_name} ${employee.last_name}?`
-
       )
-
-
-
-
 
     if (!confirmed) {
-
       return
-
     }
-
-
-
-
 
     setMessage('')
-
     setErrorMessage('')
 
-
-
-
-
     try {
-
       const {
-
+        data,
         error,
-
       } =
+        await supabase.rpc(
+          'admin_set_employee_status_scoped',
+          {
+            p_employee_id:
+              employee.id,
 
-        await supabase
-
-          .from(
-
-            'employees'
-
-          )
-
-          .update({
-
-            status:
-
+            p_status:
               newStatus,
-
-          })
-
-          .eq(
-
-            'id',
-
-            employee.id
-
-          )
-
-
-
-
+          }
+        )
 
       if (error) {
-
         throw error
-
       }
 
-
-
-
+      if (
+        data?.success !==
+        true
+      ) {
+        throw new Error(
+          data?.message ||
+          'Unable to update employee status.'
+        )
+      }
 
       setMessage(
-
-        newStatus ===
-
-        'active'
-
-          ? 'Employee activated successfully.'
-
-          : 'Employee deactivated successfully.'
-
+        data?.message ||
+        (
+          newStatus ===
+          'active'
+            ? 'Employee activated successfully.'
+            : 'Employee deactivated successfully.'
+        )
       )
-
-
-
-
 
       await loadEmployees()
-
     } catch (error) {
-
       console.error(
-
         'Employee status error:',
-
         error
-
       )
-
-
-
-
 
       setErrorMessage(
-
-        `Unable to update employee status: ${error.message}`
-
+        `Unable to update employee status: ${
+          error?.message ||
+          'Unknown error'
+        }`
       )
-
     }
-
   }
 
 
 
-
-
-  // =========================================================
-
   // OPEN FACE ENROLLMENT
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   function openFaceEnrollment() {
 
+
+
     if (
+
+
 
       !editingEmployee
 
+
+
     ) {
 
+
+
       return
+
+
 
     }
 
@@ -1670,7 +2558,19 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setErrorMessage('')
+
+
+
+
+
+
 
 
 
@@ -1678,9 +2578,15 @@ function AdminEmployees() {
 
     setFaceEnrollmentEmployee(
 
+
+
       editingEmployee
 
+
+
     )
+
+
 
   }
 
@@ -1688,15 +2594,31 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // FACE ENROLLMENT SAVED
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   async function handleFaceSaved() {
+
+
 
     await loadFaceProfileStatus()
 
@@ -1704,11 +2626,27 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
     setMessage(
+
+
 
       'Face profile registered successfully.'
 
+
+
     )
+
+
+
+
+
+
 
 
 
@@ -1716,47 +2654,91 @@ function AdminEmployees() {
 
     setErrorMessage('')
 
+
+
   }
 
 
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // GET FACE STATUS
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   function getFaceStatus(
 
+
+
     employeeId
+
+
 
   ) {
 
+
+
     return (
+
+
 
       faceProfilesByEmployee[
 
+
+
         employeeId
+
+
 
       ] || {
 
+
+
         count: 0,
+
+
 
         front: false,
 
+
+
         left: false,
+
+
 
         right: false,
 
+
+
         complete: false,
+
+
 
       }
 
+
+
     )
+
+
 
   }
 
@@ -1764,15 +2746,31 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // COUNTS
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   const totalEmployees =
+
+
 
     employees.length
 
@@ -1780,17 +2778,39 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   const activeEmployees =
+
+
 
     employees.filter(
 
+
+
       (employee) =>
+
+
 
         employee.status ===
 
+
+
         'active'
 
+
+
     ).length
+
+
+
+
+
+
 
 
 
@@ -1798,13 +2818,23 @@ function AdminEmployees() {
 
   const inactiveEmployees =
 
+
+
     employees.filter(
+
+
 
       (employee) =>
 
+
+
         employee.status ===
 
+
+
         'inactive'
+
+
 
     ).length
 
@@ -1812,23 +2842,47 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // CURRENT FACE STATUS
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   const editingFaceStatus =
 
+
+
     editingEmployee
+
+
 
       ? getFaceStatus(
 
+
+
           editingEmployee.id
 
+
+
         )
+
+
 
       : null
 
@@ -1836,79 +2890,161 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // EMPLOYEE FORM MODAL
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   const employeeFormModal =
 
+
+
     showForm
+
+
 
       ? createPortal(
 
+
+
           <div
+
+
 
             className="employee-modal-backdrop"
 
+
+
             role="presentation"
+
+
 
             onMouseDown={(
 
+
+
               event
+
+
 
             ) => {
 
+
+
               if (
+
+
 
                 event.target ===
 
+
+
                 event.currentTarget
+
+
 
               ) {
 
+
+
                 closeForm()
+
+
 
               }
 
+
+
             }}
+
+
 
           >
 
 
 
+
+
+
+
             <div
+
+
 
               className="employee-modal"
 
+
+
               role="dialog"
+
+
 
               aria-modal="true"
 
+
+
               aria-labelledby="employee-modal-title"
+
+
 
               onMouseDown={(
 
+
+
                 event
+
+
 
               ) => {
 
+
+
                 event.stopPropagation()
 
+
+
               }}
+
+
 
             >
 
 
 
+
+
+
+
               {/* =============================================
+
+
 
                   MODAL HEADER
 
+
+
               ============================================= */}
+
+
+
+
 
 
 
@@ -1916,17 +3052,33 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                 <div>
+
+
+
+
 
 
 
                   <h2 id="employee-modal-title">
 
+
+
                     {editingEmployee
+
+
 
                       ? 'Edit Employee'
 
+
+
                       : 'Add Employee'}
+
+
 
                   </h2>
 
@@ -1934,15 +3086,33 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                   <p>
+
+
 
                     {editingEmployee
 
+
+
                       ? 'Update employee information and face recognition.'
+
+
 
                       : 'Create a new employee record.'}
 
+
+
                   </p>
+
+
+
+
 
 
 
@@ -1952,37 +3122,77 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                 <button
+
+
 
                   type="button"
 
+
+
                   className="employee-modal-close"
+
+
 
                   onClick={
 
+
+
                     closeForm
 
+
+
                   }
+
+
 
                   disabled={
 
+
+
                     saving ||
+
+
 
                     Boolean(
 
+
+
                       faceEnrollmentEmployee
+
+
 
                     )
 
+
+
                   }
+
+
 
                   aria-label="Close"
 
+
+
                 >
+
+
 
                   ×
 
+
+
                 </button>
+
+
+
+
 
 
 
@@ -1992,25 +3202,53 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
               {/* =============================================
 
+
+
                   FORM
+
+
 
               ============================================= */}
 
 
 
+
+
+
+
               <form
+
+
 
                 onSubmit={
 
+
+
                   saveEmployee
+
+
 
                 }
 
+
+
                 className="employee-form"
 
+
+
               >
+
+
+
+
 
 
 
@@ -2018,11 +3256,21 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   <label>
+
+
 
                     Employee Code
 
+
+
                     <span>*</span>
+
+
 
                   </label>
 
@@ -2030,33 +3278,71 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                   <input
+
+
 
                     type="text"
 
+
+
                     name="employee_code"
+
+
 
                     value={
 
+
+
                       form.employee_code
 
+
+
                     }
+
+
 
                     onChange={
 
+
+
                       handleFormChange
+
+
 
                     }
 
+
+
                     placeholder="e.g. 361"
 
+
+
                     autoFocus
+
+
 
                   />
 
 
 
+
+
+
+
                 </div>
+
+
+
+
+
+
 
 
 
@@ -2066,15 +3352,29 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   <div className="employee-form-field">
 
 
 
+
+
+
+
                     <label>
+
+
 
                       First Name
 
+
+
                       <span>*</span>
+
+
 
                     </label>
 
@@ -2082,27 +3382,57 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                     <input
 
+
+
                       type="text"
+
+
 
                       name="first_name"
 
+
+
                       value={
+
+
 
                         form.first_name
 
+
+
                       }
+
+
 
                       onChange={
 
+
+
                         handleFormChange
 
+
+
                       }
+
+
 
                       placeholder="First name"
 
+
+
                     />
+
+
+
+
 
 
 
@@ -2112,15 +3442,31 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                   <div className="employee-form-field">
 
 
 
+
+
+
+
                     <label>
+
+
 
                       Last Name
 
+
+
                       <span>*</span>
+
+
 
                     </label>
 
@@ -2128,31 +3474,65 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                     <input
 
+
+
                       type="text"
+
+
 
                       name="last_name"
 
+
+
                       value={
+
+
 
                         form.last_name
 
+
+
                       }
+
+
 
                       onChange={
 
+
+
                         handleFormChange
 
+
+
                       }
+
+
 
                       placeholder="Last name"
 
+
+
                     />
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -2162,7 +3542,17 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                 <div className="employee-form-row">
+
+
+
+
 
 
 
@@ -2170,11 +3560,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                     <label>
+
+
 
                       Department
 
+
+
                     </label>
+
+
+
+
+
+
 
 
 
@@ -2182,25 +3586,49 @@ function AdminEmployees() {
 
                     <input
 
+
+
                       type="text"
+
+
 
                       name="department"
 
+
+
                       value={
+
+
 
                         form.department
 
+
+
                       }
+
+
 
                       onChange={
 
+
+
                         handleFormChange
 
+
+
                       }
+
+
 
                       placeholder="e.g. Decoration"
 
+
+
                     />
+
+
+
+
 
 
 
@@ -2210,15 +3638,35 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                   <div className="employee-form-field">
 
 
 
+
+
+
+
                     <label>
+
+
 
                       Position
 
+
+
                     </label>
+
+
+
+
+
+
 
 
 
@@ -2226,29 +3674,57 @@ function AdminEmployees() {
 
                     <input
 
+
+
                       type="text"
+
+
 
                       name="position"
 
+
+
                       value={
+
+
 
                         form.position
 
+
+
                       }
+
+
 
                       onChange={
 
+
+
                         handleFormChange
 
+
+
                       }
+
+
 
                       placeholder="Job position"
 
+
+
                     />
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -2258,7 +3734,17 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                 <div className="employee-form-row">
+
+
+
+
 
 
 
@@ -2266,11 +3752,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                     <label>
+
+
 
                       Email
 
+
+
                     </label>
+
+
+
+
+
+
 
 
 
@@ -2278,29 +3778,59 @@ function AdminEmployees() {
 
                     <input
 
+
+
                       type="email"
+
+
 
                       name="email"
 
+
+
                       value={
+
+
 
                         form.email
 
+
+
                       }
+
+
 
                       onChange={
 
+
+
                         handleFormChange
+
+
 
                       }
 
-                      placeholder="employee\@email.com"
+
+
+                      placeholder="employee@email.com"
+
+
 
                     />
 
 
 
+
+
+
+
                   </div>
+
+
+
+
+
+
 
 
 
@@ -2310,9 +3840,17 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                     <label>
 
+
+
                       Phone
+
+
 
                     </label>
 
@@ -2320,31 +3858,65 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                     <input
+
+
 
                       type="text"
 
+
+
                       name="phone"
+
+
 
                       value={
 
+
+
                         form.phone
 
+
+
                       }
+
+
 
                       onChange={
 
+
+
                         handleFormChange
+
+
 
                       }
 
+
+
                       placeholder="+971..."
+
+
 
                     />
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -2354,7 +3926,17 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                 <div className="employee-form-row">
+
+
+
+
 
 
 
@@ -2362,9 +3944,17 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                     <label>
 
+
+
                       Date Joined
+
+
 
                     </label>
 
@@ -2372,25 +3962,53 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                     <input
+
+
 
                       type="date"
 
+
+
                       name="date_joined"
+
+
 
                       value={
 
+
+
                         form.date_joined
 
+
+
                       }
+
+
 
                       onChange={
 
+
+
                         handleFormChange
+
+
 
                       }
 
+
+
                     />
+
+
+
+
 
 
 
@@ -2400,15 +4018,35 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                   <div className="employee-form-field">
+
+
+
+
 
 
 
                     <label>
 
+
+
                       Status
 
+
+
                     </label>
+
+
+
+
+
+
 
 
 
@@ -2416,37 +4054,73 @@ function AdminEmployees() {
 
                     <select
 
+
+
                       name="status"
+
+
 
                       value={
 
+
+
                         form.status
 
+
+
                       }
+
+
 
                       onChange={
 
+
+
                         handleFormChange
 
+
+
                       }
+
+
 
                     >
 
 
 
+
+
+
+
                       <option value="active">
+
+
 
                         Active
 
+
+
                       </option>
+
+
+
+
 
 
 
                       <option value="inactive">
 
+
+
                         Inactive
 
+
+
                       </option>
+
+
+
+
 
 
 
@@ -2454,7 +4128,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   </div>
+
+
+
+
 
 
 
@@ -2464,11 +4146,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                 {/* ===========================================
+
+
 
                     FACE RECOGNITION
 
+
+
                 =========================================== */}
+
+
+
+
 
 
 
@@ -2476,7 +4172,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   <div className="employee-face-section">
+
+
+
+
 
 
 
@@ -2484,11 +4188,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                       <div className="employee-face-icon">
+
+
 
                         ◉
 
+
+
                       </div>
+
+
+
+
+
+
 
 
 
@@ -2498,15 +4216,33 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                         <div className="employee-face-title-row">
+
+
+
+
 
 
 
                           <strong>
 
+
+
                             Face Recognition
 
+
+
                           </strong>
+
+
+
+
+
+
 
 
 
@@ -2516,11 +4252,23 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                             <span className="employee-face-status loading">
+
+
 
                               Checking...
 
+
+
                             </span>
+
+
+
+
 
 
 
@@ -2528,11 +4276,23 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                             <span className="employee-face-status enrolled">
+
+
 
                               ✓ Enrolled
 
+
+
                             </span>
+
+
+
+
 
 
 
@@ -2540,11 +4300,23 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                             <span className="employee-face-status incomplete">
+
+
 
                               {editingFaceStatus.count}/3 Captured
 
+
+
                             </span>
+
+
+
+
 
 
 
@@ -2552,15 +4324,31 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                             <span className="employee-face-status not-enrolled">
 
+
+
                               Not Enrolled
+
+
 
                             </span>
 
 
 
+
+
+
+
                           )}
+
+
+
+
 
 
 
@@ -2570,11 +4358,27 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                         <p>
+
+
 
                           Register this employee for automatic face identification at the DTR kiosk.
 
+
+
                         </p>
+
+
+
+
+
+
 
 
 
@@ -2584,31 +4388,63 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                           <div className="employee-face-samples">
 
 
 
+
+
+
+
                             <span>
+
+
 
                               ✓ Front
 
+
+
                             </span>
 
 
 
+
+
+
+
                             <span>
+
+
 
                               ✓ Left
 
+
+
                             </span>
+
+
+
+
 
 
 
                             <span>
 
+
+
                               ✓ Right
 
+
+
                             </span>
+
+
+
+
 
 
 
@@ -2616,11 +4452,23 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                         )}
 
 
 
+
+
+
+
                       </div>
+
+
+
+
 
 
 
@@ -2630,39 +4478,81 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                     <button
+
+
 
                       type="button"
 
+
+
                       className="employee-register-face-button"
+
+
 
                       onClick={
 
+
+
                         openFaceEnrollment
 
+
+
                       }
+
+
 
                       disabled={
 
+
+
                         saving ||
+
+
 
                         loadingFaceProfiles
 
+
+
                       }
+
+
 
                     >
 
 
 
+
+
+
+
                       {editingFaceStatus?.complete
+
+
 
                         ? 'Re-register Face'
 
+
+
                         : editingFaceStatus?.count > 0
+
+
 
                         ? 'Continue Enrollment'
 
+
+
                         : 'Register Face'}
+
+
+
+
 
 
 
@@ -2670,11 +4560,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   </div>
 
 
 
+
+
+
+
                 )}
+
+
+
+
+
+
 
 
 
@@ -2684,15 +4588,33 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   <div className="employee-face-new-notice">
+
+
+
+
 
 
 
                     <span>
 
+
+
                       ◉
 
+
+
                     </span>
+
+
+
+
+
+
 
 
 
@@ -2702,9 +4624,17 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                       <strong>
 
+
+
                         Face Recognition
+
+
 
                       </strong>
 
@@ -2712,11 +4642,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                       <p>
+
+
 
                         Save the employee first. You can register their face when editing the employee afterward.
 
+
+
                       </p>
+
+
+
+
 
 
 
@@ -2724,11 +4668,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   </div>
 
 
 
+
+
+
+
                 )}
+
+
+
+
+
+
 
 
 
@@ -2738,15 +4696,33 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   <div className="employee-form-error">
 
+
+
                     {errorMessage}
+
+
 
                   </div>
 
 
 
+
+
+
+
                 )}
+
+
+
+
+
+
 
 
 
@@ -2756,35 +4732,73 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   <button
+
+
 
                     type="button"
 
+
+
                     className="employee-cancel-button"
+
+
 
                     onClick={
 
+
+
                       closeForm
 
+
+
                     }
+
+
 
                     disabled={
 
+
+
                       saving ||
+
+
 
                       Boolean(
 
+
+
                         faceEnrollmentEmployee
+
+
 
                       )
 
+
+
                     }
+
+
 
                   >
 
+
+
                     Cancel
 
+
+
                   </button>
+
+
+
+
+
+
 
 
 
@@ -2792,35 +4806,69 @@ function AdminEmployees() {
 
                   <button
 
+
+
                     type="submit"
+
+
 
                     className="employee-save-button"
 
+
+
                     disabled={
+
+
 
                       saving ||
 
+
+
                       Boolean(
+
+
 
                         faceEnrollmentEmployee
 
+
+
                       )
+
+
 
                     }
 
+
+
                   >
+
+
 
                     {saving
 
+
+
                       ? 'Saving...'
+
+
 
                       : editingEmployee
 
+
+
                       ? 'Update Employee'
+
+
 
                       : 'Add Employee'}
 
+
+
                   </button>
+
+
+
+
 
 
 
@@ -2828,7 +4876,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
               </form>
+
+
+
+
 
 
 
@@ -2836,13 +4892,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
           </div>,
+
+
+
+
 
 
 
           document.body
 
+
+
         )
+
+
 
       : null
 
@@ -2850,55 +4918,111 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // FACE ENROLLMENT MODAL
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   const faceEnrollmentModal =
 
+
+
     faceEnrollmentEmployee
+
+
 
       ? createPortal(
 
+
+
           <FaceEnrollment
+
+
 
             employee={
 
+
+
               faceEnrollmentEmployee
 
+
+
             }
+
+
+
+
 
 
 
             onClose={() => {
 
+
+
               setFaceEnrollmentEmployee(
+
+
 
                 null
 
+
+
               )
+
+
 
             }}
 
 
 
+
+
+
+
             onSaved={
+
+
 
               handleFaceSaved
 
+
+
             }
+
+
 
           />,
 
 
 
+
+
+
+
           document.body
 
+
+
         )
+
+
 
       : null
 
@@ -2906,25 +5030,53 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
   // =========================================================
+
+
 
   // UI
 
+
+
   // =========================================================
+
+
+
+
 
 
 
   return (
 
+
+
     <div className="admin-employees-page">
+
+
+
+
 
 
 
       {/* =====================================================
 
+
+
           SUMMARY
 
+
+
       ===================================================== */}
+
+
+
+
 
 
 
@@ -2932,23 +5084,47 @@ function AdminEmployees() {
 
 
 
+
+
+
+
         <div className="employee-summary-card">
 
 
 
+
+
+
+
           <span>
+
+
 
             Total Employees
 
+
+
           </span>
 
 
 
+
+
+
+
           <strong>
+
+
 
             {totalEmployees}
 
+
+
           </strong>
+
+
+
+
 
 
 
@@ -2958,27 +5134,59 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
         <div className="employee-summary-card">
 
 
 
+
+
+
+
           <span>
+
+
 
             Active
 
+
+
           </span>
+
+
+
+
 
 
 
           <strong>
 
+
+
             {activeEmployees}
+
+
 
           </strong>
 
 
 
+
+
+
+
         </div>
+
+
+
+
+
+
 
 
 
@@ -2988,23 +5196,47 @@ function AdminEmployees() {
 
 
 
+
+
+
+
           <span>
 
+
+
             Inactive
+
+
 
           </span>
 
 
 
+
+
+
+
           <strong>
 
+
+
             {inactiveEmployees}
+
+
 
           </strong>
 
 
 
+
+
+
+
         </div>
+
+
+
+
 
 
 
@@ -3014,11 +5246,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
       {/* =====================================================
+
+
 
           MESSAGES
 
+
+
       ===================================================== */}
+
+
+
+
 
 
 
@@ -3026,11 +5272,23 @@ function AdminEmployees() {
 
 
 
+
+
+
+
         <div className="employee-message success">
+
+
 
           {message}
 
+
+
         </div>
+
+
+
+
 
 
 
@@ -3040,17 +5298,37 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
       {errorMessage &&
+
+
 
         !showForm && (
 
 
 
+
+
+
+
           <div className="employee-message error">
+
+
 
             {errorMessage}
 
+
+
           </div>
+
+
+
+
 
 
 
@@ -3060,11 +5338,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
       {/* =====================================================
+
+
 
           SEARCH + ADD EMPLOYEE
 
+
+
       ===================================================== */}
+
+
+
+
 
 
 
@@ -3072,13 +5364,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
         <div className="employee-search-wrapper">
+
+
+
+
 
 
 
           <span className="employee-search-icon">
 
+
+
             🔍
+
+
 
           </span>
 
@@ -3086,33 +5390,69 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
           <input
+
+
 
             type="text"
 
+
+
             value={
+
+
 
               search
 
+
+
             }
+
+
 
             onChange={(
 
+
+
               event
+
+
 
             ) =>
 
+
+
               setSearch(
+
+
 
                 event.target.value
 
+
+
               )
+
+
 
             }
 
+
+
             placeholder="Search employee code, name, department..."
 
+
+
           />
+
+
+
+
 
 
 
@@ -3122,23 +5462,49 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
         <button
+
+
 
           type="button"
 
+
+
           className="employee-add-button"
+
+
 
           onClick={
 
+
+
             openAddEmployee
+
+
 
           }
 
+
+
         >
+
+
 
           + Add Employee
 
+
+
         </button>
+
+
+
+
 
 
 
@@ -3148,11 +5514,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
       {/* =====================================================
+
+
 
           EMPLOYEE TABLE
 
+
+
       ===================================================== */}
+
+
+
+
 
 
 
@@ -3160,29 +5540,59 @@ function AdminEmployees() {
 
 
 
+
+
+
+
         {loading ? (
+
+
+
+
 
 
 
           <div className="employees-loading">
 
+
+
             Loading employees...
 
+
+
           </div>
+
+
+
+
 
 
 
         ) : filteredEmployees.length ===
 
+
+
           0 ? (
+
+
+
+
 
 
 
           <div className="employees-empty">
 
+
+
             No employees found.
 
+
+
           </div>
+
+
+
+
 
 
 
@@ -3190,7 +5600,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
           <div className="employees-table-wrapper">
+
+
+
+
 
 
 
@@ -3198,7 +5616,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
               <thead>
+
+
+
+
 
 
 
@@ -3206,71 +5632,143 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   <th>
+
+
 
                     Code
 
+
+
                   </th>
 
 
 
+
+
+
+
                   <th>
+
+
 
                     Employee
 
+
+
                   </th>
 
 
 
+
+
+
+
                   <th>
+
+
 
                     Department
 
+
+
                   </th>
 
 
 
+
+
+
+
                   <th>
+
+
 
                     Position
 
+
+
                   </th>
 
 
 
+
+
+
+
                   <th>
+
+
 
                     Contact
 
+
+
                   </th>
 
 
 
+
+
+
+
                   <th>
+
+
 
                     Date Joined
 
+
+
                   </th>
+
+
+
+
 
 
 
                   <th>
 
+
+
                     Status
 
+
+
                   </th>
+
+
+
+
 
 
 
                   <th className="employee-actions-heading">
 
+
+
                     Actions
+
+
 
                   </th>
 
 
 
+
+
+
+
                 </tr>
+
+
+
+
 
 
 
@@ -3280,71 +5778,143 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
               <tbody>
+
+
+
+
 
 
 
                 {filteredEmployees.map(
 
+
+
                   (employee) => (
+
+
+
+
 
 
 
                     <tr
 
+
+
                       key={
+
+
 
                         employee.id
 
+
+
                       }
+
+
 
                     >
 
 
 
+
+
+
+
                       <td>
+
+
+
+
 
 
 
                         <strong className="employee-code-value">
 
+
+
                           {employee.employee_code}
+
+
 
                         </strong>
 
 
 
+
+
+
+
                       </td>
 
 
 
 
 
+
+
+
+
+
+
                       <td>
+
+
+
+
 
 
 
                         <div className="employee-table-name">
 
+
+
                           {employee.first_name}{' '}
 
+
+
                           {employee.last_name}
+
+
 
                         </div>
 
 
 
+
+
+
+
                       </td>
 
 
 
 
 
+
+
+
+
+
+
                       <td>
+
+
 
                         {employee.department ||
 
+
+
                           '—'}
+
+
 
                       </td>
 
@@ -3352,11 +5922,23 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                       <td>
+
+
 
                         {employee.position ||
 
+
+
                           '—'}
+
+
 
                       </td>
 
@@ -3364,7 +5946,17 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                       <td>
+
+
+
+
 
 
 
@@ -3372,13 +5964,29 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                           <span>
+
+
 
                             {employee.email ||
 
+
+
                               '—'}
 
+
+
                           </span>
+
+
+
+
+
+
 
 
 
@@ -3388,11 +5996,23 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                             <small>
+
+
 
                               {employee.phone}
 
+
+
                             </small>
+
+
+
+
 
 
 
@@ -3400,21 +6020,41 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                         </div>
 
 
 
+
+
+
+
                       </td>
 
 
 
 
 
+
+
+
+
+
+
                       <td>
+
+
 
                         {employee.date_joined ||
 
+
+
                           '—'}
+
+
 
                       </td>
 
@@ -3422,35 +6062,73 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                       <td>
+
+
+
+
 
 
 
                         <span
 
+
+
                           className={
+
+
 
                             employee.status ===
 
+
+
                             'active'
+
+
 
                               ? 'employee-status active'
 
+
+
                               : 'employee-status inactive'
+
+
 
                           }
 
+
+
                         >
+
+
 
                           {employee.status ===
 
+
+
                           'active'
+
+
 
                             ? 'Active'
 
+
+
                             : 'Inactive'}
 
+
+
                         </span>
+
+
+
+
 
 
 
@@ -3460,7 +6138,17 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
                       <td>
+
+
+
+
 
 
 
@@ -3468,27 +6156,57 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                           <button
 
+
+
                             type="button"
+
+
 
                             className="employee-edit-button"
 
+
+
                             onClick={() =>
+
+
 
                               openEditEmployee(
 
+
+
                                 employee
+
+
 
                               )
 
+
+
                             }
+
+
 
                           >
 
+
+
                             Edit
 
+
+
                           </button>
+
+
+
+
+
+
 
 
 
@@ -3496,41 +6214,81 @@ function AdminEmployees() {
 
                           <button
 
+
+
                             type="button"
+
+
 
                             className={
 
+
+
                               employee.status ===
+
+
 
                               'active'
 
+
+
                                 ? 'employee-status-button deactivate'
+
+
 
                                 : 'employee-status-button activate'
 
+
+
                             }
+
+
 
                             onClick={() =>
 
+
+
                               toggleEmployeeStatus(
+
+
 
                                 employee
 
+
+
                               )
+
+
 
                             }
 
+
+
                           >
+
+
 
                             {employee.status ===
 
+
+
                             'active'
+
+
 
                               ? 'Deactivate'
 
+
+
                               : 'Activate'}
 
+
+
                           </button>
+
+
+
+
 
 
 
@@ -3538,7 +6296,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                       </td>
+
+
+
+
 
 
 
@@ -3546,9 +6312,19 @@ function AdminEmployees() {
 
 
 
+
+
+
+
                   )
 
+
+
                 )}
+
+
+
+
 
 
 
@@ -3556,7 +6332,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
             </table>
+
+
+
+
 
 
 
@@ -3564,7 +6348,15 @@ function AdminEmployees() {
 
 
 
+
+
+
+
         )}
+
+
+
+
 
 
 
@@ -3574,7 +6366,17 @@ function AdminEmployees() {
 
 
 
+
+
+
+
+
+
       {employeeFormModal}
+
+
+
+
 
 
 
@@ -3582,11 +6384,25 @@ function AdminEmployees() {
 
 
 
+
+
+
+
     </div>
+
+
 
   )
 
+
+
 }
+
+
+
+
+
+
 
 
 
