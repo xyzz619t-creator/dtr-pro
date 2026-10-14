@@ -1,3 +1,4 @@
+
 import {
   useCallback,
   useEffect,
@@ -60,6 +61,7 @@ const ADMIN_PAGE_PATHS = {
   comoff: '/admin/com-off',
   reports: '/admin/reports',
   devices: '/admin/devices',
+  settings: '/admin/settings',
 }
 // ===========================================================
 // NORMALIZE PATH
