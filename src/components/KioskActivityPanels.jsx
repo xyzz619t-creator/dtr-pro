@@ -7,7 +7,7 @@ import {
 } from '../lib/supabase'
 import './KioskActivityPanels.css'
 const FALLBACK_REFRESH_INTERVAL_MS =
-  5 * 60 * 1000
+  10 * 60 * 1000
 const DEVICE_TOKEN_STORAGE_KEY =
   'dtr_device_token'
 function KioskActivityPanels({
