@@ -78,14 +78,7 @@
 
 
 .control-group label {
-  color:
-    #374151 !important;
-
-  font-size: 13px;
-
-  font-weight: 700;
-
-  text-align: center;
+  display: none;
 }
 
 
@@ -277,22 +270,21 @@
 
   width: 100%;
 
-  min-height: 72px;
+  min-height: 52px;
 
-  display: grid;
-
-  grid-template-columns:
-    minmax(180px, 1fr)
-    auto
-    minmax(180px, 1fr);
+  display: flex;
 
   align-items: center;
 
-  column-gap: 20px;
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
 
   margin:
     2px 0
-    14px;
+    12px;
 
   box-sizing:
     border-box;
@@ -304,17 +296,20 @@
 ========================================================= */
 
 .schedule-month-center {
-  grid-column: 2;
-
   min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
 
   text-align: center;
 }
 
 
 .schedule-month-center h2 {
-  margin:
-    0 0 6px;
+  margin: 0;
 
   color:
     #111827 !important;
@@ -324,20 +319,13 @@
   font-weight: 700;
 
   line-height: 1.2;
+
+  white-space: nowrap;
 }
 
 
 .schedule-month-center p {
-  margin: 0;
-
-  color:
-    #6b7280 !important;
-
-  font-size: 13px;
-
-  line-height: 1.4;
-
-  white-space: nowrap;
+  display: none;
 }
 
 
@@ -346,24 +334,24 @@
 ========================================================= */
 
 .schedule-month-actions {
-  grid-column: 3;
-
-  justify-self: end;
-
   display: flex;
 
   align-items: center;
 
+  justify-content: center;
+
   gap: 10px;
+
+  margin: 0;
 }
 
 
 .save-button,
 .clear-button {
-  min-height: 44px;
+  min-height: 40px;
 
   padding:
-    0 20px;
+    0 18px;
 
   border-radius: 9px;
 
@@ -1219,37 +1207,6 @@ select:disabled {
    RESPONSIVE
 ========================================================= */
 
-@media (
-  max-width: 1200px
-) {
-
-  .schedule-month-heading {
-    grid-template-columns:
-      1fr auto;
-
-    column-gap: 14px;
-  }
-
-
-  .schedule-month-center {
-    grid-column: 1;
-
-    text-align: left;
-  }
-
-
-  .schedule-month-center p {
-    white-space:
-      normal;
-  }
-
-
-  .schedule-month-actions {
-    grid-column: 2;
-  }
-
-}
-
 
 @media (
   max-width: 1100px
@@ -1316,22 +1273,13 @@ select:disabled {
   .schedule-month-heading {
     min-height: auto;
 
-    display: flex;
+    justify-content: center;
 
-    flex-direction: column;
-
-    align-items: stretch;
-
-    gap: 10px;
+    gap: 8px;
 
     margin:
       2px 0
       10px;
-  }
-
-
-  .schedule-month-center {
-    text-align: center;
   }
 
 
@@ -1340,24 +1288,14 @@ select:disabled {
   }
 
 
-  .schedule-month-center p {
-    display: none;
-  }
-
-
   .schedule-month-actions {
-    width: 100%;
+    width: auto;
 
-    display: grid;
+    display: flex;
 
-    grid-template-columns:
-      repeat(
-        2,
-        minmax(
-          0,
-          1fr
-        )
-      );
+    align-items: center;
+
+    justify-content: center;
 
     gap: 8px;
   }
@@ -1365,9 +1303,9 @@ select:disabled {
 
   .save-button,
   .clear-button {
-    width: 100%;
+    width: auto;
 
-    min-height: 40px;
+    min-height: 38px;
 
     padding:
       0 10px;
@@ -1729,7 +1667,7 @@ select:disabled {
 
 
 /* =========================================================
-   STAGE 2 RESPONSIVE ADDITIONS
+   SCHEDULE ENGINE RESPONSIVE ADDITIONS
 ========================================================= */
 
 @media (max-width: 1100px) {
