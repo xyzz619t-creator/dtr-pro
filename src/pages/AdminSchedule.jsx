@@ -1129,12 +1129,6 @@ function AdminSchedule() {
 
   return (
     <div className="admin-schedule-page">
-      <div className="schedule-stage-banner">
-        <strong>Stage 2 schedule engine test</strong>
-        <span>
-          Weekly/Rotation bases and specific-date overrides are stored in the new engine. The employee DTR remains on the current live resolver until Stage 3.
-        </span>
-      </div>
 
       <div className="schedule-controls">
         <div className="control-group schedule-search-group">
