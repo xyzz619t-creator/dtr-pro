@@ -1132,7 +1132,6 @@ function AdminSchedule() {
 
       <div className="schedule-controls">
         <div className="control-group schedule-search-group">
-          <label>Search Employee</label>
           <div className="schedule-search-box">
             <span>🔍</span>
             <input
@@ -1140,15 +1139,16 @@ function AdminSchedule() {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               placeholder="Search code, name, department or position..."
+              aria-label="Search employee"
             />
           </div>
         </div>
 
         <div className="control-group">
-          <label>Shift Filter</label>
           <select
             value={shiftFilter}
             onChange={(event) => setShiftFilter(event.target.value)}
+            aria-label="Shift filter"
           >
             <option value="all">All Shifts</option>
             <option value="morning">Morning</option>
@@ -1157,32 +1157,13 @@ function AdminSchedule() {
         </div>
 
         <div className="control-group">
-          <label>Month</label>
           <input
             className="schedule-month-input"
             type="month"
             value={selectedMonth}
             onChange={handleMonthChange}
+            aria-label="Schedule month"
           />
-        </div>
-      </div>
-
-      {errorMessage && (
-        <div className="schedule-message schedule-error-message">
-          {errorMessage}
-        </div>
-      )}
-
-      {message && (
-        <div className="schedule-message">{message}</div>
-      )}
-
-      <div className="schedule-month-heading">
-        <div className="schedule-month-center">
-          <h2>{getMonthTitle()}</h2>
-          <p>
-            Calendar edits affect only that exact date. Unchanged dates continue from the employee&apos;s Weekly or Rotation base schedule.
-          </p>
         </div>
 
         <div className="schedule-month-actions">
@@ -1211,6 +1192,16 @@ function AdminSchedule() {
           </button>
         </div>
       </div>
+
+      {errorMessage && (
+        <div className="schedule-message schedule-error-message">
+          {errorMessage}
+        </div>
+      )}
+
+      {message && (
+        <div className="schedule-message">{message}</div>
+      )}
 
       <div className="schedule-roster-area">
         {scheduleLoading ? (
