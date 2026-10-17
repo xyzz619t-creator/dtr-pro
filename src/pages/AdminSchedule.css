@@ -44,11 +44,16 @@
   display: grid;
 
   grid-template-columns:
-    2fr 1fr 1fr;
+    minmax(320px, 2fr)
+    minmax(170px, 1fr)
+    minmax(190px, 1fr)
+    auto;
 
-  gap: 16px;
+  align-items: center;
 
-  padding: 20px;
+  gap: 12px;
+
+  padding: 16px 18px;
 
   margin-bottom: 14px;
 
@@ -262,75 +267,7 @@
 
 
 /* =========================================================
-   MONTH HEADING + ACTIONS
-========================================================= */
-
-.schedule-month-heading {
-  flex-shrink: 0;
-
-  width: 100%;
-
-  min-height: 52px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  flex-wrap: wrap;
-
-  gap: 16px;
-
-  margin:
-    2px 0
-    12px;
-
-  box-sizing:
-    border-box;
-}
-
-
-/* =========================================================
-   MONTH CENTER
-========================================================= */
-
-.schedule-month-center {
-  min-width: 0;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  text-align: center;
-}
-
-
-.schedule-month-center h2 {
-  margin: 0;
-
-  color:
-    #111827 !important;
-
-  font-size: 25px;
-
-  font-weight: 700;
-
-  line-height: 1.2;
-
-  white-space: nowrap;
-}
-
-
-.schedule-month-center p {
-  display: none;
-}
-
-
-/* =========================================================
-   MONTH ACTIONS
+   TOOLBAR ACTIONS
 ========================================================= */
 
 .schedule-month-actions {
@@ -338,9 +275,11 @@
 
   align-items: center;
 
-  justify-content: center;
+  justify-content: flex-end;
 
   gap: 10px;
+
+  min-width: max-content;
 
   margin: 0;
 }
@@ -348,16 +287,16 @@
 
 .save-button,
 .clear-button {
-  min-height: 40px;
+  min-height: 44px;
 
   padding:
-    0 18px;
+    0 16px;
 
-  border-radius: 9px;
+  border-radius: 8px;
 
   font-family: inherit;
 
-  font-size: 14px;
+  font-size: 13px;
 
   font-weight: 700;
 
@@ -1208,21 +1147,23 @@ select:disabled {
 ========================================================= */
 
 
-@media (
-  max-width: 1100px
-) {
-
+@media (max-width: 1100px) {
   .schedule-controls {
     grid-template-columns:
       1fr 1fr;
   }
-
 
   .schedule-search-group {
     grid-column:
       1 / -1;
   }
 
+  .schedule-month-actions {
+    grid-column:
+      1 / -1;
+
+    justify-content: flex-end;
+  }
 }
 
 
@@ -1259,43 +1200,19 @@ select:disabled {
   }
 
 
-  .control-group label {
-    font-size: 11px;
-  }
-
-
   .control-group input,
   .control-group select {
     min-height: 40px;
   }
 
 
-  .schedule-month-heading {
-    min-height: auto;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    margin:
-      2px 0
-      10px;
-  }
-
-
-  .schedule-month-center h2 {
-    font-size: 20px;
-  }
-
-
   .schedule-month-actions {
-    width: auto;
+    width: 100%;
 
-    display: flex;
+    display: grid;
 
-    align-items: center;
-
-    justify-content: center;
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
 
     gap: 8px;
   }
@@ -1303,9 +1220,9 @@ select:disabled {
 
   .save-button,
   .clear-button {
-    width: auto;
+    width: 100%;
 
-    min-height: 38px;
+    min-height: 40px;
 
     padding:
       0 10px;
